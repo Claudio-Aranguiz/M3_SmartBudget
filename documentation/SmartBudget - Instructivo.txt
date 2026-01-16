@@ -1,0 +1,141 @@
+Proyecto: SmartBudget 
+
+
+Evaluación del módulo Desarrollo de la Interfaz de Usuario Web 
+
+
+Situación inicial 
+
+ 
+Unidad solicitante: Equipo de Producto de SmartBudget 
+   
+   La startup SmartBudget está lanzando una nueva aplicación web para que los usuarios puedan visualizar y gestionar sus finanzas personales de forma intuitiva.  El equipo de diseño ya definió los prototipos visuales en Figma y necesita que el equipo front-end implemente una interfaz modular, escalable y responsiva, respetando las buenas prácticas de diseño web. 
+
+   Se solicita comenzar por una maqueta funcional que represente la landing page del sistema, con potencial de ser escalada a una aplicación completa. 
+
+
+Nuestro objetivo 
+ 
+El objetivo es construir progresivamente una interfaz web funcional y escalable para el sitio de SmartBudget, utilizando herramientas modernas de front-end como metodologías CSS, preprocesadores, layouts responsivos y frameworks como Bootstrap.
+
+Al finalizar el módulo, deberás entregar una versión navegable del sitio, alineada con el diseño original, manteniendo calidad de código, organización y buenas prácticas. 
+
+
+Requerimientos 
+ 
+● Implementación semántica de HTML5 y buenas prácticas de estructura. 
+● Aplicación de al menos una metodología de organización CSS (BEM, OOCSS o SMACSS). 
+● Uso de preprocesador SASS con estructura de carpetas tipo 7-1. 
+● Uso de layout y modelo de cajas para la disposición de secciones.
+● Interfaz adaptable a dispositivos móviles (media queries, Flexbox o Grid). 
+● Uso de componentes de Bootstrap 4 como cards, modales, menús, botones, etc. 
+● Código limpio, modular y comentado. 
+
+
+Paso a paso 
+
+Este proyecto refiere exclusivamente al módulo 3: Desarrollo de la Interfaz de Usuario Web, y se compone de 5 etapas (lecciones), las cuales podrás avanzar de forma progresiva y escalonada con la ayuda de los manuales teóricos y los contenidos desarrollados en las clases en vivo.  
+
+Ten en cuenta de invertir tiempo asincrónicos para el desarrollo de cada etapa a modo de poder finalizar el módulo y realizar la entrega formal de tu propuesta. Cualquier consulta que surja compártela en los espacios sincrónicos para resolver las dudas en equipo. 
+
+
+A continuación encontrarás las consignas y tareas a desarrollar: 
+
+
+Lección 1: Del diseño a la implementación de un producto digital 
+
+Objetivo: Comprender el proceso de diseño digital y aplicar buenas prácticas de desarrollo front-end. 
+
+Tareas a desarrollar: 
+■ Genera un prototipo simple en Figma o imagen. 
+■ Crea la estructura HTML inicial respetando jerarquía semántica. 
+■ Incluye comentarios que identifiquen componentes clave para el diseño. 
+■ Reflexiona sobre el rol del front-end en este proceso.
+
+
+Lección 2: Metodologías de organización y modularización de estilos 
+
+ Objetivo: Aplicar una metodología CSS para organizar los estilos de forma escalable. 
+
+Tareas a desarrollar: 
+■ Elige una metodología (BEM, SMACSS u OOCSS) e impleméntala. 
+■ Crea una hoja de estilos base con estructura modular (por componentes). 
+■ Aplica una nomenclatura coherente en las clases del HTML generado en la lección anterior. 
+■ Documenta tu elección y justificación. 
+
+
+Lección 3: El preprocesador SASS 
+
+Objetivo: Aplicar SASS como herramienta de modularización y optimización de estilos. 
+
+Tareas a desarrollar: 
+■ Instala y configura SASS en el entorno de trabajo. 
+■ Reorganiza los estilos anteriores usando el patrón 7-1. 
+■ Utiliza variables, mixins y anidamientos adecuados. 
+■ Documenta la estructura de carpetas usada y su lógica. 
+
+
+Lección 4: El modelo de cajas y el layout 
+
+Objetivo: Implementar un layout responsivo usando modelo de cajas, posicionamiento y media queries. 
+
+Tareas a desarrollar: 
+■ Aplica box-sizing, padding, margin, border, display y position en las secciones ya creadas. 
+■ Utiliza flexbox y/o grid para distribuir contenido de forma responsiva. 
+■ Ajusta los estilos para que funcionen correctamente en dispositivos móviles y de escritorio. 
+■ Usa herramientas de inspección para validar y depurar el modelo de cajas. 
+
+
+Lección 5: Utilizando Bootstrap 4 como framework CSS 
+
+Objetivo: Integrar Bootstrap 4 en el proyecto para mejorar velocidad y consistencia del diseño. 
+
+Tareas a desarrollar: 
+■ Incorpora Bootstrap 4 mediante CDN o instalación local. 
+■ Reemplaza secciones estáticas por componentes de Bootstrap (cards, navs, modals, etc.). 
+■ Aplica clases utilitarias para espaciado, alineación, colores y tipografía. 
+■ Asegura la integridad visual del diseño y mantiene la modularidad en el código. 
+
+
+¿Qué vamos a validar? 
+ 
+● Correcto uso de etiquetas semánticas HTML5. 
+● Aplicación coherente de la metodología CSS seleccionada. 
+● Uso real de SASS con estructura modular y variables. 
+● Uso apropiado de Flexbox, Grid, media queries y propiedades del modelo de cajas. 
+● Integración correcta de Bootstrap 4 sin sobreescrituras innecesarias. 
+● Legibilidad del código, documentación clara y archivos bien organizados. 
+● Responsividad visual en desktop, tablet y mobile. 
+● Presentación funcional y estética final.
+
+
+Referencias 
+
+● https://sass-lang.com/documentation/ 
+● https://getbem.com/introduction/ 
+● https://getbootstrap.com/docs/4.6/getting-started/introduction/ 
+● https://smacss.com/ 
+● https://css-tricks.com/the-css-box-model/ 
+
+
+Recursos 
+ 
+● Guías de estilo de Google HTML/CSS 
+● Plantillas de layout responsive para practicar (CodePen, Bootstrap Expo) 
+
+
+Entregables ✅
+
+● Carpeta del proyecto con estructura /sass, /css, /components, /index.html, etc. 
+● Código fuente del sitio en HTML, SASS/SCSS y CSS compilado. 
+● Documento breve con justificación metodológica (PDF o MD). 
+● Versión navegable de la interfaz (zip o repositorio). 
+● Capturas de pantalla mostrando la interfaz en distintos dispositivos. 
+
+Portafolio 
+ 
+Este proyecto representa una muestra integral de tu capacidad como desarrollador front-end. Podés incluirlo en tu portafolio profesional mostrando: 
+● Capturas del diseño implementado 
+● Descripción de tecnologías usadas y estructura de carpetas 
+● Justificación de decisiones técnicas (metodología, layout, framework) 
+● Link al repositorio en GitHub y link de despliegue (Netlify, GitHub Pages, etc.) 
