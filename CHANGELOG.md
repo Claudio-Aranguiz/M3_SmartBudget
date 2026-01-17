@@ -2,19 +2,29 @@
 
 ## [Unreleased]
 
+### [2026-01-17]
+#### Added
+- Integración completa de **Sass/SCSS** al proyecto.
+- Estructura de carpetas Sass organizada con metodología **7-1 Architecture**.
+- Archivo `assets/sass/main.scss` como punto de entrada principal.
+- Compilación automática de Sass a CSS (`assets/css/styles.css`).
+- Capturas de diseño desde Figma en `documentation/Capturas desde Figma/`.
+- Implementación de **footer sticky** utilizando técnicas CSS modernas.
+- Archivo `documentation/Leccion_1_Reflexion.md` con análisis del rol del Front-End.
+
+#### Modified
+- Actualización de `index.html` con estructura mejorada.
+- Refactorización aplicando metodología **BEM** inicial.
+- Mejora de la jerarquía semántica del documento.
+
+#### Fixed
+- Eliminación de contenido duplicado en `index.html`.
+- Configuración correcta del entorno de desarrollo Sass.
+
 ### [2026-01-16]
 #### Added
 - Creación de la estructura base del proyecto.
-- Archivo `index.html` con estructura semántica inicial y Bootstrap 4.
-- Archivo `.gitignore` configurado para ignorar archivos internos y de documentación.
-- Archivo `documentation/Analisis_Estructural_SmartBudget.md` con el análisis detallado de requerimientos y arquitectura.
-- Archivo `de_uso_interno/bucket_de_ideas.txt` con la planificación de funcionalidades para Fase 1 y Fase 2.
-- Inicialización del repositorio Git.
-- Este archivo `CHANGELOG.md` para el seguimiento del desarrollo.
-
-#### Planned
-- Diseño de wireframes y prototipos (Lección 1).
-- Implementación de metodología BEM (Lección 2).
-- Configuración de SASS con estructura 7-1 (Lección 3).
-- Ajustes de Flexbox y Grid para responsividad (Lección 4).
-- Integración completa de componentes Bootstrap 4 (Lección 5).
+- Archivo `index.html` original.
+- Archivo `.gitignore`.
+- Análisis estructural inicial en `documentation/`.
+- Repositorio Git inicializado.

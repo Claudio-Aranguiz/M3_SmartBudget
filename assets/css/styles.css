@@ -1,0 +1,33 @@
+/* styles.css */
+
+/* Reset de márgenes y paddings */
+/* NOTA aplicar SASS a medida que se crean patrones habituales */
+
+/* Estilos generales */
+body{
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+main{
+   flex: 1;
+}
+
+/* Estilos genererales para el footer */
+footer {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   padding: 8px 5px;
+   text-align: center;
+}
+.footer__text, .footer__link {
+   margin: 0;
+   padding: 7px 0px;
+   font-size: 15px;
+   font-weight: 600;
+   color: #333333;
+}
+.footer__link {
+   align-content: center;
+}
