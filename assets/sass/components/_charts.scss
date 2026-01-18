@@ -1,0 +1,15 @@
+// Componente: Charts
+// Estilos para contenedores de gráficos
+
+.chart-card {
+  &__container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+  }
+
+  &__canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
+}

@@ -1,0 +1,73 @@
+// Layout: Dashboard
+// Estilos específicos para la página dashboard
+
+.dashboard {
+  padding: 1rem;
+
+  &__summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  &__charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+      display: none; // Hidden on mobile
+    }
+  }
+}
+
+.summary-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+
+    &--income {
+      color: #10b981;
+    }
+
+    &--expense {
+      color: #ef4444;
+    }
+  }
+
+  &__change {
+    font-size: 0.75rem;
+    color: #666;
+  }
+
+  &__percentage {
+    &--positive {
+      color: #10b981;
+    }
+
+    &--negative {
+      color: #ef4444;
+    }
+  }
+}

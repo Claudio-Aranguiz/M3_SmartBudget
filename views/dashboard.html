@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>FinanzApp - Dashboard</title>
+   <link rel="stylesheet" href="../assets/sass/main.css">
+   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+   <!-- Desktop Header -->
+   <header class="header header--desktop">
+      <div class="header__container">
+         <div class="header__content">
+            <div class="header__brand">
+               <i data-lucide="pie-chart" class="header__icon"></i>
+               <span class="header__title">FinanzApp</span>
+            </div>
+            <div class="header__actions">
+               <button class="header__button header__button--logout">
+                  <i data-lucide="log-out" class="header__button-icon"></i>
+                  Cerrar Sesión
+               </button>
+            </div>
+         </div>
+      </div>
+   </header>
+
+   <!-- Mobile Header -->
+   <header class="header header--mobile">
+      <div class="header__container">
+         <div class="header__brand">
+            <i data-lucide="pie-chart" class="header__icon header__icon--small"></i>
+            <span class="header__title header__title--small">FinanzApp</span>
+         </div>
+         <button class="header__button header__button--menu" title="Menú">
+            <i data-lucide="menu" class="header__button-icon"></i>
+         </button>
+      </div>
+   </header>
+
+<main class="dashboard">
+      <!-- Summary Cards -->
+      <div class="dashboard__summary">
+         <!-- Balance Total Card -->
+         <div class="summary-card">
+            <div class="summary-card__content">
+               <div class="summary-card__header">
+                  <h3 class="summary-card__title">Balance Total</h3>
+                  <i data-lucide="wallet" class="summary-card__icon"></i>
+               </div>
+               <div class="summary-card__value">$15,231.89</div>
+               <p class="summary-card__change">
+                  <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
+               </p>
+            </div>
+         </div>
+
+         <!-- Ingresos Card -->
+         <div class="summary-card summary-card--income">
+            <div class="summary-card__content">
+               <div class="summary-card__header">
+                  <h3 class="summary-card__title">Ingresos</h3>
+                  <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
+               </div>
+               <div class="summary-card__value summary-card__value--income">$8,420.00</div>
+               <p class="summary-card__change">
+                  <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
+               </p>
+            </div>
+         </div>
+
+         <!-- Gastos Card -->
+         <div class="summary-card summary-card--expense">
+            <div class="summary-card__content">
+               <div class="summary-card__header">
+                  <h3 class="summary-card__title">Gastos</h3>
+                  <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
+               </div>
+               <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
+               <p class="summary-card__change">
+                  <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
+               </p>
+            </div>
+         </div>
+
+         <!-- Tarjetas Card -->
+         <div class="summary-card">
+            <div class="summary-card__content">
+               <div class="summary-card__header">
+                  <h3 class="summary-card__title">Tarjetas</h3>
+                  <i data-lucide="credit-card" class="summary-card__icon"></i>
+               </div>
+               <div class="summary-card__value">3</div>
+               <p class="summary-card__change">
+                  2 activas, 1 bloqueada
+               </p>
+            </div>
+      </div>
+
+      <!-- Charts Section - Desktop Only -->
+      <div class="dashboard__charts">
+         <!-- Ingresos vs Gastos Chart -->
+         <div class="chart-card">
+            <div class="chart-card__content">
+               <h3 class="chart-card__title">Ingresos vs Gastos</h3>
+               <div class="chart-card__container">
+                  <canvas id="incomeExpenseChart" class="chart-card__canvas"></canvas>
+               </div>
+            </div>
+         </div>
+
+         <!-- Gastos por Categoría Chart -->
+         <div class="chart-card">
+            <div class="chart-card__content">
+               <h3 class="chart-card__title">Gastos por Categoría</h3>
+               <div class="chart-card__container">
+                  <canvas id="categoryChart" class="chart-card__canvas"></canvas>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="transactions">
+         <div class="transactions__content">
+            <div class="transactions__header">
+               <h3 class="transactions__title">Movimientos Recientes</h3>
+               <button class="transactions__button transactions__button--view-all">Ver todos</button>
+            </div>
+            <div class="transactions__list">
+               <!-- Transaction 1 -->
+               <div class="transaction">
+                  <div class="transaction__info">
+                     <div class="transaction__icon transaction__icon--expense">
+                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                     </div>
+                     <div class="transaction__details">
+                        <p class="transaction__name">Supermercado</p>
+                        <p class="transaction__date">17 Ene 2026</p>
+                     </div>
+                  </div>
+                  <span class="transaction__amount transaction__amount--expense">-$125.50</span>
+               </div>
+
+               <!-- Transaction 2 -->
+               <div class="transaction">
+                  <div class="transaction__info">
+                     <div class="transaction__icon transaction__icon--income">
+                        <i data-lucide="arrow-up-right" class="transaction__icon-svg"></i>
+                     </div>
+                     <div class="transaction__details">
+                        <p class="transaction__name">Salario</p>
+                        <p class="transaction__date">15 Ene 2026</p>
+                     </div>
+                  </div>
+                  <span class="transaction__amount transaction__amount--income">+$3,500.00</span>
+               </div>
+
+               <!-- Transaction 3 -->
+               <div class="transaction">
+                  <div class="transaction__info">
+                     <div class="transaction__icon transaction__icon--expense">
+                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                     </div>
+                     <div class="transaction__details">
+                        <p class="transaction__name">Netflix</p>
+                        <p class="transaction__date">14 Ene 2026</p>
+                     </div>
+                  </div>
+                  <span class="transaction__amount transaction__amount--expense">-$15.99</span>
+               </div>
+
+               <!-- Transaction 4 -->
+               <div class="transaction">
+                  <div class="transaction__info">
+                     <div class="transaction__icon transaction__icon--expense">
+                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                     </div>
+                     <div class="transaction__details">
+                        <p class="transaction__name">Uber</p>
+                        <p class="transaction__date">13 Ene 2026</p>
+                     </div>
+                  </div>
+                  <span class="transaction__amount transaction__amount--expense">-$23.50</span>
+               </div>
+
+               <!-- Transaction 5 -->
+               <div class="transaction">
+                  <div class="transaction__info">
+                     <div class="transaction__icon transaction__icon--expense">
+                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                     </div>
+                     <div class="transaction__details">
+                        <p class="transaction__name">Restaurante</p>
+                        <p class="transaction__date">12 Ene 2026</p>
+                     </div>
+                  </div>
+                  <span class="transaction__amount transaction__amount--expense">-$78.00</span>
+               </div>
+            </div>
+         </div>
+      </div>
+   </main>
+
+   <!-- Mobile Bottom Navigation -->
+   <nav class="nav nav--mobile">
+      <div class="nav__container">
+         <button class="nav__button nav__button--active">
+            <i data-lucide="pie-chart" class="nav__icon"></i>
+            <span class="nav__label">Dashboard</span>
+         </button>
+         <button class="nav__button">
+            <i data-lucide="plus" class="nav__icon"></i>
+            <span class="nav__label">Acciones</span>
+         </button>
+         <button class="nav__button">
+            <i data-lucide="credit-card" class="nav__icon"></i>
+            <span class="nav__label">Historial</span>
+         </button>
+      </div>
+   </nav>
+
+   <script>
+      // Initialize Lucide icons
+      lucide.createIcons();
+
+      // Chart data
+      const monthlyData = [
+         { mes: 'Ene', ingresos: 4000, gastos: 2400 },
+         { mes: 'Feb', ingresos: 3000, gastos: 1398 },
+         { mes: 'Mar', ingresos: 2000, gastos: 3800 },
+         { mes: 'Abr', ingresos: 2780, gastos: 3908 },
+         { mes: 'May', ingresos: 1890, gastos: 2800 },
+         { mes: 'Jun', ingresos: 2390, gastos: 2000 },
+      ];
+
+      const categoryData = [
+         { nombre: 'Alimentación', valor: 4000, color: '#3b82f6' },
+         { nombre: 'Transporte', valor: 3000, color: '#8b5cf6' },
+         { nombre: 'Entretenimiento', valor: 2000, color: '#ec4899' },
+         { nombre: 'Servicios', valor: 2780, color: '#10b981' },
+         { nombre: 'Otros', valor: 1890, color: '#f59e0b' },
+      ];
+
+      // Income vs Expense Chart
+      const ctx1 = document.getElementById('incomeExpenseChart');
+      if (ctx1) {
+         new Chart(ctx1, {
+            type: 'line',
+            data: {
+               labels: monthlyData.map(item => item.mes),
+               datasets: [{
+                  label: 'Ingresos',
+                  data: monthlyData.map(item => item.ingresos),
+                  borderColor: '#10b981',
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  fill: true,
+                  tension: 0.4
+               }, {
+                  label: 'Gastos',
+                  data: monthlyData.map(item => item.gastos),
+                  borderColor: '#ef4444',
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  fill: true,
+                  tension: 0.4
+               }]
+            },
+            options: {
+               responsive: true,
+               maintainAspectRatio: false,
+               interaction: {
+                  intersect: false
+               },
+               plugins: {
+                  legend: {
+                     position: 'top'
+                  }
+               },
+               scales: {
+                  x: {
+                     display: true,
+                     title: {
+                        display: false
+                     }
+                  },
+                  y: {
+                     display: true,
+                     beginAtZero: true,
+                     title: {
+                        display: false
+                     }
+                  }
+               },
+               elements: {
+                  line: {
+                     borderWidth: 2
+                  },
+                  point: {
+                     radius: 4,
+                     hoverRadius: 6
+                  }
+               }
+            }
+         });
+      }
+
+      // Category Pie Chart
+      const ctx2 = document.getElementById('categoryChart');
+      if (ctx2) {
+         new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+               labels: categoryData.map(item => item.nombre),
+               datasets: [{
+                  data: categoryData.map(item => item.valor),
+                  backgroundColor: categoryData.map(item => item.color),
+                  borderWidth: 2,
+                  borderColor: '#ffffff',
+                  hoverBorderWidth: 3
+               }]
+            },
+            options: {
+               responsive: true,
+               maintainAspectRatio: false,
+               cutout: '60%',
+               plugins: {
+                  legend: {
+                     position: 'bottom',
+                     labels: {
+                        padding: 20,
+                        usePointStyle: true,
+                        font: {
+                           size: 12
+                        }
+                     }
+                  },
+                  tooltip: {
+                     callbacks: {
+                        label: function(context) {
+                           return context.label + ': $' + context.parsed.toLocaleString();
+                        }
+                     }
+                  }
+               },
+               animation: {
+                  animateScale: true,
+                  animateRotate: true
+               }
+            }
+         });
+      }
+   </script>
+</body>
+</html>

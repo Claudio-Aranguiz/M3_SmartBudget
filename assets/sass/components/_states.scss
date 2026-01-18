@@ -1,0 +1,26 @@
+// Componente: States
+// Estilos para estados vacíos y elementos ocultos
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+// Utilidades de display
+.u-hidden {
+  display: none !important;
+}
+
+.u-text-small {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}

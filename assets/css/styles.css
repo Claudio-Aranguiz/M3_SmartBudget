@@ -12,22 +12,347 @@ body{
 
 main{
    flex: 1;
+   padding: 1.1rem;
+   background-color: aliceblue;
+   align-content: center;
+   text-align: center;
+   
 }
 
-/* Estilos genererales para el footer */
+/* Estilos BEM - Header */
+.header {
+   background: white;
+   border-bottom: 1px solid #e0e0e0;
+}
+
+.header--desktop {
+   display: none;
+}
+
+.header--mobile {
+   display: block;
+}
+
+.header__container {
+   padding: 1rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.header__content {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   align-items: center;
+}
+
+.header__brand {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+.header__icon {
+   color: #3b82f6;
+}
+
+.header__title {
+   font-size: 1.25rem;
+   font-weight: bold;
+   color: #333;
+}
+
+.header__button {
+   padding: 0.5rem 1rem;
+   border: 1px solid #ccc;
+   border-radius: 0.5rem;
+   background: white;
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+/* Estilos BEM - Navigation */
+nav {
+   display: inline-flex;
+   padding: 0.5rem 1.1rem !important;
+   width: 100%;
+   align-items: center;
+   text-align: center;
+   font-size: 18px;
+   font-weight: 600;
+   color: #333333;      
+   height: 3.7rem;
+}
+
+.nav__brand {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+}
+
+.nav__logo {
+   width: 24px;
+   height: 24px;
+}
+
+.nav__title {
+   font-size: 1.25rem;
+   font-weight: bold;
+}
+
+.nav__list {
+   list-style: none;
+   margin-bottom: 0;
+   margin-left: auto;
+}
+
+/* Dashboard específico */
+.dashboard {
+   padding: 1rem;
+}
+
+.dashboard__summary {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+   gap: 1rem;
+   margin-bottom: 2rem;
+}
+
+.summary-card {
+   background: white;
+   border-radius: 0.5rem;
+   padding: 1.5rem;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card__header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1rem;
+}
+
+.summary-card__title {
+   font-size: 0.875rem;
+   color: #666;
+   margin: 0;
+}
+
+.summary-card__value {
+   font-size: 1.5rem;
+   font-weight: bold;
+   margin-bottom: 0.5rem;
+}
+
+.summary-card__value--income {
+   color: #10b981;
+}
+
+.summary-card__value--expense {
+   color: #ef4444;
+}
+
+.summary-card__change {
+   font-size: 0.75rem;
+   color: #666;
+}
+
+.summary-card__percentage--positive {
+   color: #10b981;
+}
+
+.summary-card__percentage--negative {
+   color: #ef4444;
+}
+
+/* Charts */
+.dashboard__charts {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+   gap: 2rem;
+   margin-bottom: 2rem;
+}
+
+.chart-card {
+   background: white;
+   border-radius: 0.5rem;
+   padding: 1.5rem;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card__title {
+   font-size: 1.125rem;
+   font-weight: 600;
+   margin-bottom: 1rem;
+}
+
+.chart-card__container {
+   position: relative;
+   height: 300px;
+   width: 100%;
+}
+
+/* Transactions */
+.transactions {
+   background: white;
+   border-radius: 0.5rem;
+   padding: 1.5rem;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactions__header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1rem;
+}
+
+.transactions__title {
+   font-size: 1.125rem;
+   font-weight: 600;
+   margin: 0;
+}
+
+.transactions__list {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.transaction {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 1rem;
+   border-radius: 0.5rem;
+   transition: background 0.2s;
+}
+
+.transaction:hover {
+   background: #f9fafb;
+}
+
+.transaction__info {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+}
+
+.transaction__icon {
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.transaction__icon--income {
+   background: #dcfce7;
+   color: #10b981;
+}
+
+.transaction__icon--expense {
+   background: #fef2f2;
+   color: #ef4444;
+}
+
+.transaction__name {
+   font-weight: 600;
+   margin: 0 0 0.25rem 0;
+}
+
+.transaction__date {
+   font-size: 0.875rem;
+   color: #666;
+   margin: 0;
+}
+
+.transaction__amount--income {
+   color: #10b981;
+   font-weight: 600;
+}
+
+.transaction__amount--expense {
+   color: #ef4444;
+   font-weight: 600;
+}
+
+/* Mobile Navigation */
+.nav--mobile {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   background: white;
+   border-top: 1px solid #e0e0e0;
+}
+
+.nav__container {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 0.25rem;
+   padding: 0.5rem;
+}
+
+.nav__button {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 0.25rem;
+   padding: 0.5rem;
+   border: none;
+   background: transparent;
+   border-radius: 0.5rem;
+   transition: background 0.2s;
+}
+
+.nav__button:hover {
+   background: #f3f4f6;
+}
+
+.nav__button--active {
+   background: #e0f2fe;
+   color: #0369a1;
+}
+
+.nav__label {
+   font-size: 0.75rem;
+}
+
+/* Estilos genererales para el footer y sub elementos*/
 footer {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
    padding: 8px 5px;
    text-align: center;
 }
+
 .footer__text, .footer__link {
    margin: 0;
-   padding: 7px 0px;
+   padding: 1.1rem;
    font-size: 15px;
    font-weight: 600;
    color: #333333;
 }
+
 .footer__link {
    align-content: center;
 }
+
+/* Estilos específicos de la página de inicio */
+.hero {
+   text-align: center;
+}
+
+.hero__title {
+   font-size: 3rem;
+         font-weight: 700;
+         margin-bottom: 1rem;
+      }
+      .brand__cta {
+         font-size: 1.2rem;
+         padding: 0.8rem 2rem;
+      }

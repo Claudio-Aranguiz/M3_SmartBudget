@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Historial - Gestor de Finanzas</title>
+   <style>
+      * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+      }
+
+      body {
+         font-family: Arial, sans-serif;
+         background-color: #f8f9fa;
+         color: #333;
+         min-height: 100vh;
+      }
+
+      .container {
+         min-height: 100vh;
+         padding-bottom: 80px;
+      }
+
+      /* Header */
+      .header {
+         background: white;
+         border-bottom: 1px solid #e9ecef;
+         padding: 1rem;
+         position: sticky;
+         top: 0;
+         z-index: 10;
+         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      }
+
+      .header-content {
+         display: flex;
+         align-items: center;
+         gap: 1rem;
+      }
+
+      .back-btn {
+         background: none;
+         border: none;
+         font-size: 1.25rem;
+         cursor: pointer;
+         color: #666;
+         padding: 0.5rem;
+         border-radius: 4px;
+      }
+
+      .back-btn:hover {
+         background-color: #f8f9fa;
+      }
+
+      .header-info h1 {
+         font-size: 1.25rem;
+         font-weight: bold;
+         color: #212529;
+      }
+
+      .header-info p {
+         font-size: 0.875rem;
+         color: #6c757d;
+      }
+
+      /* Main Content */
+      .main {
+         padding: 1rem;
+      }
+
+      .card {
+         background: white;
+         border-radius: 8px;
+         border: 1px solid #e9ecef;
+         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+         margin-bottom: 1rem;
+      }
+
+      .card:hover {
+         box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+         transition: box-shadow 0.3s ease;
+      }
+
+      .summary-grid {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 0.75rem;
+         margin-bottom: 1rem;
+      }
+
+      .summary-card.income {
+         background: #f0f9f0;
+         border-color: #c3e6c3;
+      }
+
+      .summary-card.expense {
+         background: #fef2f2;
+         border-color: #fecaca;
+      }
+
+      .card-header {
+         padding: 1rem 1rem 0.5rem;
+      }
+
+      .card-title {
+         font-size: 0.75rem;
+         font-weight: 600;
+         text-transform: uppercase;
+         letter-spacing: 0.05em;
+      }
+
+      .income .card-title { color: #166534; }
+      .expense .card-title { color: #991b1b; }
+
+      .card-content {
+         padding: 0.5rem 1rem 1rem;
+      }
+
+      .amount {
+         font-size: 1.25rem;
+         font-weight: bold;
+      }
+
+      .income .amount { color: #166534; }
+      .expense .amount { color: #991b1b; }
+
+      /* Search and Filter */
+      .search-filter {
+         padding: 1rem;
+      }
+
+      .search-container {
+         position: relative;
+         margin-bottom: 0.75rem;
+      }
+
+      .search-input {
+         width: 100%;
+         padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+         border: 1px solid #d1d5db;
+         border-radius: 6px;
+         font-size: 0.875rem;
+         background-color: white;
+      }
+
+      .search-input:focus {
+         outline: none;
+         border-color: #3b82f6;
+         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+
+      .search-icon {
+         position: absolute;
+         left: 0.75rem;
+         top: 50%;
+         transform: translateY(-50%);
+         color: #9ca3af;
+         pointer-events: none;
+      }
+
+      .filter-buttons {
+         display: flex;
+         gap: 0.5rem;
+      }
+
+      .filter-btn {
+         flex: 1;
+         padding: 0.5rem 1rem;
+         border: 1px solid #d1d5db;
+         border-radius: 6px;
+         background: white;
+         cursor: pointer;
+         font-size: 0.875rem;
+         transition: all 0.2s ease;
+      }
+
+      .filter-btn.active {
+         background: #3b82f6;
+         border-color: #3b82f6;
+         color: white;
+      }
+
+      .filter-btn:hover:not(.active) {
+         background: #f8f9fa;
+      }
+
+      /* Transaction List */
+      .transaction-list {
+         display: flex;
+         flex-direction: column;
+         gap: 0.5rem;
+      }
+
+      .transaction {
+         padding: 1rem;
+      }
+
+      .transaction-content {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+      }
+
+      .transaction-left {
+         display: flex;
+         align-items: center;
+         gap: 0.75rem;
+      }
+
+      .transaction-icon {
+         width: 2.5rem;
+         height: 2.5rem;
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 1.25rem;
+      }
+
+      .transaction-icon.income {
+         background: #dcfce7;
+         color: #16a34a;
+      }
+
+      .transaction-icon.expense {
+         background: #fee2e2;
+         color: #dc2626;
+      }
+
+      .transaction-info h3 {
+         font-weight: 500;
+         margin-bottom: 0.25rem;
+      }
+
+      .transaction-meta {
+         display: flex;
+         align-items: center;
+         gap: 0.5rem;
+      }
+
+      .badge {
+         background: #e5e7eb;
+         color: #374151;
+         padding: 0.125rem 0.5rem;
+         border-radius: 12px;
+         font-size: 0.75rem;
+      }
+
+      .transaction-date {
+         font-size: 0.75rem;
+         color: #6b7280;
+      }
+
+      .transaction-amount {
+         font-size: 1.125rem;
+         font-weight: 600;
+      }
+
+      .transaction-amount.income { color: #16a34a; }
+      .transaction-amount.expense { color: #dc2626; }
+
+      /* Empty State */
+      .empty-state {
+         text-align: center;
+         padding: 3rem 1rem;
+         color: #6b7280;
+      }
+
+      .empty-icon {
+         font-size: 3rem;
+         margin-bottom: 1rem;
+         opacity: 0.5;
+      }
+
+      /* Bottom Navigation */
+      .bottom-nav {
+         position: fixed;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         background: white;
+         border-top: 1px solid #e5e7eb;
+         padding: 0.5rem;
+         z-index: 10;
+      }
+
+      .nav-grid {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         gap: 0.25rem;
+      }
+
+      .nav-btn {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         gap: 0.25rem;
+         padding: 0.5rem;
+         border: none;
+         background: none;
+         border-radius: 6px;
+         cursor: pointer;
+         text-decoration: none;
+         color: #6b7280;
+         transition: all 0.2s ease;
+      }
+
+      .nav-btn:hover {
+         background: #f3f4f6;
+      }
+
+      .nav-btn.active {
+         background: #eff6ff;
+         color: #2563eb;
+      }
+
+      .nav-icon {
+         font-size: 1.25rem;
+      }
+
+      .nav-text {
+         font-size: 0.75rem;
+      }
+
+      @media (max-width: 480px) {
+         .main {
+            padding: 0.75rem;
+         }
+         
+         .summary-grid {
+            gap: 0.5rem;
+         }
+      }
+   </style>
+</head>
+<body>
+   <div class="container">
+      <!-- Header -->
+      <header class="header">
+         <div class="header__content">
+            <a href="/dashboard" class="header__back-button" aria-label="Volver al dashboard">
+               ←
+            </a>
+            <div class="header__info">
+               <h1 class="header__title">Historial</h1>
+               <p class="header__subtitle">Todos tus movimientos</p>
+            </div>
+         </div>
+      </header>
+
+      <main class="main">
+         <!-- Summary Cards -->
+         <div class="summary">
+            <div class="summary-card summary-card--income">
+               <div class="summary-card__header">
+                  <div class="summary-card__title">Total Ingresos</div>
+               </div>
+               <div class="summary-card__content">
+                  <p class="summary-card__amount" id="totalIngresos">$4,850.00</p>
+               </div>
+            </div>
+
+            <div class="summary-card summary-card--expense">
+               <div class="summary-card__header">
+                  <div class="summary-card__title">Total Gastos</div>
+               </div>
+               <div class="summary-card__content">
+                  <p class="summary-card__amount" id="totalGastos">$662.48</p>
+               </div>
+            </div>
+         </div>
+
+         <!-- Search and Filter -->
+         <div class="search">
+            <div class="search__container">
+               <input type="text" class="search__input" placeholder="Buscar movimiento..." id="searchInput">
+               <span class="search__icon">🔍</span>
+            </div>
+            <div class="filter-buttons">
+               <button class="filter-btn active" onclick="filterTransactions('todos')">Todos</button>
+               <button class="filter-btn" onclick="filterTransactions('ingreso')">Ingresos</button>
+               <button class="filter-btn" onclick="filterTransactions('gasto')">Gastos</button>
+            </div>
+         </div>
+
+         <!-- Transactions List -->
+         <div class="transaction-list" id="transactionList">
+            <!-- Transactions will be populated by JavaScript -->
+         </div>
+
+         <!-- Empty State (hidden by default) -->
+         <div class="empty-state empty-state--hidden" id="emptyState">
+            <div class="empty-icon">🔍</div>
+            <p><strong>No se encontraron movimientos</strong></p>
+            <p class="u-text-small">Intenta con otros filtros</p>
+         </div>
+      </main>
+
+      <!-- Bottom Navigation -->
+      <nav class="bottom-nav">
+         <div class="nav-grid">
+            <a href="/dashboard" class="nav-btn">
+               <span class="nav-icon">📊</span>
+               <span class="nav-text">Dashboard</span>
+            </a>
+            <a href="/mobile-menu" class="nav-btn">
+               <span class="nav-icon">➕</span>
+               <span class="nav-text">Acciones</span>
+            </a>
+            <a href="/historial" class="nav-btn active">
+               <span class="nav-icon">💳</span>
+               <span class="nav-text">Historial</span>
+            </a>
+         </div>
+      </nav>
+   </div>
+
+   <script>
+      const allTransactions = [
+         { id: 1, concepto: 'Supermercado', monto: -125.50, fecha: '17 Ene 2026', categoria: 'Alimentación', tipo: 'gasto' },
+         { id: 2, concepto: 'Salario', monto: 3500, fecha: '15 Ene 2026', categoria: 'Ingreso', tipo: 'ingreso' },
+         { id: 3, concepto: 'Netflix', monto: -15.99, fecha: '14 Ene 2026', categoria: 'Entretenimiento', tipo: 'gasto' },
+         { id: 4, concepto: 'Uber', monto: -23.50, fecha: '13 Ene 2026', categoria: 'Transporte', tipo: 'gasto' },
+         { id: 5, concepto: 'Restaurante', monto: -78.00, fecha: '12 Ene 2026', categoria: 'Alimentación', tipo: 'gasto' },
+         { id: 6, concepto: 'Freelance', monto: 850, fecha: '10 Ene 2026', categoria: 'Ingreso', tipo: 'ingreso' },
+         { id: 7, concepto: 'Gasolina', monto: -45.00, fecha: '09 Ene 2026', categoria: 'Transporte', tipo: 'gasto' },
+         { id: 8, concepto: 'Farmacia', monto: -32.50, fecha: '08 Ene 2026', categoria: 'Salud', tipo: 'gasto' },
+         { id: 9, concepto: 'Gimnasio', monto: -50.00, fecha: '07 Ene 2026', categoria: 'Salud', tipo: 'gasto' },
+         { id: 10, concepto: 'Amazon', monto: -89.99, fecha: '06 Ene 2026', categoria: 'Compras', tipo: 'gasto' },
+         { id: 11, concepto: 'Starbucks', monto: -12.50, fecha: '05 Ene 2026', categoria: 'Alimentación', tipo: 'gasto' },
+         { id: 12, concepto: 'Spotify', monto: -9.99, fecha: '04 Ene 2026', categoria: 'Entretenimiento', tipo: 'gasto' },
+         { id: 13, concepto: 'Electricidad', monto: -65.00, fecha: '03 Ene 2026', categoria: 'Servicios', tipo: 'gasto' },
+         { id: 14, concepto: 'Bonus', monto: 500, fecha: '02 Ene 2026', categoria: 'Ingreso', tipo: 'ingreso' },
+         { id: 15, concepto: 'Cena', monto: -95.00, fecha: '01 Ene 2026', categoria: 'Alimentación', tipo: 'gasto' }
+      ];
+
+      let currentFilter = 'todos';
+      let searchTerm = '';
+
+      function renderTransactions() {
+         const filtered = allTransactions.filter(transaction => {
+            const matchesSearch = transaction.concepto.toLowerCase().includes(searchTerm.toLowerCase());
+            const matchesFilter = currentFilter === 'todos' || transaction.tipo === currentFilter;
+            return matchesSearch && matchesFilter;
+         });
+
+         const transactionList = document.getElementById('transactionList');
+         const emptyState = document.getElementById('emptyState');
+
+         if (filtered.length === 0) {
+            transactionList.style.display = 'none';
+            emptyState.style.display = 'block';
+            return;
+         }
+
+         transactionList.style.display = 'flex';
+         emptyState.style.display = 'none';
+
+         transactionList.innerHTML = filtered.map(transaction => `
+            <div class="card transaction">
+               <div class="transaction-content">
+                  <div class="transaction-left">
+                     <div class="transaction-icon ${transaction.tipo}">
+                        ${transaction.tipo === 'ingreso' ? '↗️' : '↘️'}
+                     </div>
+                     <div class="transaction-info">
+                        <h3>${transaction.concepto}</h3>
+                        <div class="transaction-meta">
+                           <span class="badge">${transaction.categoria}</span>
+                           <span class="transaction-date">${transaction.fecha}</span>
+                        </div>
+                     </div>
+                  </div>
+                  <span class="transaction-amount ${transaction.tipo}">
+                     ${transaction.monto > 0 ? '+' : ''}$${Math.abs(transaction.monto).toFixed(2)}
+                  </span>
+               </div>
+            </div>
+         `).join('');
+      }
+
+      function filterTransactions(type) {
+         currentFilter = type;
+         
+         // Update button states
+         document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+         });
+         event.target.classList.add('active');
+         
+         renderTransactions();
+      }
+
+      // Search functionality
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+         searchTerm = e.target.value;
+         renderTransactions();
+      });
+
+      // Calculate totals
+      function updateTotals() {
+         const totalIngresos = allTransactions
+            .filter(t => t.tipo === 'ingreso')
+            .reduce((sum, t) => sum + t.monto, 0);
+
+         const totalGastos = Math.abs(
+            allTransactions
+               .filter(t => t.tipo === 'gasto')
+               .reduce((sum, t) => sum + t.monto, 0)
+         );
+
+         document.getElementById('totalIngresos').textContent = `$${totalIngresos.toFixed(2)}`;
+         document.getElementById('totalGastos').textContent = `$${totalGastos.toFixed(2)}`;
+      }
+
+      // Initialize
+      updateTotals();
+      renderTransactions();
+   </script>
+</body>
+</html>

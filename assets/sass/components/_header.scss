@@ -1,0 +1,126 @@
+// Componente: Header
+// Estilos para headers de páginas
+
+.header {
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+
+  &--desktop {
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+  }
+
+  &--mobile {
+    display: block;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__container {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__icon {
+    color: #3b82f6;
+
+    &--small {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+
+    &--small {
+      font-size: 1.125rem;
+    }
+  }
+
+  &__subtitle {
+    color: #666;
+    margin: 0;
+  }
+
+  &__button {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #f9fafb;
+    }
+
+    &--menu {
+      padding: 0.5rem;
+    }
+  }
+
+  &__button-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &__back-button {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: #666;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #f8f9fa;
+    }
+  }
+
+  &__back-icon {
+    font-size: 20px;
+  }
+
+  &__info {
+    h1 {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #212529;
+      margin: 0;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: #6c757d;
+      margin: 0;
+    }
+  }
+}

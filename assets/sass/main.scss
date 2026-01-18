@@ -6,13 +6,21 @@
 
 // Base
 @use "base/reset";
+@use "base/layout";
 // @use "base/typography";
 
 // Componentes
+@use "components/header";
+@use "components/navigation";
+@use "components/charts";
+@use "components/states";
+@use "components/transactions";
 
 // Layouts
 
 // Páginas
+@use "pages/dashboard";
+@use "pages/historial";
 
 // Temas
 

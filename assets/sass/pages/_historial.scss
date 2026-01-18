@@ -1,0 +1,59 @@
+// Layout: Historial
+// Estilos específicos para la página historial
+
+.historial {
+  .summary {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .summary-card {
+    &--income {
+      background: #f0f9f0;
+      border-color: #c3e6c3;
+    }
+
+    &--expense {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+  }
+}
+
+.search {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 1rem;
+  padding: 1rem;
+
+  &__container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 0.875rem;
+
+    &:focus {
+      border-color: #80bdff;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      outline: 0;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: 1rem;
+    color: #6c757d;
+    pointer-events: none;
+  }
+}

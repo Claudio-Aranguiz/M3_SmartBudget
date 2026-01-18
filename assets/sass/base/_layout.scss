@@ -1,0 +1,93 @@
+// Base: Layout
+// Estilos base para el layout general
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+}
+
+main {
+  flex: 1;
+}
+
+.main {
+  flex: 1;
+  padding: 1rem;
+
+  &--center {
+    background-color: aliceblue;
+    align-content: center;
+    text-align: center;
+  }
+}
+
+.page {
+  max-width: 400px;
+  margin: 0 auto;
+  background: white;
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+// Footer
+footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 8px 5px;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer {
+  &__text, 
+  &__link {
+    margin: 0;
+    padding: 1.1rem;
+    font-size: 15px;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  &__link {
+    align-content: center;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      color: inherit;
+    }
+  }
+}
+
+// Hero section
+.hero {
+  text-align: center;
+
+  &__title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  &__cta {
+    font-size: 1.125rem;
+    padding: 0.75rem 2rem;
+  }
+}
+
+// Auth section
+.auth {
+  text-align: center;
+  padding: 2rem 1rem;
+
+  &__button {
+    margin: 0.5rem;
+    min-width: 200px;
+  }
+}
