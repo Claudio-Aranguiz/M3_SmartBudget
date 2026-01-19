@@ -1,59 +1,228 @@
-// Layout: Historial
-// Estilos específicos para la página historial
+// Página: Historial
+// Estilos específicos para la página de historial de transacciones
 
-.historial {
-  .summary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
+@use "../abstracts/variables" as *;
 
-  .summary-card {
-    &--income {
-      background: #f0f9f0;
-      border-color: #c3e6c3;
-    }
-
-    &--expense {
-      background: #fef2f2;
-      border-color: #fecaca;
-    }
-  }
+.container {
+  min-height: 100vh;
+  padding-bottom: 80px;
 }
 
-.search {
+// Cards de resumen
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.summary-card {
   background: white;
   border-radius: 8px;
   border: 1px solid #e9ecef;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 1rem;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: box-shadow 0.3s ease;
+  }
+
+  &--income {
+    background: #f0f9f0;
+    border-color: #c3e6c3;
+    
+    .summary-card__title { 
+      color: $color-income-light; 
+    }
+    
+    .summary-card__amount { 
+      color: $color-income-light; 
+    }
+  }
+
+  &--expense {
+    background: #fef2f2;
+    border-color: #fecaca;
+    
+    .summary-card__title { 
+      color: $color-expense-light; 
+    }
+    
+    .summary-card__amount { 
+      color: $color-expense-light; 
+    }
+  }
+
+  &__header {
+    padding: 1rem 1rem 0.5rem;
+  }
+
+  &__title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__content {
+    padding: 0.5rem 1rem 1rem;
+  }
+
+  &__amount {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+// Búsqueda y filtros
+.search {
   padding: 1rem;
 
   &__container {
     position: relative;
-    display: flex;
-    align-items: center;
+    margin-bottom: 0.75rem;
   }
 
   &__input {
     width: 100%;
-    padding: 0.75rem 2.5rem 0.75rem 1rem;
-    border: 1px solid #ced4da;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    border: 1px solid #d1d5db;
     border-radius: 6px;
     font-size: 0.875rem;
+    background-color: white;
 
     &:focus {
-      border-color: #80bdff;
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-      outline: 0;
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
   }
 
   &__icon {
     position: absolute;
-    right: 1rem;
-    color: #6c757d;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
     pointer-events: none;
+  }
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+
+  &.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+  }
+
+  &:hover:not(.active) {
+    background: #f8f9fa;
+  }
+}
+
+// Lista de transacciones (usa estilos base de _transactions.scss)
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.badge {
+  background: #e5e7eb;
+  color: #374151;
+  padding: 0.125rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+}
+
+// Estado vacío
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #6b7280;
+
+  &--hidden {
+    display: none;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+}
+
+// Footer simple para navegación
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.75rem;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+
+  .nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+
+    &:hover {
+      background: #f3f4f6;
+      text-decoration: none;
+      color: #374151;
+    }
+
+    .nav-icon {
+      font-size: 1.25rem;
+    }
+
+    .nav-text {
+      font-size: 0.75rem;
+    }
+  }
+}
+
+// Responsivo
+@media (max-width: 480px) {
+  .main {
+    padding: 0.75rem;
+  }
+  
+  .summary {
+    gap: 0.5rem;
+  }
+
+  .bottom-nav {
+    gap: 3rem;
+    
+    .nav-btn {
+      padding: 0.75rem 1.5rem;
+    }
   }
 }

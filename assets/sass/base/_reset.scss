@@ -1,8 +1,15 @@
+@use "../abstracts/variables" as *;
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-align: center;
+}
+
+body {
+  font-family: $font-family-primary;
+  background-color: $color-bg-primary;
+  color: $color-text-primary;
 }
 
 a {

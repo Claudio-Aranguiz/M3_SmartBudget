@@ -1,0 +1,143 @@
+// Variables globales del proyecto SmartBudget
+// Centralización de todas las variables para mejor mantenimiento
+
+// =============================================================================
+// COLORES DEL SISTEMA
+// =============================================================================
+
+// Colores principales para transacciones
+$color-income: #10b981;          // Verde para ingresos
+$color-expense: #ef4444;         // Rojo para gastos
+
+// Variaciones de colores para transacciones
+$color-income-light: #166534;    // Verde oscuro para texto
+$color-expense-light: #991b1b;   // Rojo oscuro para texto
+
+// Colores de fondo para transacciones
+$color-income-bg: #dcfce7;       // Verde claro para fondos
+$color-expense-bg: #fef2f2;      // Rojo claro para fondos
+
+// Colores para iconos semánticos
+$color-icon-primary: #3b82f6;    // Azul - perfil/acciones de usuario
+$color-icon-success: #10b981;    // Verde - configuración/ajustes
+$color-icon-warning: #f59e0b;    // Amarillo - ayuda/soporte
+$color-icon-danger: #ef4444;     // Rojo - cerrar sesión/destructivas
+
+// Colores base del sistema
+$color-primary: #3b82f6;         // Azul primario
+$color-primary-hover: #2563eb;   // Azul primario hover
+
+// Colores neutros
+$color-gray-50: #f9fafb;
+$color-gray-100: #f3f4f6;
+$color-gray-200: #e5e7eb;
+$color-gray-300: #d1d5db;
+$color-gray-400: #9ca3af;
+$color-gray-500: #6b7280;
+$color-gray-600: #4b5563;
+$color-gray-700: #374151;
+$color-gray-800: #1f2937;
+$color-gray-900: #111827;
+
+// Colores de texto
+$color-text-primary: #333333;
+$color-text-secondary: #666;
+$color-text-muted: #6c757d;
+
+// Colores de fondo
+$color-bg-primary: #f8f9fa;
+$color-bg-white: #ffffff;
+$color-bg-light: aliceblue;
+
+// Colores de borde
+$color-border-light: #e0e0e0;
+$color-border-medium: #e9ecef;
+$color-border-dark: #e5e7eb;
+
+// =============================================================================
+// TIPOGRAFÍA
+// =============================================================================
+
+// Familia de fuentes
+$font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+// Tamaños de fuente
+$font-size-xs: 0.75rem;         // 12px
+$font-size-sm: 0.875rem;        // 14px
+$font-size-base: 1rem;          // 16px
+$font-size-lg: 1.125rem;        // 18px
+$font-size-xl: 1.25rem;         // 20px
+$font-size-2xl: 1.5rem;         // 24px
+$font-size-3xl: 3rem;           // 48px
+
+// Peso de fuente
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// =============================================================================
+// ESPACIADO
+// =============================================================================
+
+// Espaciado base
+$spacing-xs: 0.25rem;           // 4px
+$spacing-sm: 0.5rem;            // 8px
+$spacing-md: 0.75rem;           // 12px
+$spacing-base: 1rem;            // 16px
+$spacing-lg: 1.5rem;            // 24px
+$spacing-xl: 2rem;              // 32px
+$spacing-2xl: 3rem;             // 48px
+
+// Padding específicos
+$padding-btn: 0.5rem 1rem;
+$padding-card: 1.5rem;
+$padding-header: 0.5rem 1.1rem;
+
+// =============================================================================
+// DIMENSIONES
+// =============================================================================
+
+// Alturas
+$height-header: 3.7rem;
+$height-footer-mobile: 80px;
+
+// Anchos
+$width-icon-sm: 16px;
+$width-icon-md: 20px;
+$width-icon-lg: 24px;
+$width-icon-xl: 40px;
+
+// Bordes redondeados
+$border-radius-sm: 0.25rem;     // 4px
+$border-radius-md: 0.5rem;      // 8px
+$border-radius-lg: 0.75rem;     // 12px
+$border-radius-circle: 50%;
+
+// =============================================================================
+// SOMBRAS
+// =============================================================================
+
+$shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+$shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 4px 8px rgba(0,0,0,0.15);
+$shadow-xl: 0 0 20px rgba(0, 0, 0, 0.1);
+
+// =============================================================================
+// BREAKPOINTS
+// =============================================================================
+
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// =============================================================================
+// Z-INDEX
+// =============================================================================
+
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;

@@ -1,28 +1,14 @@
 // Componente: Header
 // Estilos para headers de páginas
 
+@use "../abstracts/variables" as *;
+
 .header {
-  background: white;
-  border-bottom: 1px solid #e0e0e0;
-
-  &--desktop {
-    display: none;
-
-    @media (min-width: 768px) {
-      display: block;
-    }
-  }
-
-  &--mobile {
-    display: block;
-
-    @media (min-width: 768px) {
-      display: none;
-    }
-  }
+  background: $color-bg-white;
+  border-bottom: 1px solid $color-border-light;
 
   &__container {
-    padding: 1rem;
+    padding: $spacing-base;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -38,16 +24,11 @@
   &__brand {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: $spacing-sm;
   }
 
   &__icon {
-    color: #3b82f6;
-
-    &--small {
-      width: 24px;
-      height: 24px;
-    }
+    color: $color-primary;
   }
 
   &__title {

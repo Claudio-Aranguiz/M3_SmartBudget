@@ -6,6 +6,91 @@
 
 ## [Unreleased] - RAW Development Phase
 
+### [2026-01-19] - CSS Architecture Optimization & Page Standardization
+#### Added
+- 🎯 **Sistema de cascada CSS optimizado**:
+  - Configuración de prioridad: Bootstrap → SCSS → styles.css
+  - `styles.css` restaurado como hoja prioritaria para sobreescribir SCSS
+  - Eliminación de conflictos entre sistemas CSS
+
+- 📄 **Estandarización completa de páginas**:
+  - `historial.html` reestructurado con header/footer consistentes
+  - `menu.html` completamente rediseñado con estructura BEM
+  - Footer navigation con estados activos funcionales
+  - Headers simplificados con navegación rápida al dashboard
+
+- 🎨 **Estilos específicos mejorados en styles.css**:
+  - `.summary` grid para cards de historial
+  - `.search` estilos para filtros de búsqueda
+  - `.filter-btn` botones interactivos de filtrado
+  - `.summary-card--interactive` cards con efectos hover
+  - Diferenciación visual ingresos/gastos (.summary-card--income/expense)
+
+- 🔧 **Sistema de variables SCSS centralizado**:
+  - `_variables.scss` con 127 variables organizadas por categorías
+  - Variables para colores, tipografía, espaciado y dimensiones
+  - Variables semánticas para iconos (`$color-icon-primary/success/warning/danger`)
+  - Eliminación de duplicaciones entre archivos SCSS
+
+- ⚡ **Componente de iconos de menú**:
+  - `_menu-icons.scss` con clases BEM para iconos semánticos
+  - Eliminación de todos los estilos inline del proyecto
+  - Sistema de colores consistente usando variables SCSS
+
+- 🚀 **Funcionalidades mejoradas en menu.html**:
+  - Grid de acciones financieras (agregar ingreso/gasto, nueva tarjeta, transferir)
+  - Resumen rápido con balance actual y estadísticas del mes
+  - Cards interactivas con efectos hover y transiciones
+  - Función JavaScript `showAlert()` para placeholders de desarrollo
+
+#### Modified
+- 🔄 **Jerarquía CSS reestructurada**:
+  - Todos los archivos HTML configurados para cargar styles.css después de main.css
+  - SCSS simplificado eliminando estilos duplicados en styles.css
+  - Sistema híbrido manteniendo beneficios de ambos approaches
+
+- 🧹 **Limpieza de archivos legacy**:
+  - `_layout.scss` simplificado eliminando backgrounds duplicados
+  - Variables locales migradas a sistema centralizado
+  - Eliminación de inconsistencias entre componentes SCSS
+  - `menu_old.html` eliminado tras migración completa de funcionalidades
+
+#### Fixed
+- 🐛 **Resolución de conflictos de estilos**:
+  - Background `aliceblue` en main element aplicándose correctamente
+  - Iconos Lucide inicializándose en todas las páginas
+  - Headers con estructura BEM consistente
+  - Error de sintaxis en `_header.scss` (llave extra línea 33) corregido
+
+- ⚡ **Optimización de performance**:
+  - Reducción de CSS duplicado entre sistemas
+  - Carga de estilos en orden correcto para evitar FOUC
+  - Eliminación de selectores redundantes
+  - Compilación SCSS sin errores ni advertencias
+
+- 🎯 **Eliminación completa de estilos inline**:
+  - 0 atributos `style=""` en todo el proyecto
+  - Migración a clases CSS organizadas con metodología BEM
+  - Mejor mantenibilidad y consistencia visual
+
+#### Technical Improvements
+- 📐 **Arquitectura CSS híbrida optimizada**:
+  - SCSS para variables y estructura base
+  - styles.css para detalles específicos y overrides
+  - Proceso de migración gradual establecido
+  - Mantenimiento de flexibilidad para futuros cambios
+
+- 🔧 **Sistema de build mejorado**:
+  - Compilación SCSS exitosa con nuevo componente de iconos
+  - Organización modular de componentes
+  - Variables centralizadas para mejor mantenimiento
+
+#### Cleanup
+- 🗂️ **Organización del workspace**:
+  - Eliminación de archivos obsoletos (`menu_old.html`)
+  - Estructura de carpetas optimizada
+  - Código más limpio y mantenible
+
 ### [2026-01-18] - Major Architecture Refactor
 #### Added
 - ✨ **Migración completa a arquitectura SASS modular**:

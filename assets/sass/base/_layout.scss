@@ -1,26 +1,29 @@
 // Base: Layout
 // Estilos base para el layout general
 
+@use "../abstracts/variables" as *;
+
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: $font-family-primary;
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa;
+  background-color: $color-bg-primary;
 }
 
 main {
   flex: 1;
+  padding-bottom: $height-footer-mobile; // Espacio para footer sticky
 }
 
 .main {
   flex: 1;
-  padding: 1rem;
+  padding: $spacing-base;
+  padding-bottom: $height-footer-mobile; // Espacio para footer sticky
 
   &--center {
-    background-color: aliceblue;
     align-content: center;
     text-align: center;
   }
@@ -34,20 +37,58 @@ main {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-// Footer
-footer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 8px 5px;
-  text-align: center;
-  margin-top: auto;
-}
-
+// Footer simple (hereda del index/login)
 .footer {
   &__text, 
   &__link {
     margin: 0;
     padding: 1.1rem;
+  }
+
+  // Footer simple para navegación entre páginas
+  &.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $color-bg-white;
+    border-top: 1px solid $color-border-dark;
+    padding: $spacing-md;
+    z-index: $z-index-fixed;
+    display: flex;
+    justify-content: center;
+    gap: $spacing-xl;
+
+    .footer__link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: $spacing-sm $spacing-base;
+      text-decoration: none;
+      color: $color-gray-500;
+      transition: all 0.2s ease;
+      border-radius: $border-radius-sm;
+      font-size: $font-size-sm;
+
+      &:hover {
+        background: $color-gray-100;
+        text-decoration: none;
+        color: $color-gray-700;
+      }
+    }
+
+    // Responsivo móvil
+    @media (max-width: 767px) {
+      gap: $spacing-2xl;
+      
+      .footer__link {
+        padding: $spacing-md $spacing-lg;
+      }
+    }
+  }
+
+  &__text {
     font-size: 15px;
     font-weight: 600;
     color: #333333;
@@ -63,6 +104,15 @@ footer {
       color: inherit;
     }
   }
+}
+
+// Footer general
+footer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 8px 5px;
+  text-align: center;
+  margin-top: auto;
 }
 
 // Hero section
@@ -91,3 +141,4 @@ footer {
     min-width: 200px;
   }
 }
+

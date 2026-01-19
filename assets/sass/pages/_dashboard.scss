@@ -1,6 +1,8 @@
 // Layout: Dashboard
 // Estilos específicos para la página dashboard
 
+@use "../abstracts/variables" as *;
+
 .dashboard {
   padding: 1rem;
 
@@ -48,11 +50,11 @@
     margin-bottom: 0.5rem;
 
     &--income {
-      color: #10b981;
+      color: $color-income;
     }
 
     &--expense {
-      color: #ef4444;
+      color: $color-expense;
     }
   }
 
@@ -63,11 +65,11 @@
 
   &__percentage {
     &--positive {
-      color: #10b981;
+      color: $color-income;
     }
 
     &--negative {
-      color: #ef4444;
+      color: $color-expense;
     }
   }
 }

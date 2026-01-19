@@ -3,6 +3,7 @@
 // Vendores
 
 // Abstracciones
+@use "abstracts/variables" as *;
 
 // Base
 @use "base/reset";
@@ -15,6 +16,7 @@
 @use "components/charts";
 @use "components/states";
 @use "components/transactions";
+@use "components/menu-icons";
 
 // Layouts
 
@@ -25,3 +27,5 @@
 // Temas
 
 // Utilidades
+
+// Variables

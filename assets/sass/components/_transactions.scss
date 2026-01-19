@@ -1,6 +1,8 @@
 // Componente: Transactions
 // Estilos para lista de transacciones
 
+@use "../abstracts/variables" as *;
+
 .transactions {
   background: white;
   border-radius: 0.5rem;
@@ -47,14 +49,18 @@
 }
 
 .transaction {
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  transition: background 0.2s;
+  transition: all 0.2s ease;
 
   &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     background: #f9fafb;
   }
 
@@ -73,13 +79,13 @@
     justify-content: center;
 
     &--income {
-      background: #dcfce7;
-      color: #10b981;
+      background: $color-income-bg;
+      color: $color-income;
     }
 
     &--expense {
-      background: #fef2f2;
-      color: #ef4444;
+      background: $color-expense-bg;
+      color: $color-expense;
     }
   }
 
@@ -108,13 +114,78 @@
 
   &__amount {
     font-weight: 600;
+    font-size: 1.125rem;
 
     &--income {
-      color: #10b981;
+      color: $color-income;
     }
 
     &--expense {
-      color: #ef4444;
+      color: $color-expense;
+    }
+  }
+
+  // Variaciones para diferentes estructuras HTML
+  &-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  &-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+
+    &.income {
+      background: $color-income-bg;
+      color: $color-income;
+    }
+
+    &.expense {
+      background: $color-expense-bg;
+      color: $color-expense;
+    }
+  }
+
+  &-info {
+    h3 {
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+  }
+
+  &-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &-date {
+    font-size: 0.75rem;
+    color: #6b7280;
+  }
+
+  &-amount {
+    font-size: 1.125rem;
+    font-weight: 600;
+
+    &.income { 
+      color: $color-income; 
+    }
+    
+    &.expense { 
+      color: $color-expense; 
     }
   }
 }
