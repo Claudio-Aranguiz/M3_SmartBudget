@@ -1,0 +1,15 @@
+// Layout: Auth
+// Estilos para secciones de autenticación
+
+@use "../abstracts/variables" as *;
+
+// Auth section
+.auth {
+  text-align: center;
+  padding: 2rem 1rem;
+
+  &__button {
+    margin: 0.5rem;
+    min-width: 200px;
+  }
+}

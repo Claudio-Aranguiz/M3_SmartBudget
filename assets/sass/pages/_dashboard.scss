@@ -4,32 +4,54 @@
 @use "../abstracts/variables" as *;
 
 .dashboard {
-  padding: 1rem;
 
   &__summary {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+    gap: 0; // Móvil: sin gap
     margin-bottom: 2rem;
+
+    // Desktop
+    @media (min-width: 769px) {
+      gap: 2rem;
+    }
   }
 
   &__charts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    // Mobile first: oculto por defecto
+    display: none;
+    grid-template-columns: 1fr;
     gap: 2rem;
     margin-bottom: 2rem;
+    width: 100%;
 
-    @media (max-width: 768px) {
-      display: none; // Hidden on mobile
+    // Desde 426px: visible y ocupa 2 columnas del grid padre
+    @media (min-width: 426px) {
+      display: grid;
+      grid-column: span 2;
+    }
+
+    // Pantallas muy grandes: múltiples gráficos en columnas
+    @media (min-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
 
+.dashboard h3 {
+  text-align: center;
+  margin: 1rem;
+
+  @media (min-width: 769px) {
+      margin: 2rem;
+  }
+}
 .summary-card {
   background: white;
   border-radius: 0.5rem;
   padding: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 
   &__header {
     display: flex;

@@ -29,50 +29,38 @@
       </div>
    </header>
 
-   <main>
+   <main class="main">
       <!-- Contenido del menú -->
       <div class="dashboard">
-         <h2>Opciones del Menú</h2>
-         
+
+         <!-- Resumen Rápido -->
+         <h3>Resumen Rápido</h3>
+         <div class="summary-card">
+            <div class="summary-card__header">
+               <div class="summary-card__title">Balance Actual</div>
+               <i data-lucide="wallet" class="menu-icon menu-icon--primary"></i>
+            </div>
+            <div class="summary-card__content">
+               <div class="summary-card__value summary-card__value--income">$15,231.89</div>
+            </div>
+         </div>
+
          <div class="dashboard__summary">
             <div class="summary-card">
                <div class="summary-card__header">
-                  <div class="summary-card__title">Mi Perfil</div>
-                  <i data-lucide="user" class="menu-icon menu-icon--primary"></i>
+                  <div class="summary-card__title">Ingresos del mes</div>
                </div>
                <div class="summary-card__content">
-                  <p>Gestiona tu información personal</p>
+                  <div class="summary-card__value summary-card__value--income">+$8,420.00</div>
                </div>
             </div>
 
             <div class="summary-card">
                <div class="summary-card__header">
-                  <div class="summary-card__title">Configuración</div>
-                  <i data-lucide="settings" class="menu-icon menu-icon--success"></i>
+                  <div class="summary-card__title">Gastos del mes</div>
                </div>
                <div class="summary-card__content">
-                  <p>Ajusta las preferencias de la app</p>
-               </div>
-            </div>
-
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Soporte</div>
-                  <i data-lucide="help-circle" class="menu-icon menu-icon--warning"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Obtén ayuda y contacta con nosotros</p>
-               </div>
-            </div>
-
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Cerrar Sesión</div>
-                  <i data-lucide="log-out" class="menu-icon menu-icon--danger"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Salir de tu cuenta de forma segura</p>
-                  <a href="login.html" class="btn btn-outline-danger btn-sm mt-2">Cerrar Sesión</a>
+                  <div class="summary-card__value summary-card__value--expense">-$5,328.50</div>
                </div>
             </div>
          </div>
@@ -121,57 +109,63 @@
             </div>
          </div>
 
-         <!-- Resumen Rápido -->
-         <h3>Resumen Rápido</h3>
-         <div class="summary-card">
-            <div class="summary-card__header">
-               <div class="summary-card__title">Balance Actual</div>
-               <i data-lucide="wallet" class="menu-icon menu-icon--primary"></i>
-            </div>
-            <div class="summary-card__content">
-               <div class="summary-card__value summary-card__value--income">$15,231.89</div>
-            </div>
-         </div>
-
+                  <!-- Otras Opciones -->
+         <h3>Otras Opciones</h3>
+         
          <div class="dashboard__summary">
             <div class="summary-card">
                <div class="summary-card__header">
-                  <div class="summary-card__title">Ingresos del mes</div>
+                  <div class="summary-card__title">Mi Perfil</div>
+                  <i data-lucide="user" class="menu-icon menu-icon--primary"></i>
                </div>
                <div class="summary-card__content">
-                  <div class="summary-card__value summary-card__value--income">+$8,420.00</div>
+                  <p>Gestiona tu información personal</p>
                </div>
             </div>
 
             <div class="summary-card">
                <div class="summary-card__header">
-                  <div class="summary-card__title">Gastos del mes</div>
+                  <div class="summary-card__title">Configuración</div>
+                  <i data-lucide="settings" class="menu-icon menu-icon--success"></i>
                </div>
                <div class="summary-card__content">
-                  <div class="summary-card__value summary-card__value--expense">-$5,328.50</div>
+                  <p>Ajusta las preferencias de la app</p>
+               </div>
+            </div>
+
+            <div class="summary-card">
+               <div class="summary-card__header">
+                  <div class="summary-card__title">Soporte</div>
+                  <i data-lucide="help-circle" class="menu-icon menu-icon--warning"></i>
+               </div>
+               <div class="summary-card__content">
+                  <p>Obtén ayuda y contacta con nosotros</p>
+               </div>
+            </div>
+
+            <div class="summary-card">
+               <div class="summary-card__header">
+                  <div class="summary-card__title">Cerrar Productos</div>
+                  <i data-lucide="log-out" class="menu-icon menu-icon--danger"></i>
+               </div>
+               <div class="summary-card__content">
+                  <p>Cerrar Productos de forma segura</p>
+                  <a href="#" class="btn btn-outline-danger btn-sm mt-2">ir a Cerrar</a>
                </div>
             </div>
          </div>
+
       </div>
    </main>
 
-   <!-- Footer Navigation -->
-   <footer class="nav--mobile">
-      <div class="nav__container">
-         <button class="nav__button" onclick="location.href='dashboard.html'" aria-label="Dashboard">
-            <i data-lucide="home"></i>
-            <span class="nav__label">Dashboard</span>
-         </button>
-         <button class="nav__button" onclick="location.href='historial.html'" aria-label="Historial">
-            <i data-lucide="clock"></i>
-            <span class="nav__label">Historial</span>
-         </button>
-         <button class="nav__button nav__button--active" aria-label="Menú">
-            <i data-lucide="menu"></i>
-            <span class="nav__label">Menú</span>
-         </button>
-      </div>
-   </footer>
+   <footer class="footer bottom-nav">
+      <a href="dashboard.html" class=" footer__link">
+         <span class="">Dashboard</span>
+      </a>
+      <a href="historial.html" class=" footer__link">
+         <span class="">Historial</span>
+      </a>
+    </footer>
 
    <!-- Scripts -->
    <script>

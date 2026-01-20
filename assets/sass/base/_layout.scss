@@ -1,27 +1,40 @@
 // Base: Layout
-// Estilos base para el layout general
+// Estilos base para elementos estructurales fundamentales
 
 @use "../abstracts/variables" as *;
 
+// Reset universal
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Estructura completa del body (todas las propiedades consolidadas)
 body {
+  // Propiedades visuales
+  font-family: $font-family-primary;
+  background-color: $color-bg-primary;
+  color: $color-text-primary;
+  
+  // Propiedades estructurales
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: $font-family-primary;
-  margin: 0;
-  padding: 0;
-  background-color: $color-bg-primary;
 }
 
-main {
-  flex: 1;
-  padding-bottom: $height-footer-mobile; // Espacio para footer sticky
+// Estilos base para enlaces
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
+// Contenedor principal - usar solo clase .main para evitar redundancia
 .main {
   flex: 1;
   padding: $spacing-base;
-  padding-bottom: $height-footer-mobile; // Espacio para footer sticky
+  padding-bottom: $height-footer-mobile;
+  background: #c5ebf1d6;
 
   &--center {
     align-content: center;
@@ -29,116 +42,12 @@ main {
   }
 }
 
+// Contenedor de página base
 .page {
   max-width: 400px;
   margin: 0 auto;
   background: white;
   min-height: 100vh;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-// Footer simple (hereda del index/login)
-.footer {
-  &__text, 
-  &__link {
-    margin: 0;
-    padding: 1.1rem;
-  }
-
-  // Footer simple para navegación entre páginas
-  &.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: $color-bg-white;
-    border-top: 1px solid $color-border-dark;
-    padding: $spacing-md;
-    z-index: $z-index-fixed;
-    display: flex;
-    justify-content: center;
-    gap: $spacing-xl;
-
-    .footer__link {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: $spacing-xs;
-      padding: $spacing-sm $spacing-base;
-      text-decoration: none;
-      color: $color-gray-500;
-      transition: all 0.2s ease;
-      border-radius: $border-radius-sm;
-      font-size: $font-size-sm;
-
-      &:hover {
-        background: $color-gray-100;
-        text-decoration: none;
-        color: $color-gray-700;
-      }
-    }
-
-    // Responsivo móvil
-    @media (max-width: 767px) {
-      gap: $spacing-2xl;
-      
-      .footer__link {
-        padding: $spacing-md $spacing-lg;
-      }
-    }
-  }
-
-  &__text {
-    font-size: 15px;
-    font-weight: 600;
-    color: #333333;
-  }
-
-  &__link {
-    align-content: center;
-    color: inherit;
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      color: inherit;
-    }
-  }
-}
-
-// Footer general
-footer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  padding: 8px 5px;
-  text-align: center;
-  margin-top: auto;
-}
-
-// Hero section
-.hero {
-  text-align: center;
-
-  &__title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  &__cta {
-    font-size: 1.125rem;
-    padding: 0.75rem 2rem;
-  }
-}
-
-// Auth section
-.auth {
-  text-align: center;
-  padding: 2rem 1rem;
-
-  &__button {
-    margin: 0.5rem;
-    min-width: 200px;
-  }
 }
 

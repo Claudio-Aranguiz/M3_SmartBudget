@@ -6,7 +6,7 @@
 @use "abstracts/variables" as *;
 
 // Base
-@use "base/reset";
+// @use "base/reset";  // Temporalmente comentado para eliminar duplicación
 @use "base/layout";
 // @use "base/typography";
 
@@ -19,6 +19,9 @@
 @use "components/menu-icons";
 
 // Layouts
+@use "layout/footer";
+@use "layout/hero";
+@use "layout/auth";
 
 // Páginas
 @use "pages/dashboard";

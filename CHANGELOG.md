@@ -6,6 +6,70 @@
 
 ## [Unreleased] - RAW Development Phase
 
+### [2026-01-20] - SASS Architecture Optimization & Code Quality Improvements
+#### Added
+- 🏗️ **Reorganización completa de arquitectura SASS**:
+  - Nueva estructura `layout/` con componentes específicos (`_footer.scss`, `_hero.scss`, `_auth.scss`)
+  - Separación correcta entre estilos `base/` y `layout/` siguiendo metodología 7-1
+  - Centralización de estilos en un solo lugar por componente
+
+- 🎯 **Mejoras en responsive design**:
+  - Sistema de gap responsive en dashboard: 0 para móvil, 2rem para desktop
+  - Configuración mobile-first para `dashboard__charts`: oculto por defecto, visible desde 426px+
+  - Media queries optimizados usando enfoque mobile-first
+
+- 🧹 **Sistema de validación de enlaces SASS**:
+  - Verificación completa de importaciones y dependencias
+  - Todas las variables resolviendo correctamente (144 variables)
+  - CSS compilado limpio sin variables sin resolver
+  - SASS watch funcionando sin errores
+
+#### Fixed
+- 🐛 **Eliminación de redundancias críticas**:
+  - **Problema `main` vs `.main`**: Consolidado a solo `.main` (más específico y BEM)
+  - **Problema `footer` vs `.footer`**: Eliminado elemento HTML redundante, solo clase BEM
+  - **Duplicación de `.bottom-nav`**: Centralizado en `_footer.scss`, eliminado de `_historial.scss`
+  - **Definiciones duplicadas de `body`**: Una sola definición consolidada en `_layout.scss`
+
+- ⚡ **Optimización de código**:
+  - CSS compilado reducido de 719 a 670 líneas (-7% de código)
+  - Eliminación de 49 líneas de código redundante
+  - Proceso de compilación más eficiente sin duplicaciones
+
+- 🎨 **Corrección de solapamiento en dashboard**:
+  - `dashboard__charts` ya no se solapa con transactions en desktop
+  - Grid layout corregido: una columna en desktop normal, dos columnas solo en pantallas >1200px
+  - Eliminado comportamiento de "col-6" no deseado
+
+#### Modified
+- 🔄 **Reestructuración de archivos SASS**:
+  - Movido contenido de layout desde `base/_layout.scss` a archivos específicos
+  - `base/_layout.scss` ahora contiene solo estilos estructurales básicos
+  - `main.scss` actualizado con importaciones correctas de layout
+
+- 📱 **Mejoras mobile-first**:
+  - Media queries reestructurados siguiendo metodología mobile-first
+  - `dashboard__charts` con lógica correcta: `display: none` por defecto, `display: grid` desde 426px+
+  - Eliminado uso incorrecto de `max-width` media queries donde no correspondía
+
+#### Technical Improvements
+- 🛠️ **Arquitectura CSS más limpia**:
+  - Especificidad clara: solo clases BEM, no elementos HTML confusos
+  - Mantenimiento más fácil: un lugar por componente
+  - Mejor rendimiento: menos reglas CSS duplicadas
+  - Consistencia: metodología BEM aplicada correctamente en toda la base de código
+
+- 🔍 **Sistema de detección de redundancias**:
+  - Implementado proceso de revisión de duplicaciones
+  - Identificación automática de patrones problemáticos (`elemento {}` vs `.elemento {}`)
+  - Base establecida para prevenir futuras redundancias
+
+#### Cleanup
+- 🗂️ **Organización mejorada**:
+  - Eliminación de archivo `base/_reset.scss` temporal (integrado en `_layout.scss`)
+  - Código SASS más mantenible y escalable
+  - Documentación de cambios en comentarios de código
+
 ### [2026-01-19] - CSS Architecture Optimization & Page Standardization
 #### Added
 - 🎯 **Sistema de cascada CSS optimizado**:

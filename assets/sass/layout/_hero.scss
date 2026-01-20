@@ -1,0 +1,20 @@
+// Layout: Hero
+// Estilos para secciones hero
+
+@use "../abstracts/variables" as *;
+
+// Hero section
+.hero {
+  text-align: center;
+
+  &__title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  &__cta {
+    font-size: 1.125rem;
+    padding: 0.75rem 2rem;
+  }
+}
