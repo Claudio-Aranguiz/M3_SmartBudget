@@ -9,9 +9,10 @@
   width: 100%;
   align-items: center;
   text-align: center;
+  justify-content: center;
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
-  color: $color-text-primary;      
+  color: $color-text-primary;
   height: $height-header;
 
   &__brand {

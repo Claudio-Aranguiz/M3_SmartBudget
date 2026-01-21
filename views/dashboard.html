@@ -21,75 +21,67 @@
                 <span class="nav__title">SmartBudget</span>
             </div>
             <ul class="nav__list">
-                <li class="nav__item">
-                    <button class="header__button header__button--logout" onclick="window.location.href='../index.html'">
-                        <i data-lucide="log-out" class="header__button-icon"></i>
-                        Cerrar Sesión
-                    </button>
-                </li>
+               <li class="nav__item">
+                  <button class="header__button">
+                     <i data-lucide="settings" class="header__button-icon"></i>
+                  </button>
+               </li>
+               <li class="nav__item">
+                   <button class="header__button header__button--logout" onclick="window.location.href='../index.html'" alt="Cerrar Sesión">
+                       <i data-lucide="log-out" class="header__button-icon"></i>
+                   </button>
+               </li>
             </ul>
         </nav>
-    </header>
+   </header>
 
-<main class="main dashboard">
-      <!-- Summary Cards -->
-      <div class="dashboard__summary">
+    <main class="main dashboard">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="dashboard__summary">
          <!-- Balance Total Card -->
-         <div class="summary-card">
-            <div class="summary-card__content">
-               <div class="summary-card__header">
-                  <h3 class="summary-card__title">Balance Total</h3>
-                  <i data-lucide="wallet" class="summary-card__icon"></i>
+            <div class="summary-card">
+               <div class="summary-card__content">
+                  <div class="summary-card__header">
+                     <h3 class="summary-card__title">Balance Total</h3>
+                     <i data-lucide="wallet" class="summary-card__icon"></i>
+                  </div>
+                  <div class="summary-card__value">$15,231.89</div>
+                  <p class="summary-card__change">
+                     <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
+                  </p>
                </div>
-               <div class="summary-card__value">$15,231.89</div>
-               <p class="summary-card__change">
-                  <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
-               </p>
             </div>
-         </div>
-
-         <!-- Ingresos Card -->
-         <div class="summary-card summary-card--income">
-            <div class="summary-card__content">
-               <div class="summary-card__header">
-                  <h3 class="summary-card__title">Ingresos</h3>
-                  <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
+            
+            <!-- Ingresos Card -->
+            <div class="summary-card summary-card--income">
+               <div class="summary-card__content">
+                  <div class="summary-card__header">
+                     <h3 class="summary-card__title">Ingresos</h3>
+                     <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
+                  </div>
+                  <div class="summary-card__value summary-card__value--income">$8,420.00</div>
+                  <p class="summary-card__change">
+                     <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
+                  </p>
                </div>
-               <div class="summary-card__value summary-card__value--income">$8,420.00</div>
-               <p class="summary-card__change">
-                  <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
-               </p>
             </div>
-         </div>
 
-         <!-- Gastos Card -->
-         <div class="summary-card summary-card--expense">
-            <div class="summary-card__content">
-               <div class="summary-card__header">
-                  <h3 class="summary-card__title">Gastos</h3>
-                  <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
+            <!-- Gastos Card -->
+            <div class="summary-card summary-card--expense">
+               <div class="summary-card__content">
+                  <div class="summary-card__header">
+                     <h3 class="summary-card__title">Gastos</h3>
+                     <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
+                  </div>
+                  <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
+                     <p class="summary-card__change">
+                        <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
+                     </p>
+                  </div>
                </div>
-               <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
-               <p class="summary-card__change">
-                  <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
-               </p>
             </div>
-         </div>
-
-         <!-- Tarjetas Card -->
-         <div class="summary-card">
-            <div class="summary-card__content">
-               <div class="summary-card__header">
-                  <h3 class="summary-card__title">Tarjetas</h3>
-                  <i data-lucide="credit-card" class="summary-card__icon"></i>
-               </div>
-               <div class="summary-card__value">3</div>
-               <p class="summary-card__change">
-                  2 activas, 1 bloqueada
-               </p>
-            </div>
-      </div>
-
+         <br>
       <!-- Charts Section - Desktop Only -->
       <div class="dashboard__charts">
          <!-- Ingresos vs Gastos Chart -->
@@ -192,8 +184,10 @@
                </div>
             </div>
          </div>
-      </div>
-   </main>
+                </div>
+            </div>
+        </div>
+    </main>
 
    <footer class="footer bottom-nav">
       <a href="menu.html" class=" footer__link">

@@ -6,6 +6,30 @@
 
 ## [Unreleased] - RAW Development Phase
 
+### [2026-01-21] - Dashboard Layout Refactoring & Header Standardization
+#### Added
+- 📜 **Scroll interno en transacciones**: 
+  - Limitado el alto de la lista de transacciones a `18rem` en desktop.
+  - Implementado scrollbar personalizado estético y funcional.
+- 📐 **Sistema de grillas ampliado**:
+  - Soporte para hasta 4 columnas en `.dashboard__summary` para versiones desktop.
+  - Optimización de espacio en la página de Menú/Acciones.
+
+#### Modified
+- 🏗️ **Homologación de Headers**:
+  - Estandarización del componente de navegación en `dashboard.html`, `menu.html` e `historial.html`.
+  - Migración a estructura unificada `<nav class="nav">` eliminando fragmentos redundantes.
+- 🧹 **Refactorización de código HTML**:
+  - Limpieza integral de indentación y formato en las tres vistas principales.
+  - Atributos HTML organizados de forma limpia sin saltos de línea innecesarios.
+  - Corrección de estructura Bootstrap (eliminación de `col-` vacíos).
+
+#### Fixed
+- 🏠 **Visibilidad de navegación**:
+  - Corregido error que hacía invisibles los botones e iconos de navegación en sub-páginas.
+  - Implementación de clases de tamaño para iconos Lucide (`header__button-icon`).
+  - Restauración de la clase `.nav` necesaria para los estilos SASS.
+
 ### [2026-01-20] - SASS Architecture Optimization & Code Quality Improvements
 #### Added
 - 🏗️ **Reorganización completa de arquitectura SASS**:

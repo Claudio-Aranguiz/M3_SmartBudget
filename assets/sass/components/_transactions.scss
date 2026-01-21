@@ -11,7 +11,7 @@
   grid-column: span 1;
 
   @media (min-width: 769px) {
-      grid-column: span 2;
+    grid-column: span 2;
   }
 
   &__header {
@@ -50,6 +50,36 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+
+    @media (min-width: 769px) {
+      max-height: 18rem;
+      overflow-y: auto;
+      padding-right: 0.5rem; // Espacio para el scrollbar
+
+      // Personalización del scrollbar (Chrome, Safari, Edge)
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #bbb;
+        }
+      }
+
+      // Firefox
+      scrollbar-width: thin;
+      scrollbar-color: #ccc #f1f1f1;
+    }
   }
 }
 
@@ -57,7 +87,7 @@
   background: white;
   border-radius: 8px;
   border: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -65,7 +95,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     background: #f9fafb;
   }
 
@@ -185,12 +215,12 @@
     font-size: 1.125rem;
     font-weight: 600;
 
-    &.income { 
-      color: $color-income; 
+    &.income {
+      color: $color-income;
     }
-    
-    &.expense { 
-      color: $color-expense; 
+
+    &.expense {
+      color: $color-expense;
     }
   }
 }

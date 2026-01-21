@@ -10,82 +10,82 @@
    <!-- CSS Dependencies -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
    <link rel="stylesheet" href="../assets/sass/main.css">
-   <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Prioridad sobre SCSS -->
+   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
    <!-- Header simplificado -->
-   <header class="header header--mobile">
-      <div class="header__container">
-         <div class="header__content">
-            <div class="header__brand">
-               <i data-lucide="trending-up" class="header__icon"></i>
-               <span class="header__title">Historial</span>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__brand">
+                <img src="../assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.svg" alt="SmartBudget Logo" class="nav__logo">
+                <span class="nav__title">SmartBudget</span>
             </div>
-            <a href="dashboard.html" class="header__button" aria-label="Ir al dashboard">
-               <i data-lucide="home"></i>
-               <span>Dashboard</span>
-            </a>
-         </div>
-      </div>
-   </header>
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <button class="header__button" onclick="window.location.href='dashboard.html'" aria-label="Ir al dashboard">
+                        <i data-lucide="home" class="header__button-icon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-      <main class="main">
-         <!-- Summary Cards -->
-         <div class="summary">
+    <main class="main">
+        <!-- Summary Cards -->
+        <div class="summary">
             <div class="summary-card summary-card--income">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Total Ingresos</div>
-               </div>
-               <div class="summary-card__content">
-                  <p class="summary-card__amount" id="totalIngresos">$4,850.00</p>
-               </div>
+                <div class="summary-card__header">
+                    <div class="summary-card__title">Total Ingresos</div>
+                </div>
+                <div class="summary-card__content">
+                    <p class="summary-card__amount" id="totalIngresos">$4,850.00</p>
+                </div>
             </div>
 
             <div class="summary-card summary-card--expense">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Total Gastos</div>
-               </div>
-               <div class="summary-card__content">
-                  <p class="summary-card__amount" id="totalGastos">$662.48</p>
-               </div>
+                <div class="summary-card__header">
+                    <div class="summary-card__title">Total Gastos</div>
+                </div>
+                <div class="summary-card__content">
+                    <p class="summary-card__amount" id="totalGastos">$662.48</p>
+                </div>
             </div>
-         </div>
+        </div>
 
-         <!-- Search and Filter -->
-         <div class="search">
+        <!-- Search and Filter -->
+        <div class="search">
             <div class="search__container">
-               <input type="text" class="search__input" placeholder="Buscar movimiento..." id="searchInput">
-               <span class="search__icon">🔍</span>
+                <input type="text" class="search__input" placeholder="Buscar movimiento..." id="searchInput">
+                <span class="search__icon">🔍</span>
             </div>
             <div class="filter-buttons">
-               <button class="filter-btn active" onclick="filterTransactions('todos')">Todos</button>
-               <button class="filter-btn" onclick="filterTransactions('ingreso')">Ingresos</button>
-               <button class="filter-btn" onclick="filterTransactions('gasto')">Gastos</button>
+                <button class="filter-btn active" onclick="filterTransactions('todos')">Todos</button>
+                <button class="filter-btn" onclick="filterTransactions('ingreso')">Ingresos</button>
+                <button class="filter-btn" onclick="filterTransactions('gasto')">Gastos</button>
             </div>
-         </div>
+        </div>
 
-         <!-- Transactions List -->
-         <div class="transaction-list" id="transactionList">
+        <!-- Transactions List -->
+        <div class="transaction-list" id="transactionList">
             <!-- Transactions will be populated by JavaScript -->
-         </div>
+        </div>
 
-         <!-- Empty State (hidden by default) -->
-         <div class="empty-state empty-state--hidden" id="emptyState">
+        <!-- Empty State (hidden by default) -->
+        <div class="empty-state empty-state--hidden" id="emptyState">
             <div class="empty-icon">🔍</div>
             <p><strong>No se encontraron movimientos</strong></p>
             <p class="u-text-small">Intenta con otros filtros</p>
-         </div>
-      </main>
+        </div>
+    </main>
 
-      <footer class="footer bottom-nav">
-         <a href="dashboard.html" class=" footer__link">
-            <span class="">Dashboard</span>
-         </a>
-         <a href="menu.html" class=" footer__link">
-            <span class="">Acciones</span>
-         </a>
-      </footer>
-   </div>
+    <footer class="footer bottom-nav">
+        <a href="dashboard.html" class="footer__link">
+            <span>Dashboard</span>
+        </a>
+        <a href="menu.html" class="footer__link">
+            <span>Acciones</span>
+        </a>
+    </footer>
 
    <script>
       const allTransactions = [

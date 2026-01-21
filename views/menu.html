@@ -14,149 +14,146 @@
 </head>
 <body>
    <!-- Header simplificado -->
-   <header class="header header--mobile">
-      <div class="header__container">
-         <div class="header__content">
-            <div class="header__brand">
-               <i data-lucide="menu" class="header__icon"></i>
-               <span class="header__title">Menú</span>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav__brand">
+                <img src="../assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.svg" alt="SmartBudget Logo" class="nav__logo">
+                <span class="nav__title">SmartBudget</span>
             </div>
-            <a href="dashboard.html" class="header__button" aria-label="Ir al dashboard">
-               <i data-lucide="home"></i>
-               <span>Dashboard</span>
-            </a>
-         </div>
-      </div>
-   </header>
+            <ul class="nav__list">
+                <li class="nav__item">
+                    <button class="header__button" onclick="window.location.href='dashboard.html'" aria-label="Ir al dashboard">
+                        <i data-lucide="home" class="header__button-icon"></i>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-   <main class="main">
-      <!-- Contenido del menú -->
-      <div class="dashboard">
+    <main class="main">
+        <!-- Contenido del menú -->
+        <div class="dashboard">
 
-         <!-- Resumen Rápido -->
-         <h3>Resumen Rápido</h3>
-         <div class="summary-card">
-            <div class="summary-card__header">
-               <div class="summary-card__title">Balance Actual</div>
-               <i data-lucide="wallet" class="menu-icon menu-icon--primary"></i>
-            </div>
-            <div class="summary-card__content">
-               <div class="summary-card__value summary-card__value--income">$15,231.89</div>
-            </div>
-         </div>
+            <!-- Resumen Rápido -->
+            <h3>Resumen Rápido</h3>
+            <div class="dashboard__summary">
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Balance Actual</div>
+                        <i data-lucide="wallet" class="menu-icon menu-icon--primary"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <div class="summary-card__value summary-card__value--income">$15,231.89</div>
+                    </div>
+                </div>
 
-         <div class="dashboard__summary">
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Ingresos del mes</div>
-               </div>
-               <div class="summary-card__content">
-                  <div class="summary-card__value summary-card__value--income">+$8,420.00</div>
-               </div>
-            </div>
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Ingresos del mes</div>
+                    </div>
+                    <div class="summary-card__content">
+                        <div class="summary-card__value summary-card__value--income">+$8,420.00</div>
+                    </div>
+                </div>
 
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Gastos del mes</div>
-               </div>
-               <div class="summary-card__content">
-                  <div class="summary-card__value summary-card__value--expense">-$5,328.50</div>
-               </div>
-            </div>
-         </div>
-
-         <!-- Acciones Financieras -->
-         <h3>Acciones Rápidas</h3>
-         <div class="dashboard__summary">
-            <div class="summary-card summary-card--interactive" onclick="showAlert('Función de agregar ingreso')">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Agregar Ingreso</div>
-                  <i data-lucide="plus-circle" class="menu-icon menu-icon--success"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Registra un nuevo ingreso</p>
-               </div>
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Gastos del mes</div>
+                    </div>
+                    <div class="summary-card__content">
+                        <div class="summary-card__value summary-card__value--expense">-$5,328.50</div>
+                    </div>
+                </div>
             </div>
 
-            <div class="summary-card summary-card--interactive" onclick="showAlert('Función de agregar gasto')">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Agregar Gasto</div>
-                  <i data-lucide="minus-circle" class="menu-icon menu-icon--danger"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Registra un nuevo gasto</p>
-               </div>
+            <!-- Acciones Financieras -->
+            <h3>Acciones Rápidas</h3>
+            <div class="dashboard__summary">
+                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de agregar ingreso')">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Agregar Ingreso</div>
+                        <i data-lucide="plus-circle" class="menu-icon menu-icon--success"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Registra un nuevo ingreso</p>
+                    </div>
+                </div>
+
+                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de agregar gasto')">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Agregar Gasto</div>
+                        <i data-lucide="minus-circle" class="menu-icon menu-icon--danger"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Registra un nuevo gasto</p>
+                    </div>
+                </div>
+
+                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de nueva tarjeta')">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Nueva Tarjeta</div>
+                        <i data-lucide="credit-card" class="menu-icon menu-icon--primary"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Agrega una tarjeta de crédito/débito</p>
+                    </div>
+                </div>
+
+                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de transferir')">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Transferir</div>
+                        <i data-lucide="send" class="menu-icon menu-icon--warning"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Realiza una transferencia</p>
+                    </div>
+                </div>
             </div>
 
-            <div class="summary-card summary-card--interactive" onclick="showAlert('Función de nueva tarjeta')">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Nueva Tarjeta</div>
-                  <i data-lucide="credit-card" class="menu-icon menu-icon--primary"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Agrega una tarjeta de crédito/débito</p>
-               </div>
-            </div>
+            <div class="dashboard__summary">
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Mi Perfil</div>
+                        <i data-lucide="user" class="menu-icon menu-icon--primary"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Gestiona tu información personal</p>
+                    </div>
+                </div>
 
-            <div class="summary-card summary-card--interactive" onclick="showAlert('Función de transferir')">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Transferir</div>
-                  <i data-lucide="send" class="menu-icon menu-icon--warning"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Realiza una transferencia</p>
-               </div>
-            </div>
-         </div>
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Configuración</div>
+                        <i data-lucide="settings" class="menu-icon menu-icon--success"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Ajusta las preferencias de la app</p>
+                    </div>
+                </div>
 
-                  <!-- Otras Opciones -->
-         <h3>Otras Opciones</h3>
-         
-         <div class="dashboard__summary">
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Mi Perfil</div>
-                  <i data-lucide="user" class="menu-icon menu-icon--primary"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Gestiona tu información personal</p>
-               </div>
-            </div>
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Soporte</div>
+                        <i data-lucide="help-circle" class="menu-icon menu-icon--warning"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Obtén ayuda y contacta con nosotros</p>
+                    </div>
+                </div>
 
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Configuración</div>
-                  <i data-lucide="settings" class="menu-icon menu-icon--success"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Ajusta las preferencias de la app</p>
-               </div>
+                <div class="summary-card">
+                    <div class="summary-card__header">
+                        <div class="summary-card__title">Cerrar Productos</div>
+                        <i data-lucide="log-out" class="menu-icon menu-icon--danger"></i>
+                    </div>
+                    <div class="summary-card__content">
+                        <p>Cerrar Productos de forma segura</p>
+                        <a href="#" class="btn btn-outline-danger btn-sm mt-2">ir a Cerrar</a>
+                    </div>
+                </div>
             </div>
-
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Soporte</div>
-                  <i data-lucide="help-circle" class="menu-icon menu-icon--warning"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Obtén ayuda y contacta con nosotros</p>
-               </div>
-            </div>
-
-            <div class="summary-card">
-               <div class="summary-card__header">
-                  <div class="summary-card__title">Cerrar Productos</div>
-                  <i data-lucide="log-out" class="menu-icon menu-icon--danger"></i>
-               </div>
-               <div class="summary-card__content">
-                  <p>Cerrar Productos de forma segura</p>
-                  <a href="#" class="btn btn-outline-danger btn-sm mt-2">ir a Cerrar</a>
-               </div>
-            </div>
-         </div>
-
-      </div>
-   </main>
+        </div>
+    </main>
 
    <footer class="footer bottom-nav">
       <a href="dashboard.html" class=" footer__link">
