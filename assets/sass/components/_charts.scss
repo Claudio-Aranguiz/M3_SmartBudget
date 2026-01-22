@@ -1,15 +1,260 @@
-// Componente: Charts
-// Estilos para contenedores de gráficos
+// Components: Charts
+// Estilos específicos para los gráficos y visualizaciones
 
-.chart-card {
-  &__container {
-    position: relative;
-    height: 300px;
-    width: 100%;
+// Contenedor principal de gráficos
+.charts {
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  margin: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Encabezado de la sección de gráficos
+.charts-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  
+  h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 0.5rem 0;
   }
+  
+  p {
+    font-size: 0.875rem;
+    color: #666;
+    margin: 0;
+  }
+}
 
-  &__canvas {
+// Contenedor del canvas del gráfico
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: 1rem 0;
+  
+  canvas {
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
+  }
+}
+
+// Gráfico circular (donut/pie)
+.chart-donut {
+  .chart-container {
+    height: 250px;
+  }
+  
+  .chart-center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    
+    .total-amount {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
+      display: block;
+    }
+    
+    .total-label {
+      font-size: 0.875rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+  }
+}
+
+// Leyenda del gráfico
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    
+    .legend-label {
+      color: #333;
+      font-weight: 500;
+    }
+    
+    .legend-amount {
+      color: #666;
+      font-weight: normal;
+    }
+  }
+}
+
+// Gráfico de barras
+.chart-bar {
+  .chart-container {
+    height: 300px;
+  }
+}
+
+// Gráfico de líneas
+.chart-line {
+  .chart-container {
+    height: 250px;
+  }
+}
+
+// Indicadores de resumen
+.chart-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  
+  .summary-item {
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    
+    .summary-label {
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .summary-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333;
+      
+      &.positive {
+        color: #22c55e;
+      }
+      
+      &.negative {
+        color: #ef4444;
+      }
+    }
+  }
+}
+
+// Filtros de período para gráficos
+.chart-filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  
+  .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    background: white;
+    color: #666;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: #f5f5f5;
+    }
+    
+    &.active {
+      background: #3b82f6;
+      color: white;
+      border-color: #3b82f6;
+    }
+  }
+}
+
+// Estados de carga y error
+.chart-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.chart-error {
+  text-align: center;
+  padding: 2rem;
+  color: #ef4444;
+  
+  .error-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .error-message {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .error-description {
+    font-size: 0.875rem;
+    opacity: 0.7;
+  }
+}
+
+// Estado vacío
+.chart-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  
+  .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+  
+  .empty-message {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .empty-description {
+    font-size: 0.875rem;
+    opacity: 0.7;
+  }
+}
+
+// Responsive design para gráficos
+@media (max-width: 768px) {
+  .chart-container {
+    height: 200px;
+  }
+  
+  .chart-donut .chart-container {
+    height: 180px;
+  }
+  
+  .chart-legend {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .chart-summary {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
   }
 }

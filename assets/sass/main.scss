@@ -15,7 +15,6 @@
 @import "components/charts";
 @import "components/states";
 @import "components/transactions";
-@import "components/menu-icons";
 
 // 4. LAYOUTS PERSONALIZADOS
 @import "layout/footer";
@@ -25,6 +24,9 @@
 // 5. PÁGINAS ESPECÍFICAS
 @import "pages/dashboard";
 @import "pages/historial";
+
+// 6. UTILIDADES ADICIONALES
+@import "utilities/helpers";
 
 // =============================================================================
 // BOOTSTRAP INCLUYE:

@@ -1,101 +1,266 @@
-// Layout: Dashboard
-// Estilos específicos para la página dashboard
+// Pages: Dashboard
+// Estilos específicos para la página del dashboard
 
+// Contenedor principal del dashboard
 .dashboard {
-
-  &__summary {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 0; // Móvil: sin gap
-    // margin-bottom: 2rem;
-
-    // Desktop
-    @media (min-width: 769px) {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-  }
-
-  &__charts {
-    // Mobile first: oculto por defecto
-    display: none;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    width: 100%;
-
-    // Desde 426px: visible y ocupa 2 columnas del grid padre
-    @media (min-width: 426px) {
-      display: grid;
-      // grid-column: span 2;
-    }
-
-    // Pantallas muy grandes: múltiples gráficos en columnas
-    @media (min-width: 1200px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
+  padding: 1rem;
+  background: rgba(197, 235, 241, 0.8392156863);
+  min-height: 100vh;
 }
 
-.dashboard h3 {
-  text-align: center;
-  margin: 1rem;
-
-  @media (min-width: 769px) {
-    margin: 2rem;
-  }
-}
-
-.summary-card {
+// Sección de balance/resumen principal
+.balance-section {
   background: white;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  
+  .balance-label {
+    font-size: 0.875rem;
+    color: #666;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .balance-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0.5rem 0;
+    
+    &.positive {
+      color: #22c55e;
+    }
+    
+    &.negative {
+      color: #ef4444;
+    }
+    
+    &.neutral {
+      color: #333;
+    }
+  }
+  
+  .balance-date {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.5rem;
+  }
+}
 
-  &__header {
+// Grid de métricas/estadísticas rápidas
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  
+  .metric-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+    .metric-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+      font-size: 1.25rem;
+      
+      &.income {
+        background: rgba(34, 197, 94, 0.1);
+        color: #22c55e;
+      }
+      
+      &.expense {
+        background: rgba(239, 68, 68, 0.1);
+        color: #ef4444;
+      }
+      
+      &.savings {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+      }
+    }
+    
+    .metric-label {
+      font-size: 0.75rem;
+      color: #666;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333;
+    }
+  }
+}
+
+// Sección de acciones rápidas
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  
+  .action-button {
+    background: white;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .action-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.75rem;
+      font-size: 1.5rem;
+      background: #f3f4f6;
+      color: #666;
+    }
+    
+    .action-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #333;
+    }
+  }
+}
+
+// Widget de transacciones recientes en dashboard
+.recent-transactions {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  
+  .widget-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    padding: 1rem 1rem 0.5rem;
+    
+    .widget-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+    
+    .widget-link {
+      font-size: 0.875rem;
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 500;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
+  
+  .widget-content {
+    padding: 0.5rem 1rem 1rem;
+  }
+}
 
-  &__title {
+// Tabs para diferentes períodos en dashboard
+.dashboard-tabs {
+  display: flex;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .tab-button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: none;
+    background: transparent;
+    color: #666;
     font-size: 0.875rem;
-    color: #666;
-    margin: 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+    
+    &:last-child {
+      border-radius: 0 8px 8px 0;
+    }
+    
+    &.active {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    &:hover:not(.active) {
+      background: #f3f4f6;
+    }
   }
+}
 
-  &__value {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-
-    &--income {
-      color: $color-income;
-    }
-
-    &--expense {
-      color: $color-expense;
-    }
-
-    &--savings {
-      color: #8b5cf6; // Color morado para ahorros
+// Responsive design para dashboard
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 0.75rem;
+  }
+  
+  .balance-amount {
+    font-size: 2rem;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .quick-actions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    
+    .action-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.25rem;
     }
   }
+}
 
-  &__change {
-    font-size: 0.75rem;
-    color: #666;
+@media (max-width: 480px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
   }
-
-  &__percentage {
-    &--positive {
-      color: $color-income;
-    }
-
-    &--negative {
-      color: $color-expense;
-    }
+  
+  .balance-amount {
+    font-size: 1.75rem;
   }
 }

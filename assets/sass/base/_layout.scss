@@ -2,7 +2,7 @@
 // Estilos base para elementos estructurales fundamentales
 // NOTA: Las variables ya están disponibles desde Bootstrap y main.scss
 
-// Reset universal
+// Reset universal (complementa Bootstrap reboot)
 * {
   margin: 0;
   padding: 0;
@@ -11,12 +11,9 @@
 
 // Estructura completa del body (usando variables de Bootstrap)
 body {
-  // Propiedades visuales
-  font-family: $font-family-base;      // Variable de Bootstrap
-  background-color: $body-bg;         // Variable de Bootstrap
-  color: $body-color;                 // Variable de Bootstrap
-
-  // Propiedades estructurales
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333333;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -28,12 +25,12 @@ a {
   color: inherit;
 }
 
-// Contenedor principal - usar solo clase .main para evitar redundancia
+// Contenedor principal
 .main {
   flex: 1;
-  padding: $spacer;                        // Variable de Bootstrap
-  padding-bottom: 60px;                    // Valor fijo para footer móvil
-  background: #c5ebf1d6;
+  padding: 1rem;
+  padding-bottom: 80px; // Espacio para footer fijo
+  background: rgba(197, 235, 241, 0.8392156863);
 
   &--center {
     align-content: center;
@@ -47,5 +44,11 @@ a {
   margin: 0 auto;
   background: white;
   min-height: 100vh;
-  box-shadow: $box-shadow;                 // Variable de Bootstrap personalizada
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+// Contenedor general
+.container {
+  min-height: 100vh;
+  padding-bottom: 80px;
 }

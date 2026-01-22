@@ -1,0 +1,47 @@
+// Utilidades adicionales para SmartBudget
+// Clases de utilidad y helpers específicos del proyecto
+
+// =============================================================================
+// CLASES DE UTILIDAD
+// =============================================================================
+
+.u-hidden {
+  display: none !important;
+}
+
+.u-text-small {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+// =============================================================================
+// ESTILOS DE TRANSICIÓN Y ANIMACIONES
+// =============================================================================
+
+// Transición suave para hover effects
+%smooth-transition {
+  transition: all 0.2s ease;
+}
+
+// Sombras personalizadas
+%card-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+%card-shadow-hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+// =============================================================================
+// MIXINS ÚTILES
+// =============================================================================
+
+@mixin smooth-hover($property: background-color, $duration: 0.2s) {
+  transition: #{$property} #{$duration} ease;
+}
+
+@mixin mobile-first($breakpoint: 768px) {
+  @media (min-width: #{$breakpoint}) {
+    @content;
+  }
+}
