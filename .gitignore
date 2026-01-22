@@ -18,9 +18,20 @@ assets/sass/main.css.map
 assets/sass/main-bootstrap.css
 assets/sass/main-bootstrap.css.map
 
+# Bootstrap CSS compilado (no necesario, usamos SCSS personalizado)
+assets/vendor/bootstrap/css/bootstrap.min.css
+assets/vendor/bootstrap/css/bootstrap.min.css.map
+
+# Otros archivos CSS compilados del proyecto  
+assets/css/*.css.map
+
 # Scripts temporales de automatización
 *.ps1
 fix-scss-imports.ps1
+
+# Archivos de configuración de herramientas que pueden regenerarse
+.sass-cache/
+*.scssc
 
 # DEPENDENCIAS Y PAQUETES
 # =============================================================================
