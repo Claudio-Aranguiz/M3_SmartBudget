@@ -1,34 +1,37 @@
-// Archivo manifiesto de SASS principal
+// =============================================================================
+// SASS PRINCIPAL - SmartBudget
+// Archivo manifiesto de SASS con Bootstrap personalizado
+// =============================================================================
 
-// Vendores
+// 1. BOOTSTRAP PERSONALIZADO (incluye sus propias variables)
+@import "bootstrap-custom";
 
-// Abstracciones
-@use "abstracts/variables" as *;
+// 2. BASE DEL PROYECTO (después de Bootstrap)
+@import "base/layout";
 
-// Base
-// @use "base/reset";  // Temporalmente comentado para eliminar duplicación
-@use "base/layout";
-// @use "base/typography";
+// 3. COMPONENTES PERSONALIZADOS  
+@import "components/header";
+@import "components/navigation";  
+@import "components/charts";
+@import "components/states";
+@import "components/transactions";
+@import "components/menu-icons";
 
-// Componentes
-@use "components/header";
-@use "components/navigation";
-@use "components/charts";
-@use "components/states";
-@use "components/transactions";
-@use "components/menu-icons";
+// 4. LAYOUTS PERSONALIZADOS
+@import "layout/footer";
+@import "layout/hero"; 
+@import "layout/auth";
 
-// Layouts
-@use "layout/footer";
-@use "layout/hero";
-@use "layout/auth";
+// 5. PÁGINAS ESPECÍFICAS
+@import "pages/dashboard";
+@import "pages/historial";
 
-// Páginas
-@use "pages/dashboard";
-@use "pages/historial";
-
-// Temas
-
-// Utilidades
-
-// Variables
+// =============================================================================
+// BOOTSTRAP INCLUYE:
+// ✅ Reset/Normalize (reboot)
+// ✅ Grid system personalizable
+// ✅ Typography base
+// ✅ Componentes (cards, buttons, forms, modal, etc.)
+// ✅ Utilidades (spacing, colors, flex, display, etc.)
+// ✅ Variables personalizables ($primary, $secondary, etc.)
+// =============================================================================

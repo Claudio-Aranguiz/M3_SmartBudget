@@ -8,9 +8,8 @@
    <!-- Favicon-->
    <link rel="icon" type="image/png" href="../assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
    <!-- CSS Dependencies -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-   <link rel="stylesheet" href="../assets/sass/main.css">
-   <link rel="stylesheet" href="../assets/css/styles.css">
+   <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+   <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Estilos adicionales del proyecto -->
 </head>
 <body>
    <!-- Header simplificado -->
@@ -31,39 +30,43 @@
     </header>
 
     <main class="main">
-        <!-- Summary Cards -->
-        <div class="summary">
-            <div class="summary-card summary-card--income">
-                <div class="summary-card__header">
-                    <div class="summary-card__title">Total Ingresos</div>
-                </div>
-                <div class="summary-card__content">
-                    <p class="summary-card__amount" id="totalIngresos">$4,850.00</p>
-                </div>
-            </div>
+        <div class="row">
+            <div class="col-1"></div>
 
-            <div class="summary-card summary-card--expense">
-                <div class="summary-card__header">
-                    <div class="summary-card__title">Total Gastos</div>
+            <div class="col-10">
+                <!-- Summary Cards -->
+                <div class="summary">
+                    <div class="summary-card summary-card--income">
+                        <div class="summary-card__header">
+                            <div class="summary-card__title">Total Ingresos</div>
+                        </div>
+                        <div class="summary-card__content">
+                            <p class="summary-card__amount" id="totalIngresos">$4,850.00</p>
+                        </div>
+                    </div>
+                
+                    <div class="summary-card summary-card--expense">
+                        <div class="summary-card__header">
+                            <div class="summary-card__title">Total Gastos</div>
+                        </div>
+                        <div class="summary-card__content">
+                            <p class="summary-card__amount" id="totalGastos">$662.48</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="summary-card__content">
-                    <p class="summary-card__amount" id="totalGastos">$662.48</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- Search and Filter -->
-        <div class="search">
-            <div class="search__container">
-                <input type="text" class="search__input" placeholder="Buscar movimiento..." id="searchInput">
-                <span class="search__icon">🔍</span>
-            </div>
-            <div class="filter-buttons">
-                <button class="filter-btn active" onclick="filterTransactions('todos')">Todos</button>
-                <button class="filter-btn" onclick="filterTransactions('ingreso')">Ingresos</button>
-                <button class="filter-btn" onclick="filterTransactions('gasto')">Gastos</button>
-            </div>
-        </div>
+                <!-- Search and Filter -->
+                <div class="search">
+                    <div class="search__container">
+                        <input type="text" class="search__input" placeholder="Buscar movimiento..." id="searchInput">
+                        <span class="search__icon">🔍</span>
+                    </div>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterTransactions('todos')">Todos</button>
+                        <button class="filter-btn" onclick="filterTransactions('ingreso')">Ingresos</button>
+                        <button class="filter-btn" onclick="filterTransactions('gasto')">Gastos</button>
+                    </div>
+                </div>
 
         <!-- Transactions List -->
         <div class="transaction-list" id="transactionList">
@@ -75,6 +78,11 @@
             <div class="empty-icon">🔍</div>
             <p><strong>No se encontraron movimientos</strong></p>
             <p class="u-text-small">Intenta con otros filtros</p>
+        </div>
+
+            </div>
+
+            <div class="col-"></div>
         </div>
     </main>
 
@@ -189,5 +197,8 @@
       updateTotals();
       renderTransactions();
    </script>
+   
+   <!-- Historial JavaScript Module -->
+   <script type="module" src="../assets/js/pages/historial-init.js"></script>
 </body>
 </html>

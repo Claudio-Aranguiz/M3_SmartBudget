@@ -9,9 +9,8 @@
     <!-- Favicon-->
     <link rel="icon" type="image/png" href="/assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
     <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/sass/main.css">
-    <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Prioridad sobre SCSS -->
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Estilos adicionales del proyecto -->
 </head>
 <body>
    <!-- Header: Contiene el logo y botón de ingreso -->
@@ -209,54 +208,9 @@
 
    <!-- JS Dependencies -->
    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
    
-   <!-- Custom JavaScript -->
-   <script>
-       // Manejo del formulario de login
-       document.getElementById('loginForm').addEventListener('submit', function(e) {
-           e.preventDefault();
-           
-           const email = document.getElementById('email').value;
-           const password = document.getElementById('password').value;
-           
-           // Validación básica
-           if (email && password) {
-               alert('Inicio de sesión exitoso! Redirigiendo al dashboard...');
-               $('#loginModal').modal('hide');
-               // Aquí podrías redirigir a otra página
-               // window.location.href = '../dashboard.html';
-           } else {
-               alert('Por favor, completa todos los campos');
-           }
-       });
-       
-       // Manejo del formulario de registro
-       document.getElementById('registerForm').addEventListener('submit', function(e) {
-           e.preventDefault();
-           
-           const name = document.getElementById('regName').value;
-           const email = document.getElementById('regEmail').value;
-           const password = document.getElementById('regPassword').value;
-           const confirmPassword = document.getElementById('regConfirmPassword').value;
-           
-           // Validación básica
-           if (name && email && password && confirmPassword) {
-               if (password === confirmPassword) {
-                   alert('Registro exitoso! Bienvenido a SmartBudget!');
-                   $('#registerModal').modal('hide');
-                   // Aquí podrías redirigir a otra página
-                   // window.location.href = '../dashboard.html';
-               } else {
-                   alert('Las contraseñas no coinciden');
-               }
-           } else {
-               alert('Por favor, completa todos los campos');
-           }
-       });
-       
-       // Inicializar iconos de Lucide
-       lucide.createIcons();
-   </script>
+   <!-- Login JavaScript Module -->
+   <script type="module" src="../assets/js/pages/login-init.js"></script>
 </body>
 </html>

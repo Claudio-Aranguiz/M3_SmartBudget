@@ -1,8 +1,160 @@
 
-# Carpetas
+# =============================================================================
+# GITIGNORE - SmartBudget Project
+# Archivos y carpetas que no deben subirse al repositorio
+# =============================================================================
+
+# ARCHIVOS COMPILADOS Y TEMPORALES
+# =============================================================================
+
+# CSS compilado de SASS (pueden regenerarse)
+assets/sass/*.css
+assets/sass/*.css.map
+*.css.map
+
+# Archivos CSS específicos compilados
+assets/sass/main.css
+assets/sass/main.css.map
+assets/sass/main-bootstrap.css
+assets/sass/main-bootstrap.css.map
+
+# Scripts temporales de automatización
+*.ps1
+fix-scss-imports.ps1
+
+# DEPENDENCIAS Y PAQUETES
+# =============================================================================
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ARCHIVOS DEL SISTEMA OPERATIVO
+# =============================================================================
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+
+# Linux
+*~
+.fuse_hidden*
+.Trash-*
+.nfs*
+
+# EDITORES E IDEs
+# =============================================================================
+
+# Visual Studio Code
+.vscode/settings.json
+.vscode/tasks.json
+.vscode/launch.json
+.vscode/extensions.json
+*.code-workspace
+
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Atom
+.atom/
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.iws
+
+# ARCHIVOS TEMPORALES DE DESARROLLO
+# =============================================================================
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de cache
+.cache/
+.parcel-cache/
+.sass-cache/
+
+# Archivos temporales
+*.tmp
+*.temp
+.temp/
+temp/
+
+# CONFIGURACIÓN LOCAL Y SECRETOS
+# =============================================================================
+
+# Variables de entorno
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Configuración local
+config.local.*
+*.local
+
+# Archivos de backup
+*.bak
+*.backup
+backup/
+
+# ARCHIVOS ESPECÍFICOS DEL PROYECTO
+# =============================================================================
+
+# Carpetas de uso interno
 de_uso_interno/
 
-# Archivos
+# Archivos de análisis y desarrollo (mantener en documentación/)
 bucket_de_ideas.txt
 Analisis_Estructural_SmartBudget.md
 Analisis_y_Plan_de_Desarrollo.md
+
+# Capturas y assets temporales
+*.tmp.png
+*.tmp.jpg
+*.tmp.svg
+
+# HERRAMIENTAS DE BUILD Y DEPLOY
+# =============================================================================
+
+# Build outputs
+build/
+dist/
+*.tgz
+*.tar.gz
+
+# Coverage reports
+coverage/
+*.lcov
+
+# =============================================================================
+# MANTENER EN REPOSITORIO:
+# - Código fuente (HTML, CSS original, JS, SCSS)
+# - Assets finales (imágenes optimizadas, iconos)
+# - Documentación en documentation/
+# - Archivos de configuración necesarios
+# =============================================================================

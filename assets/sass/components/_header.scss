@@ -1,8 +1,6 @@
 // Componente: Header
 // Estilos para headers de páginas
 
-@use "../abstracts/variables" as *;
-
 .header {
   background: $color-bg-white;
   border-bottom: 1px solid $color-border-light;

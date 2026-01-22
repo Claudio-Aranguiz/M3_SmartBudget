@@ -1,8 +1,6 @@
 // Layout: Footer
 // Estilos para componentes de footer
 
-@use "../abstracts/variables" as *;
-
 // Footer simple (hereda del index/login)
 .footer {
   &__text, 
@@ -63,6 +61,7 @@
   &__link {
     align-content: center;
     color: inherit;
+    font-weight: 600;
     text-decoration: none;
 
     &:hover {

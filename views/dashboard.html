@@ -9,9 +9,8 @@
    <!-- Favicon-->
    <link rel="icon" type="image/png" href="/assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
    <!-- CSS Dependencies -->
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-   <link rel="stylesheet" href="../assets/sass/main.css">
-   <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Prioridad sobre SCSS -->
+   <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+   <link rel="stylesheet" href="../assets/css/styles.css"> <!-- Estilos adicionales del proyecto -->
 </head>
 <body>
    <header class="header">
@@ -22,12 +21,12 @@
             </div>
             <ul class="nav__list">
                <li class="nav__item">
-                  <button class="header__button">
+                  <button class="header__button" title="Configuración" aria-label="Abrir configuración">
                      <i data-lucide="settings" class="header__button-icon"></i>
                   </button>
                </li>
                <li class="nav__item">
-                   <button class="header__button header__button--logout" onclick="window.location.href='../index.html'" alt="Cerrar Sesión">
+                   <button class="header__button header__button--logout" onclick="window.location.href='../index.html'" title="Cerrar Sesión" aria-label="Cerrar sesión">
                        <i data-lucide="log-out" class="header__button-icon"></i>
                    </button>
                </li>
@@ -37,47 +36,61 @@
 
     <main class="main dashboard">
         <div class="row">
-            <div class="col-lg-10 mx-auto">
-                <div class="dashboard__summary">
-         <!-- Balance Total Card -->
-            <div class="summary-card">
-               <div class="summary-card__content">
-                  <div class="summary-card__header">
-                     <h3 class="summary-card__title">Balance Total</h3>
-                     <i data-lucide="wallet" class="summary-card__icon"></i>
-                  </div>
-                  <div class="summary-card__value">$15,231.89</div>
-                  <p class="summary-card__change">
-                     <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
-                  </p>
-               </div>
-            </div>
-            
-            <!-- Ingresos Card -->
-            <div class="summary-card summary-card--income">
-               <div class="summary-card__content">
-                  <div class="summary-card__header">
-                     <h3 class="summary-card__title">Ingresos</h3>
-                     <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
-                  </div>
-                  <div class="summary-card__value summary-card__value--income">$8,420.00</div>
-                  <p class="summary-card__change">
-                     <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
-                  </p>
-               </div>
-            </div>
-
-            <!-- Gastos Card -->
-            <div class="summary-card summary-card--expense">
-               <div class="summary-card__content">
-                  <div class="summary-card__header">
-                     <h3 class="summary-card__title">Gastos</h3>
-                     <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
-                  </div>
-                  <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
+            <div class="col-lg-9 mx-auto">
+               <div class="dashboard__summary">
+               <!-- Balance Total Card -->
+               <div class="summary-card">
+                  <div class="summary-card__content">
+                     <div class="summary-card__header">
+                        <h3 class="summary-card__title">Balance Total</h3>
+                        <i data-lucide="wallet" class="summary-card__icon"></i>
+                     </div>
+                     <div class="summary-card__value">$15,231.89</div>
                      <p class="summary-card__change">
-                        <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
+                        <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
                      </p>
+                  </div>
+               </div>
+               
+               <!-- Ingresos Card -->
+               <div class="summary-card summary-card--income">
+                  <div class="summary-card__content">
+                     <div class="summary-card__header">
+                        <h3 class="summary-card__title">Ingresos</h3>
+                        <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
+                     </div>
+                     <div class="summary-card__value summary-card__value--income">$8,420.00</div>
+                     <p class="summary-card__change">
+                        <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
+                     </p>
+                  </div>
+               </div>
+            
+               <!-- Gastos Card -->
+               <div class="summary-card summary-card--expense">
+                  <div class="summary-card__content">
+                     <div class="summary-card__header">
+                        <h3 class="summary-card__title">Gastos</h3>
+                        <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
+                     </div>
+                     <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
+                        <p class="summary-card__change">
+                           <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
+                        </p>
+                  </div>
+               </div>
+
+               <!-- Ahorros Card -->
+               <div class="summary-card summary-card--savings">
+                  <div class="summary-card__content">
+                     <div class="summary-card__header">
+                        <h3 class="summary-card__title">Ahorros</h3>
+                        <i data-lucide="piggy-bank" class="summary-card__icon summary-card__icon--savings"></i>
+                     </div>
+                     <div class="summary-card__value summary-card__value--savings">$3,091.50</div>
+                        <p class="summary-card__change">
+                           <span class="summary-card__percentage summary-card__percentage--positive">+15.7%</span> vs mes anterior
+                        </p>
                   </div>
                </div>
             </div>
@@ -197,135 +210,9 @@
          <span class="">Historial</span>
       </a>
     </footer>
-   <script>
-      // Initialize Lucide icons
-      lucide.createIcons();
-
-      // Chart data
-      const monthlyData = [
-         { mes: 'Ene', ingresos: 4000, gastos: 2400 },
-         { mes: 'Feb', ingresos: 3000, gastos: 1398 },
-         { mes: 'Mar', ingresos: 2000, gastos: 3800 },
-         { mes: 'Abr', ingresos: 2780, gastos: 3908 },
-         { mes: 'May', ingresos: 1890, gastos: 2800 },
-         { mes: 'Jun', ingresos: 2390, gastos: 2000 },
-      ];
-
-      const categoryData = [
-         { nombre: 'Alimentación', valor: 4000, color: '#3b82f6' },
-         { nombre: 'Transporte', valor: 3000, color: '#8b5cf6' },
-         { nombre: 'Entretenimiento', valor: 2000, color: '#ec4899' },
-         { nombre: 'Servicios', valor: 2780, color: '#10b981' },
-         { nombre: 'Otros', valor: 1890, color: '#f59e0b' },
-      ];
-
-      // Income vs Expense Chart
-      const ctx1 = document.getElementById('incomeExpenseChart');
-      if (ctx1) {
-         new Chart(ctx1, {
-            type: 'line',
-            data: {
-               labels: monthlyData.map(item => item.mes),
-               datasets: [{
-                  label: 'Ingresos',
-                  data: monthlyData.map(item => item.ingresos),
-                  borderColor: '#10b981',
-                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                  fill: true,
-                  tension: 0.4
-               }, {
-                  label: 'Gastos',
-                  data: monthlyData.map(item => item.gastos),
-                  borderColor: '#ef4444',
-                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                  fill: true,
-                  tension: 0.4
-               }]
-            },
-            options: {
-               responsive: true,
-               maintainAspectRatio: false,
-               interaction: {
-                  intersect: false
-               },
-               plugins: {
-                  legend: {
-                     position: 'top'
-                  }
-               },
-               scales: {
-                  x: {
-                     display: true,
-                     title: {
-                        display: false
-                     }
-                  },
-                  y: {
-                     display: true,
-                     beginAtZero: true,
-                     title: {
-                        display: false
-                     }
-                  }
-               },
-               elements: {
-                  line: {
-                     borderWidth: 2
-                  },
-                  point: {
-                     radius: 4,
-                     hoverRadius: 6
-                  }
-               }
-            }
-         });
-      }
-
-      // Category Pie Chart
-      const ctx2 = document.getElementById('categoryChart');
-      if (ctx2) {
-         new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-               labels: categoryData.map(item => item.nombre),
-               datasets: [{
-                  data: categoryData.map(item => item.valor),
-                  backgroundColor: categoryData.map(item => item.color),
-                  borderWidth: 2,
-                  borderColor: '#ffffff',
-                  hoverBorderWidth: 3
-               }]
-            },
-            options: {
-               responsive: true,
-               maintainAspectRatio: false,
-               cutout: '60%',
-               plugins: {
-                  legend: {
-                     position: 'bottom',
-                     labels: {
-                        padding: 20,
-                        usePointStyle: true,
-                        font: {
-                           size: 12
-                        }
-                     }
-                  },
-                  tooltip: {
-                     callbacks: {
-                        label: function(context) {
-                           return context.label + ': $' + context.parsed.toLocaleString();
-                        }
-                     }
-                  }
-               },
-               animation: {
-                  animateScale: true,
-                  animateRotate: true
-               }
-            }
-         });
-      }
    </script>
+   
+   <!-- Dashboard JavaScript Module -->
+   <script type="module" src="../assets/js/pages/dashboard-init.js"></script>
 </body>
 </html>

@@ -1,8 +1,6 @@
 // Componente: Transactions
 // Estilos para lista de transacciones
 
-@use "../abstracts/variables" as *;
-
 .transactions {
   background: white;
   border-radius: 0.5rem;
@@ -76,7 +74,8 @@
         }
       }
 
-      // Firefox
+      // Firefox scrollbar styling (no compatible con todos los navegadores)
+      // Fallback: navegadores que no lo soporten usarán scrollbar por defecto
       scrollbar-width: thin;
       scrollbar-color: #ccc #f1f1f1;
     }

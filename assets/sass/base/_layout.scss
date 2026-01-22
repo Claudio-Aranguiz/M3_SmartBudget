@@ -1,7 +1,6 @@
 // Base: Layout
 // Estilos base para elementos estructurales fundamentales
-
-@use "../abstracts/variables" as *;
+// NOTA: Las variables ya están disponibles desde Bootstrap y main.scss
 
 // Reset universal
 * {
@@ -10,18 +9,17 @@
   box-sizing: border-box;
 }
 
-// Estructura completa del body (todas las propiedades consolidadas)
+// Estructura completa del body (usando variables de Bootstrap)
 body {
   // Propiedades visuales
-  font-family: $font-family-primary;
-  background-color: $color-bg-primary;
-  color: $color-text-primary;
+  font-family: $font-family-base;      // Variable de Bootstrap
+  background-color: $body-bg;         // Variable de Bootstrap
+  color: $body-color;                 // Variable de Bootstrap
 
   // Propiedades estructurales
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
 }
 
 // Estilos base para enlaces
@@ -33,8 +31,8 @@ a {
 // Contenedor principal - usar solo clase .main para evitar redundancia
 .main {
   flex: 1;
-  padding: $spacing-base;
-  padding-bottom: $height-footer-mobile;
+  padding: $spacer;                        // Variable de Bootstrap
+  padding-bottom: 60px;                    // Valor fijo para footer móvil
   background: #c5ebf1d6;
 
   &--center {
@@ -49,5 +47,5 @@ a {
   margin: 0 auto;
   background: white;
   min-height: 100vh;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  box-shadow: $box-shadow;                 // Variable de Bootstrap personalizada
 }

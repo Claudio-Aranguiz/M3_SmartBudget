@@ -1,0 +1,142 @@
+// =============================================================================
+// BOOTSTRAP CUSTOMIZATION - SmartBudget
+// Personalización de variables de Bootstrap antes de importar
+// =============================================================================
+
+// 1. IMPORTAR FUNCIONES Y VARIABLES DE BOOTSTRAP (requerido primero)
+@import "vendor/bootstrap/functions";
+@import "vendor/bootstrap/variables";
+
+// 2. PERSONALIZAR VARIABLES DE BOOTSTRAP
+// =============================================================================
+
+// Colores principales (sobrescribir colores de Bootstrap)
+$primary: #3b82f6;        // Azul principal del proyecto
+$secondary: #6c757d;      // Gris secundario
+$success: #10b981;        // Verde para ingresos
+$danger: #ef4444;         // Rojo para gastos  
+$warning: #f59e0b;        // Naranja para alertas
+$info: #06b6d4;          // Cyan para información
+
+// Tipografía
+$font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-size-base: 0.875rem;
+$line-height-base: 1.5;
+
+// Espaciado
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5), 
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3)
+);
+
+// Grid breakpoints (personalizar para mobile-first)
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// Contenedores
+$container-max-widths: (
+  sm: 540px,
+  md: 720px, 
+  lg: 960px,
+  xl: 1140px
+);
+
+// Componentes personalizados
+$border-radius: 0.5rem;
+$border-radius-sm: 0.25rem;
+$border-radius-lg: 0.75rem;
+
+$box-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+$box-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+// Cards
+$card-spacer-y: 1.5rem;
+$card-spacer-x: 1.5rem;
+$card-border-radius: $border-radius;
+$card-box-shadow: $box-shadow-sm;
+
+// Buttons  
+$btn-border-radius: $border-radius-sm;
+$btn-border-radius-sm: $border-radius-sm;
+$btn-border-radius-lg: $border-radius;
+
+// Forms
+$input-border-radius: $border-radius-sm;
+$input-border-radius-sm: $border-radius-sm;
+$input-border-radius-lg: $border-radius;
+
+// 3. IMPORTAR MIXINS DE BOOTSTRAP (después de variables)
+@import "vendor/bootstrap/mixins";
+
+// 4. IMPORTAR COMPONENTES DE BOOTSTRAP SELECTIVAMENTE
+// =============================================================================
+// Solo importar los componentes que realmente usamos
+
+// Layout & components
+@import "vendor/bootstrap/root";
+@import "vendor/bootstrap/reboot";
+@import "vendor/bootstrap/type";
+@import "vendor/bootstrap/images";
+@import "vendor/bootstrap/grid";
+@import "vendor/bootstrap/tables";
+@import "vendor/bootstrap/forms";
+@import "vendor/bootstrap/buttons";
+@import "vendor/bootstrap/transitions";
+@import "vendor/bootstrap/dropdown";
+@import "vendor/bootstrap/button-group";
+@import "vendor/bootstrap/nav";
+@import "vendor/bootstrap/navbar";
+@import "vendor/bootstrap/card";
+@import "vendor/bootstrap/breadcrumb";
+@import "vendor/bootstrap/pagination";
+@import "vendor/bootstrap/badge";
+@import "vendor/bootstrap/alert";
+@import "vendor/bootstrap/progress";
+@import "vendor/bootstrap/list-group";
+@import "vendor/bootstrap/close";
+@import "vendor/bootstrap/modal";
+@import "vendor/bootstrap/tooltip";
+@import "vendor/bootstrap/popover";
+@import "vendor/bootstrap/utilities";
+
+// 5. UTILIDADES PERSONALIZADAS PARA EL PROYECTO
+// =============================================================================
+// Usar las variables del proyecto (definidas en abstracts/_variables.scss)
+
+.text-income {
+  color: $success !important; // Usar $success de Bootstrap que ya configuramos como verde
+}
+
+.text-expense {
+  color: $danger !important;  // Usar $danger de Bootstrap que ya configuramos como rojo
+}
+
+.text-savings {
+  color: #8b5cf6 !important;  // Morado para ahorros
+}
+
+.bg-income {
+  background-color: rgba($success, 0.1) !important;
+  border-color: rgba($success, 0.3) !important;
+}
+
+.bg-expense {
+  background-color: rgba($danger, 0.1) !important;
+  border-color: rgba($danger, 0.3) !important;
+}
+
+.bg-savings {
+  background-color: rgba(#8b5cf6, 0.1) !important;
+  border-color: rgba(#8b5cf6, 0.3) !important;
+}

@@ -1,8 +1,6 @@
 // Layout: Dashboard
 // Estilos específicos para la página dashboard
 
-@use "../abstracts/variables" as *;
-
 .dashboard {
 
   &__summary {
@@ -79,6 +77,10 @@
 
     &--expense {
       color: $color-expense;
+    }
+
+    &--savings {
+      color: #8b5cf6; // Color morado para ahorros
     }
   }
 

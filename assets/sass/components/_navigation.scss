@@ -1,8 +1,6 @@
 // Componente: Navigation
 // Estilos para barras de navegación
 
-@use "../abstracts/variables" as *;
-
 .nav {
   display: inline-flex;
   padding: $padding-header !important;
