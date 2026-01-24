@@ -1,32 +1,34 @@
+@use "../abstracts/variables" as vars;
+
 // Componente: Navigation
 // Estilos para barras de navegación
 
 .nav {
   display: inline-flex;
-  padding: $padding-header !important;
+  padding: vars.$padding-header !important;
   width: 100%;
   align-items: center;
   text-align: center;
   justify-content: center;
-  font-size: $font-size-lg;
-  font-weight: $font-weight-semibold;
-  color: $color-text-primary;
-  height: $height-header;
+  font-size: vars.$font-size-lg;
+  font-weight: vars.$font-weight-semibold;
+  color: vars.$color-text-primary;
+  height: vars.$height-header;
 
   &__brand {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: vars.$spacing-sm;
   }
 
   &__logo {
-    width: $width-icon-lg;
-    height: $width-icon-lg;
+    width: vars.$width-icon-lg;
+    height: vars.$width-icon-lg;
   }
 
   &__title {
-    font-size: $font-size-xl;
-    font-weight: $font-weight-bold;
+    font-size: vars.$font-size-xl;
+    font-weight: vars.$font-weight-bold;
   }
 
   &__list {
@@ -42,12 +44,12 @@
   &__link {
     color: inherit;
     text-decoration: none;
-    padding: $spacing-sm $spacing-base;
-    border-radius: $border-radius-sm;
+    padding: vars.$spacing-sm vars.$spacing-base;
+    border-radius: vars.$border-radius-sm;
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: $color-gray-100;
+      background-color: vars.$color-gray-100;
       text-decoration: none;
       color: inherit;
     }

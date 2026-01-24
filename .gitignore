@@ -7,20 +7,30 @@
 # ARCHIVOS COMPILADOS Y TEMPORALES
 # =============================================================================
 
-# CSS compilado de SASS (pueden regenerarse)
-assets/sass/*.css
+# ARCHIVOS COMPILADOS Y TEMPORALES
+# =============================================================================
+
+# CSS compilado de SASS (pueden regenerarse) - EXCEPTO el principal
 assets/sass/*.css.map
 *.css.map
 
-# Archivos CSS específicos compilados
+# Archivos CSS específicos compilados MENOS el principal
 assets/sass/main.css
 assets/sass/main.css.map
-assets/sass/main-bootstrap.css
-assets/sass/main-bootstrap.css.map
+assets/css/styles-compiled.css
+assets/css/styles-compiled.css.map
 
-# Scripts temporales de automatización
-*.ps1
-fix-scss-imports.ps1
+# MANTENER: main-bootstrap.css (archivo principal usado en HTML)
+# assets/sass/main-bootstrap.css
+# assets/sass/main-bootstrap.css.map
+
+# Archivos de test y temporales
+test/
+*.test.html
+
+# Scripts temporales de automatización (ahora en /test)
+# *.ps1 - movido a /test
+# fix-scss-imports.ps1 - movido a /test
 
 # DEPENDENCIAS Y PAQUETES
 # =============================================================================

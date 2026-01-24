@@ -1,31 +1,35 @@
 // =============================================================================
 // SASS PRINCIPAL - SmartBudget
-// Archivo manifiesto de SASS con Bootstrap personalizado
+// Archivo manifiesto de SASS usando @use completo con namespaces
 // =============================================================================
 
-// 1. BOOTSTRAP PERSONALIZADO (incluye sus propias variables)
-@import "bootstrap-custom";
+// TODAS LAS DIRECTIVAS @use CON NAMESPACES ESPECÍFICOS
+// 1. VARIABLES PERSONALIZADAS
+@use "abstracts/variables" as vars;
 
-// 2. BASE DEL PROYECTO (después de Bootstrap)
-@import "base/layout";
+// 2. BOOTSTRAP PERSONALIZADO CON NAMESPACE
+@use "bootstrap-custom" as bs;
 
-// 3. COMPONENTES PERSONALIZADOS  
-@import "components/header";
-@import "components/navigation";  
-@import "components/charts";
-@import "components/states";
-@import "components/transactions";
-@import "components/menu-icons";
+// 3. BASE DEL PROYECTO
+@use "base/layout" as layout;
 
-// 4. LAYOUTS PERSONALIZADOS
-@import "layout/footer";
-@import "layout/hero"; 
-@import "layout/auth";
+// 4. COMPONENTES PERSONALIZADOS
+@use "components/header" as header;
+@use "components/navigation" as nav;
+@use "components/summary-cards" as cards;
+@use "components/charts" as charts;
+@use "components/states" as states;
+@use "components/transactions" as transactions;
+@use "components/menu-icons" as icons;
 
-// 5. PÁGINAS ESPECÍFICAS
-@import "pages/dashboard";
-@import "pages/historial";
+// 5. LAYOUTS PERSONALIZADOS
+@use "layout/footer" as footer;
+@use "layout/hero" as hero;
+@use "layout/auth" as auth;
 
+// 6. PÁGINAS ESPECÍFICAS
+@use "pages/dashboard" as dashboard;
+@use "pages/historial" as historial;
 // =============================================================================
 // BOOTSTRAP INCLUYE:
 // ✅ Reset/Normalize (reboot)

@@ -14,62 +14,17 @@
   margin-bottom: 1rem;
 }
 
-.summary-card {
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    transition: box-shadow 0.3s ease;
-  }
-
-  &--income {
-    background: #f0f9f0;
-    border-color: #c3e6c3;
-    
-    .summary-card__title { 
-      color: $color-income-light; 
+// Summary cards ahora están en components/_summary-cards.scss
+// Estilos específicos del historial
+.historial {
+  .summary-card {
+    &__header {
+      padding: 1rem 1rem 0.5rem;
     }
     
-    .summary-card__amount { 
-      color: $color-income-light; 
+    &__content {
+      padding: 0.5rem 1rem 1rem;
     }
-  }
-
-  &--expense {
-    background: #fef2f2;
-    border-color: #fecaca;
-    
-    .summary-card__title { 
-      color: $color-expense-light; 
-    }
-    
-    .summary-card__amount { 
-      color: $color-expense-light; 
-    }
-  }
-
-  &__header {
-    padding: 1rem 1rem 0.5rem;
-  }
-
-  &__title {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  &__content {
-    padding: 0.5rem 1rem 1rem;
-  }
-
-  &__amount {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin: 0;
   }
 }
 
@@ -177,7 +132,7 @@
 
   // La navegación inferior usa los estilos de layout/_footer.scss
   .footer.bottom-nav {
-    gap: 3rem;
+    gap: 0rem;
     
     .footer__link {
       padding: 0.75rem 1.5rem;

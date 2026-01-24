@@ -1,27 +1,14 @@
 /**
- * SmartBudget - Legacy Support
- * This file provides backward compatibility for any legacy code
- * and imports the main application
+ * SmartBudget - Landing Page Only
+ * This file provides minimal support for the landing page without loading the full app
  */
 
-// Import the main application
-import SmartBudgetApp from './app.js';
+// Only load the full app in authenticated pages, not in the landing page
+// The landing page should remain lightweight
 
-// Export for global access (backward compatibility)
-window.SmartBudgetApp = SmartBudgetApp;
-
-// Legacy function support
+// Legacy function support for basic functionality
 window.showAlert = function(message, type = 'info') {
-    if (window.SmartBudgetApp && window.SmartBudgetApp.isReady()) {
-        const Utils = window.SmartBudgetApp.getComponent('Utils');
-        if (Utils && Utils.showNotification) {
-            Utils.showNotification(message, type);
-        } else {
-            alert(message);
-        }
-    } else {
-        alert(message);
-    }
+    alert(message);
 };
 
-console.log('📜 Legacy support loaded - SmartBudget ready');
+console.log('📜 Landing page loaded - SmartBudget ready');

@@ -1,22 +1,19 @@
 // =============================================================================
-// BOOTSTRAP CUSTOMIZATION - SmartBudget
-// Personalización de variables de Bootstrap antes de importar
+// BOOTSTRAP CUSTOMIZATION - SmartBudget  
+// Personalización de variables de Bootstrap usando @use con namespace
 // =============================================================================
 
-// 1. IMPORTAR FUNCIONES Y VARIABLES DE BOOTSTRAP (requerido primero)
-@import "vendor/bootstrap/functions";
-@import "vendor/bootstrap/variables";
-
-// 2. PERSONALIZAR VARIABLES DE BOOTSTRAP
+// 1. USAR BOOTSTRAP COMPLETO CON NAMESPACE
 // =============================================================================
+@use "vendor/bootstrap/bootstrap" as bootstrap;
 
 // Colores principales (sobrescribir colores de Bootstrap)
-$primary: #3b82f6;        // Azul principal del proyecto
-$secondary: #6c757d;      // Gris secundario
-$success: #10b981;        // Verde para ingresos
-$danger: #ef4444;         // Rojo para gastos  
-$warning: #f59e0b;        // Naranja para alertas
-$info: #06b6d4;          // Cyan para información
+$primary: #3b82f6 !default;        // Azul principal del proyecto
+$secondary: #6c757d !default;      // Gris secundario
+$success: #10b981 !default;        // Verde para ingresos
+$danger: #ef4444 !default;         // Rojo para gastos  
+$warning: #f59e0b !default;        // Naranja para alertas
+$info: #06b6d4 !default;          // Cyan para información
 
 // Tipografía
 $font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -76,41 +73,7 @@ $input-border-radius: $border-radius-sm;
 $input-border-radius-sm: $border-radius-sm;
 $input-border-radius-lg: $border-radius;
 
-// 3. IMPORTAR MIXINS DE BOOTSTRAP (después de variables)
-@import "vendor/bootstrap/mixins";
-
-// 4. IMPORTAR COMPONENTES DE BOOTSTRAP SELECTIVAMENTE
-// =============================================================================
-// Solo importar los componentes que realmente usamos
-
-// Layout & components
-@import "vendor/bootstrap/root";
-@import "vendor/bootstrap/reboot";
-@import "vendor/bootstrap/type";
-@import "vendor/bootstrap/images";
-@import "vendor/bootstrap/grid";
-@import "vendor/bootstrap/tables";
-@import "vendor/bootstrap/forms";
-@import "vendor/bootstrap/buttons";
-@import "vendor/bootstrap/transitions";
-@import "vendor/bootstrap/dropdown";
-@import "vendor/bootstrap/button-group";
-@import "vendor/bootstrap/nav";
-@import "vendor/bootstrap/navbar";
-@import "vendor/bootstrap/card";
-@import "vendor/bootstrap/breadcrumb";
-@import "vendor/bootstrap/pagination";
-@import "vendor/bootstrap/badge";
-@import "vendor/bootstrap/alert";
-@import "vendor/bootstrap/progress";
-@import "vendor/bootstrap/list-group";
-@import "vendor/bootstrap/close";
-@import "vendor/bootstrap/modal";
-@import "vendor/bootstrap/tooltip";
-@import "vendor/bootstrap/popover";
-@import "vendor/bootstrap/utilities";
-
-// 5. UTILIDADES PERSONALIZADAS PARA EL PROYECTO
+// 3. UTILIDADES PERSONALIZADAS PARA EL PROYECTO
 // =============================================================================
 // Usar las variables del proyecto (definidas en abstracts/_variables.scss)
 

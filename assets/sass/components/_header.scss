@@ -1,12 +1,14 @@
+@use "../abstracts/variables" as vars;
+
 // Componente: Header
 // Estilos para headers de páginas
 
 .header {
-  background: $color-bg-white;
-  border-bottom: 1px solid $color-border-light;
+  background: vars.$color-bg-white;
+  border-bottom: 1px solid vars.$color-border-light;
 
   &__container {
-    padding: $spacing-base;
+    padding: vars.$spacing-base;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -22,11 +24,11 @@
   &__brand {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
+    gap: vars.$spacing-sm;
   }
 
   &__icon {
-    color: $color-primary;
+    color: vars.$color-primary;
   }
 
   &__title {

@@ -1,3 +1,5 @@
+@use "../abstracts/variables" as vars;
+
 // Componente: Transactions
 // Estilos para lista de transacciones
 
@@ -5,6 +7,7 @@
   background: white;
   border-radius: 0.5rem;
   padding: 1.5rem;
+  margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   grid-column: span 1;
 
@@ -113,13 +116,13 @@
     justify-content: center;
 
     &--income {
-      background: $color-income-bg;
-      color: $color-income;
+      background: vars.$color-income-bg;
+      color: vars.$color-income;
     }
 
     &--expense {
-      background: $color-expense-bg;
-      color: $color-expense;
+      background: vars.$color-expense-bg;
+      color: vars.$color-expense;
     }
   }
 
@@ -151,11 +154,11 @@
     font-size: 1.125rem;
 
     &--income {
-      color: $color-income;
+      color: vars.$color-income;
     }
 
     &--expense {
-      color: $color-expense;
+      color: vars.$color-expense;
     }
   }
 
@@ -182,13 +185,13 @@
     font-size: 1.25rem;
 
     &.income {
-      background: $color-income-bg;
-      color: $color-income;
+      background: vars.$color-income-bg;
+      color: vars.$color-income;
     }
 
     &.expense {
-      background: $color-expense-bg;
-      color: $color-expense;
+      background: vars.$color-expense-bg;
+      color: vars.$color-expense;
     }
   }
 
@@ -215,11 +218,11 @@
     font-weight: 600;
 
     &.income {
-      color: $color-income;
+      color: vars.$color-income;
     }
 
     &.expense {
-      color: $color-expense;
+      color: vars.$color-expense;
     }
   }
 }
