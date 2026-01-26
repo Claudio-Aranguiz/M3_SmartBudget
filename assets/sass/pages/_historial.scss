@@ -2,7 +2,6 @@
 // Estilos específicos para la página de historial de transacciones
 
 .container {
-  min-height: 100vh;
   padding-bottom: 80px;
 }
 
@@ -21,7 +20,7 @@
     &__header {
       padding: 1rem 1rem 0.5rem;
     }
-    
+
     &__content {
       padding: 0.5rem 1rem 1rem;
     }
@@ -122,20 +121,7 @@
 
 // Responsivo
 @media (max-width: 480px) {
-  .main {
-    padding: 0.75rem;
-  }
-  
   .summary {
     gap: 0.5rem;
-  }
-
-  // La navegación inferior usa los estilos de layout/_footer.scss
-  .footer.bottom-nav {
-    gap: 0rem;
-    
-    .footer__link {
-      padding: 0.75rem 1.5rem;
-    }
   }
 }

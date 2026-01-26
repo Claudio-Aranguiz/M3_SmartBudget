@@ -1,6 +1,11 @@
+
 # 💰 SmartBudget - Gestor de Presupuesto Personal
 
 **SmartBudget** es una aplicación web moderna para la gestión de presupuesto personal, desarrollada con HTML5, CSS3, JavaScript ES6 y Bootstrap 4.
+
+**Actualización 26-01-2026:**
+- Eliminado completamente el rol de admin, archivos y lógica asociada.
+- El sistema ahora es solo para usuarios regulares.
 
 ---
 
@@ -164,7 +169,6 @@ cd test
 | Usuario | Email | Password | Rol |
 |---------|-------|----------|-----|
 | **María González** | maria.gonzalez@email.com | maria123 | user |
-| **Administrador** | admin@smartbudget.com | admin123 | admin |
 | **Carlos Rodríguez** | carlos.rodriguez@email.com | carlos123 | user |
 
 ---
@@ -195,5 +199,5 @@ Proyecto desarrollado con fines educativos como parte del módulo de desarrollo 
 
 ---
 
-*Última actualización: 25 de enero de 2026*  
-*Estado: ✅ Proyecto completamente funcional y testado*
+*Última actualización: 26 de enero de 2026*  
+*Estado: ✅ Proyecto completamente funcional, solo usuarios regulares*

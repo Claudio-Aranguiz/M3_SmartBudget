@@ -2,7 +2,7 @@
 # =============================================================================
 # GITIGNORE - SmartBudget Project v1.0
 # Archivos y carpetas que no deben subirse al repositorio
-# Actualizado: 25-01-2026 - Estructura limpia y organizada
+# Actualizado: 26-01-2026 - Limpieza final, eliminado rol admin y archivos asociados
 # =============================================================================
 
 # ARCHIVOS COMPILADOS Y TEMPORALES

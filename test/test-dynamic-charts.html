@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Dynamic Charts</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css">
+    <style>
+        body {
+            padding: 20px;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+        }
+        .charts-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .chart-container {
+            height: 300px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .test-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #2563eb;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        .status.error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test de Gráficos Dinámicos</h1>
+        
+        <div class="test-section">
+            <h2>Estado del Sistema</h2>
+            <div id="system-status"></div>
+            <button class="test-button" onclick="checkSystemStatus()">Verificar Sistema</button>
+        </div>
+
+        <!-- Summary Cards Test -->
+        <div class="test-section">
+            <h2>Tarjetas de Resumen</h2>
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <div class="summary-card__content">
+                        <div class="summary-card__header">
+                            <h3 class="summary-card__title">Balance Total</h3>
+                            <i data-lucide="wallet" class="summary-card__icon"></i>
+                        </div>
+                        <div class="summary-card__value">Cargando...</div>
+                        <p class="summary-card__change">
+                            <span class="summary-card__percentage">--</span> desde el mes pasado
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="summary-card summary-card--income">
+                    <div class="summary-card__content">
+                        <div class="summary-card__header">
+                            <h3 class="summary-card__title">Ingresos</h3>
+                            <i data-lucide="trending-up" class="summary-card__icon"></i>
+                        </div>
+                        <div class="summary-card__value">Cargando...</div>
+                        <p class="summary-card__change">
+                            <span class="summary-card__percentage">--</span> vs mes anterior
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="summary-card summary-card--expense">
+                    <div class="summary-card__content">
+                        <div class="summary-card__header">
+                            <h3 class="summary-card__title">Gastos</h3>
+                            <i data-lucide="trending-down" class="summary-card__icon"></i>
+                        </div>
+                        <div class="summary-card__value">Cargando...</div>
+                        <p class="summary-card__change">
+                            <span class="summary-card__percentage">--</span> vs mes anterior
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="summary-card summary-card--savings">
+                    <div class="summary-card__content">
+                        <div class="summary-card__header">
+                            <h3 class="summary-card__title">Ahorros</h3>
+                            <i data-lucide="piggy-bank" class="summary-card__icon"></i>
+                        </div>
+                        <div class="summary-card__value">Cargando...</div>
+                        <p class="summary-card__change">
+                            <span class="summary-card__percentage">--</span> vs mes anterior
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Test -->
+        <div class="test-section">
+            <h2>Gráficos Dinámicos</h2>
+            <button class="test-button" onclick="loadTestData()">Cargar Datos de Prueba</button>
+            <button class="test-button" onclick="refreshCharts()">Refrescar Gráficos</button>
+            
+            <div class="charts-row">
+                <div class="chart-container">
+                    <h3>Ingresos vs Gastos</h3>
+                    <canvas id="incomeExpenseChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Gastos por Categoría</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transactions Test -->
+        <div class="test-section">
+            <h2>Transacciones Recientes</h2>
+            <div class="transactions">
+                <div class="transactions__content">
+                    <div class="transactions__list">
+                        <!-- Se llenarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { DashboardCharts, DashboardDataProcessor } from '../assets/js/pages/dashboard-init.js';
+        import { StorageManager } from '../assets/js/data/storage.js';
+
+        // Global functions for testing
+        window.checkSystemStatus = checkSystemStatus;
+        window.loadTestData = loadTestData;
+        window.refreshCharts = refreshCharts;
+
+        // Mock user session for testing
+        StorageManager.setSession({
+            userId: 2,
+            username: 'testuser',
+            userType: 'user',
+            loginTime: new Date().toISOString()
+        });
+
+        console.log('🧪 Test environment initialized');
+
+        function checkSystemStatus() {
+            const statusDiv = document.getElementById('system-status');
+            let status = '<div class="status success">✅ Sistemas funcionando correctamente:</div>';
+            
+            status += '<ul>';
+            status += `<li>Chart.js: ${typeof Chart !== 'undefined' ? '✅ Cargado' : '❌ No encontrado'}</li>`;
+            status += `<li>Lucide Icons: ${typeof lucide !== 'undefined' ? '✅ Cargado' : '❌ No encontrado'}</li>`;
+            status += `<li>Dashboard Modules: ${typeof DashboardCharts !== 'undefined' ? '✅ Cargado' : '❌ No encontrado'}</li>`;
+            status += `<li>Storage Manager: ${typeof StorageManager !== 'undefined' ? '✅ Cargado' : '❌ No encontrado'}</li>`;
+            status += '</ul>';
+
+            statusDiv.innerHTML = status;
+            
+            // Initialize icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        async function loadTestData() {
+            console.log('🔄 Loading test data...');
+            
+            try {
+                // Simulate loading and initialize charts
+                await DashboardCharts.init();
+                console.log('✅ Test data loaded and charts initialized');
+            } catch (error) {
+                console.error('❌ Error loading test data:', error);
+                document.getElementById('system-status').innerHTML += 
+                    `<div class="status error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function refreshCharts() {
+            console.log('🔄 Refreshing charts...');
+            await DashboardCharts.refreshCharts();
+            console.log('✅ Charts refreshed');
+        }
+
+        // Auto-initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 DOM loaded, initializing test...');
+            checkSystemStatus();
+            
+            // Wait a bit for libraries to load, then initialize
+            setTimeout(() => {
+                loadTestData();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

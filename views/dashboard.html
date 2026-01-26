@@ -9,10 +9,14 @@
    <!-- Favicon-->
    <link rel="icon" type="image/png" href="/assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
    <!-- CSS Dependencies -->
-   <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+   <link rel="stylesheet" href="../assets/sass/main-bootstrap.css">
 
 </head>
 <body>
+   <!-- Imagen del background -->
+   <div class="background-image">
+       <img src="../assets/img/Gemini_Generated_Image_76lk8y76lk8y76lk.png" alt="imagen de fondo decorativa" class="background-image__img">
+   </div>
    <header class="header">
         <nav class="nav">
             <div class="nav__brand">
@@ -198,7 +202,16 @@
     </main>
 
    <footer class="footer bottom-nav">
-      <a href="menu.html" class=" footer__text">
+      <a href="menu.html" class="footer__text">
+         <i data-lucide="menu" class="footer__icon"></i>
+         Menú
+      </a>
+   </footer>
+
+   <!-- JavaScript -->
+   <script type="module" src="../assets/js/pages/dashboard-init.js"></script>
+</body>
+</html>
          <span class="">Acciones</span>
       </a>
       <a href="historial.html" class=" footer__text">

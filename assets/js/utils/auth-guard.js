@@ -20,14 +20,7 @@ async function loadUsersDatabase() {
         // Fallback con datos mínimos si falla la carga
         USERS_DATABASE = {
             users: [
-                {
-                    id: 1,
-                    email: "admin@smartbudget.com",
-                    password: "admin123",
-                    name: "Administrador",
-                    role: "admin",
-                    isActive: true
-                },
+                // Eliminado usuario admin
                 {
                     id: 2,
                     email: "demo@smartbudget.com",
@@ -89,76 +82,7 @@ export async function authenticateUser(email, password) {
     return null;
 }
 
-/**
- * Verificar si el usuario actual es administrador
- * @returns {boolean} - true si es admin, false si no
- */
-export function isAdmin() {
-    const userData = getAuthenticatedUser();
-    return userData && userData.role === 'admin';
-}
 
-/**
- * Obtener todos los usuarios (solo para admin)
- * @returns {Array|null} - Lista de usuarios o null si no es admin
- */
-export async function getAllUsers() {
-    if (!isAdmin()) {
-        console.warn('⚠️ Access denied: Admin privileges required');
-        return null;
-    }
-    
-    if (!USERS_DATABASE) {
-        await loadUsersDatabase();
-    }
-    
-    return USERS_DATABASE.users.filter(u => u.role === 'user');
-}
-
-/**
- * Agregar ingreso a un usuario (solo admin)
- * @param {number} userId - ID del usuario
- * @param {number} amount - Cantidad a agregar
- * @param {string} description - Descripción del ingreso
- * @returns {boolean} - true si se agregó correctamente
- */
-export async function addIncomeToUser(userId, amount, description = 'Ingreso agregado por Admin') {
-    if (!isAdmin()) {
-        console.warn('⚠️ Access denied: Admin privileges required');
-        return false;
-    }
-    
-    if (!USERS_DATABASE) {
-        await loadUsersDatabase();
-    }
-    
-    const user = USERS_DATABASE.users.find(u => u.id === userId);
-    if (!user) {
-        console.error('❌ User not found:', userId);
-        return false;
-    }
-
-    try {
-        // Simular agregar a la base de datos de transacciones
-        // En una implementación real, esto haría una petición al servidor
-        const newTransaction = {
-            id: Date.now(), // ID temporal simple
-            userId: userId,
-            type: 'ingreso',
-            amount: parseFloat(amount),
-            description: description,
-            date: new Date().toISOString().split('T')[0]
-        };
-        
-        console.log(`✅ Added $${amount} to user ${user.name}`);
-        console.log('Transaction created:', newTransaction);
-        return true;
-        
-    } catch (error) {
-        console.error('❌ Error adding income to user:', error);
-        return false;
-    }
-}
 
 /**
  * Calcular balance actual del usuario desde la base de datos de transacciones

@@ -12,17 +12,46 @@
   box-sizing: border-box;
 }
 
-// Estructura completa del body (usando variables de Bootstrap)
+// Imagen de fondo - posicionada detrás de todo el contenido
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1.8;
+  }
+}
+
+// Estructura completa del html y body
+html,
+body {
+  height: 100%;
+}
+
 body {
   // Propiedades visuales
-  font-family: bs.$font-family-base;     
-  background-color: bs.$body-bg;        
-  color: bs.$body-color;                 
+  font-family: bs.$font-family-base;
+  background-color: transparent; // Cambiar a transparente para mostrar la imagen de fondo
+  color: bs.$body-color;
 
   // Propiedades estructurales
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh; // Mejor soporte para móviles modernos
+
+  // Asegurar que el contenido esté sobre la imagen
+  position: relative;
+  z-index: 1;
 }
 
 // Estilos base para enlaces
@@ -34,34 +63,58 @@ a {
 // Contenedor principal - usar solo clase .main para evitar redundancia
 .main {
   flex: 1;
-  padding: bs.$spacer;                        
-  padding-bottom: 60px;                    
-  background: #c5ebf1d6;
+  display: flex;
+  flex-direction: column;
+  padding: bs.$spacer;
+  background: rgba(197, 235, 241, 0.85); // Hacer semi-transparente para mostrar fondo
+  position: relative;
 
-  // Por defecto en móvil usa variante bottom
-  align-content: flex-end;
-  padding-bottom: 5rem;
+  // Espacio para el footer fijo (movido desde el body para evitar desbordamiento)
+  padding-bottom: 80px;
 
-  // En desktop cambia a variante center
-  @media (min-width: 768px) {
-    align-content: center;
-    text-align: center;
-    padding-bottom: 60px;
+  @media (max-width: 480px) {
+    padding-bottom: 90px; // Más espacio en móvil
   }
 
-  // Modificadores específicos (solo usar cuando necesites forzar comportamiento)
+  // En desktop, asegurar alineación y padding
+  @media (min-width: 768px) {
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 80px;
+  }
+
+  // En móvil, asegurar ancho completo
+  @media (max-width: 767px) {
+    margin: 0;
+    width: 100%;
+  }
+
+  // Modificadores específicos
   &--center {
-    align-content: center !important;
+    justify-content: center !important;
     text-align: center !important;
   }
 
   &--bottom {
-    align-content: flex-end !important;
-    padding-bottom: 5rem !important;
+    @media (max-width: 480px) {
+      justify-content: flex-end !important;
+    }
+  }
+}
+
+// Reglas especiales para evitar que el footer tape los modales
+.modal-open {
+
+  // Cuando hay un modal abierto, el footer no debe interferir
+  .footer.bottom-nav {
+    z-index: 1000; // Por debajo del modal (z-index: 1050)
   }
 
-  @media (min-width: 480px) {
-                      
+  // En móvil, ajustar la posición del modal para evitar el footer
+  @media (max-width: 767px) {
+    .modal-dialog {
+      margin-bottom: 90px; // Espacio para el footer
+    }
   }
 }
 
@@ -70,6 +123,5 @@ a {
   max-width: 400px;
   margin: 0 auto;
   background: white;
-  min-height: 100vh;
-  box-shadow: bs.$box-shadow;                 
+  box-shadow: bs.$box-shadow;
 }

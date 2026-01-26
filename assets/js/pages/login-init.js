@@ -90,10 +90,7 @@ class AuthManager {
      * Handle successful login process
      */
     handleSuccessfulLogin(userData) {
-        const isAdmin = userData.role === 'admin';
-        const welcomeMessage = isAdmin ? 
-            '¡Bienvenido Administrador!' : 
-            `¡Hola ${userData.name}! Inicio de sesión exitoso.`;
+        const welcomeMessage = `¡Hola ${userData.name}! Inicio de sesión exitoso.`;
             
         alert(welcomeMessage);
         
@@ -102,10 +99,9 @@ class AuthManager {
             $('#loginModal').modal('hide');
         }
         
-        // Redirect based on user role
+        // Redirigir siempre a menu.html
         setTimeout(() => {
-            const redirectUrl = isAdmin ? 'admin.html' : 'menu.html';
-            window.location.href = redirectUrl;
+            window.location.href = 'menu.html';
         }, 500);
     }
 
