@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Transacciones - SmartBudget</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css">
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; }
+        .test-container { max-width: 800px; margin: 0 auto; }
+        .test-button { margin: 10px 5px; padding: 10px 20px; }
+        .results { margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px; }
+        pre { background: #e9ecef; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test de Transacciones - SmartBudget</h1>
+        
+        <div class="alert alert-info">
+            <strong>Instrucciones:</strong> Abre la consola del navegador (F12) para ver los resultados detallados.
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary test-button" onclick="setupTestUser()">1. Configurar Usuario de Test</button>
+            <button class="btn btn-success test-button" onclick="testIncome()">2. Test Ingreso</button>
+            <button class="btn btn-danger test-button" onclick="testExpense()">3. Test Gasto</button>
+            <button class="btn btn-info test-button" onclick="viewTransactions()">4. Ver Transacciones</button>
+            <button class="btn btn-warning test-button" onclick="clearData()">5. Limpiar Datos</button>
+        </div>
+
+        <div id="results" class="results" style="display: none;">
+            <h3>Resultados:</h3>
+            <div id="output"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configurar usuario de test
+        function setupTestUser() {
+            const testUser = {
+                id: 2,
+                email: "maria.gonzalez@email.com",
+                name: "María González",
+                role: "user"
+            };
+            
+            localStorage.setItem('smartbudget-authenticated', 'true');
+            localStorage.setItem('smartbudget-user', JSON.stringify(testUser));
+            
+            showResult('✅ Usuario de test configurado: ' + testUser.name);
+            console.log('✅ Usuario de test configurado:', testUser);
+        }
+
+        // Test de ingreso
+        async function testIncome() {
+            try {
+                const transactionData = {
+                    type: 'ingreso',
+                    amount: 2500.00,
+                    description: 'Salario mensual - Test',
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                const result = await saveTestTransaction(transactionData);
+                showResult('✅ Ingreso creado: $' + result.amount + ' - ' + result.description);
+                console.log('✅ Transacción de ingreso guardada:', result);
+            } catch (error) {
+                showResult('❌ Error: ' + error.message);
+                console.error('❌ Error:', error);
+            }
+        }
+
+        // Test de gasto
+        async function testExpense() {
+            try {
+                const transactionData = {
+                    type: 'gasto',
+                    amount: 75.50,
+                    description: 'Supermercado - Test',
+                    date: new Date().toISOString().split('T')[0]
+                };
+                
+                const result = await saveTestTransaction(transactionData);
+                showResult('✅ Gasto creado: $' + result.amount + ' - ' + result.description);
+                console.log('✅ Transacción de gasto guardada:', result);
+            } catch (error) {
+                showResult('❌ Error: ' + error.message);
+                console.error('❌ Error:', error);
+            }
+        }
+
+        // Ver transacciones
+        async function viewTransactions() {
+            try {
+                const localTransactions = JSON.parse(localStorage.getItem('smartbudget-transactions') || '[]');
+                
+                // Cargar también del archivo JSON
+                const response = await fetch('../assets/data/transactions.json');
+                const data = await response.json();
+                
+                const allTransactions = [...data.transactions, ...localTransactions];
+                const userData = JSON.parse(localStorage.getItem('smartbudget-user'));
+                
+                if (userData) {
+                    const userTransactions = allTransactions.filter(t => t.userId === userData.id);
+                    const balance = userTransactions.reduce((sum, t) => {
+                        return t.type === 'ingreso' ? sum + t.amount : sum - t.amount;
+                    }, 0);
+                    
+                    showResult(`👤 Usuario: ${userData.name}<br>📊 Transacciones: ${userTransactions.length}<br>💰 Balance: $${balance.toFixed(2)}`);
+                    console.log('📋 Transacciones del usuario:', userTransactions);
+                    console.table(userTransactions);
+                }
+                
+            } catch (error) {
+                showResult('❌ Error al cargar transacciones: ' + error.message);
+                console.error('❌ Error:', error);
+            }
+        }
+
+        // Limpiar datos
+        function clearData() {
+            localStorage.removeItem('smartbudget-transactions');
+            localStorage.removeItem('smartbudget-user');
+            localStorage.removeItem('smartbudget-authenticated');
+            
+            showResult('🧹 Datos de test eliminados');
+            console.log('🧹 Datos de localStorage limpiados');
+        }
+
+        // Función auxiliar para guardar transacción
+        async function saveTestTransaction(transactionData) {
+            const userData = JSON.parse(localStorage.getItem('smartbudget-user'));
+            if (!userData) {
+                throw new Error('Usuario no autenticado. Ejecuta "Configurar Usuario de Test" primero.');
+            }
+
+            try {
+                // Cargar transacciones existentes
+                const response = await fetch('../assets/data/transactions.json');
+                const data = await response.json();
+                
+                // Generar nuevo ID
+                const newId = Math.max(...data.transactions.map(t => t.id), 0) + 1;
+                
+                // Crear nueva transacción
+                const newTransaction = {
+                    id: newId,
+                    userId: userData.id,
+                    type: transactionData.type,
+                    amount: parseFloat(transactionData.amount),
+                    description: transactionData.description,
+                    date: transactionData.date
+                };
+
+                // Guardar en localStorage
+                let localTransactions = JSON.parse(localStorage.getItem('smartbudget-transactions') || '[]');
+                localTransactions.push(newTransaction);
+                localStorage.setItem('smartbudget-transactions', JSON.stringify(localTransactions));
+
+                console.log('✅ Transacción guardada localmente:', newTransaction);
+                
+                // Mostrar cómo quedaría el archivo JSON
+                const updatedJSON = {
+                    transactions: [...data.transactions, newTransaction]
+                };
+                console.log('📄 Archivo JSON actualizado quedaría así:');
+                console.log(JSON.stringify(updatedJSON, null, 2));
+                
+                return newTransaction;
+                
+            } catch (error) {
+                console.error('❌ Error al cargar JSON, usando fallback:', error);
+                
+                // Fallback: solo localStorage
+                const newTransaction = {
+                    id: Date.now(),
+                    userId: userData.id,
+                    type: transactionData.type,
+                    amount: parseFloat(transactionData.amount),
+                    description: transactionData.description,
+                    date: transactionData.date
+                };
+                
+                let localTransactions = JSON.parse(localStorage.getItem('smartbudget-transactions') || '[]');
+                localTransactions.push(newTransaction);
+                localStorage.setItem('smartbudget-transactions', JSON.stringify(localTransactions));
+                
+                return newTransaction;
+            }
+        }
+
+        // Mostrar resultado en la página
+        function showResult(message) {
+            const resultsDiv = document.getElementById('results');
+            const outputDiv = document.getElementById('output');
+            
+            outputDiv.innerHTML = '<div class="alert alert-info">' + message + '</div>';
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

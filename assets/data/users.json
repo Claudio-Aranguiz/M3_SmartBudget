@@ -1,0 +1,82 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@smartbudget.com",
+      "password": "admin123",
+      "name": "Administrador",
+      "role": "admin",
+      "profileImage": "assets/img/admin-avatar.jpg",
+      "createdAt": "2026-01-01T00:00:00.000Z",
+      "lastLogin": null,
+      "isActive": true,
+      "permissions": ["view_all_users", "add_income", "edit_users", "view_reports"]
+    },
+    {
+      "id": 2,
+      "email": "maria.gonzalez@email.com",
+      "password": "maria123",
+      "name": "María González",
+      "role": "user",
+      "profileImage": "assets/img/user-avatar-1.jpg",
+      "monthlyBudget": 3500.00,
+      "createdAt": "2026-01-15T10:30:00.000Z",
+      "lastLogin": "2026-01-25T08:15:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": 3,
+      "email": "carlos.rodriguez@email.com",
+      "password": "carlos123",
+      "name": "Carlos Rodríguez",
+      "role": "user",
+      "profileImage": "assets/img/user-avatar-2.jpg",
+      "monthlyBudget": 2000.00,
+      "createdAt": "2026-01-10T14:20:00.000Z",
+      "lastLogin": "2026-01-24T19:45:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": 4,
+      "email": "ana.martinez@email.com",
+      "password": "ana123",
+      "name": "Ana Martínez",
+      "role": "user",
+      "profileImage": "assets/img/user-avatar-3.jpg",
+      "monthlyBudget": 4000.00,
+      "createdAt": "2026-01-05T09:15:00.000Z",
+      "lastLogin": "2026-01-25T07:30:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": 5,
+      "email": "luis.garcia@email.com",
+      "password": "luis123",
+      "name": "Luis García",
+      "role": "user",
+      "profileImage": "assets/img/user-avatar-4.jpg",
+      "monthlyBudget": 1800.00,
+      "createdAt": "2026-01-20T16:45:00.000Z",
+      "lastLogin": "2026-01-23T20:10:00.000Z",
+      "isActive": true
+    },
+    {
+      "id": 6,
+      "email": "demo@smartbudget.com",
+      "password": "demo123",
+      "name": "Usuario Demo",
+      "role": "user",
+      "profileImage": "assets/img/demo-avatar.jpg",
+      "monthlyBudget": 2500.00,
+      "createdAt": "2026-01-25T12:00:00.000Z",
+      "lastLogin": null,
+      "isActive": true
+    }
+  ],
+  "metadata": {
+    "totalUsers": 6,
+    "activeUsers": 6,
+    "lastUpdated": "2026-01-25T12:00:00.000Z",
+    "version": "1.1.0"
+  }
+}

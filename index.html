@@ -43,5 +43,13 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="./assets/js/main.js"></script>
+    
+    <!-- Demo System (solo se carga si está en modo demo) -->
+    <script type="module">
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('demo') === 'true') {
+            import('./demo/demo-controller.js');
+        }
+    </script>
 </body>
 </html>

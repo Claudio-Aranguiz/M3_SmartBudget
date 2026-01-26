@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - SmartBudget</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Favicon-->
+    <link rel="icon" type="image/png" href="../assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css">
+    <style>
+        .admin-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-card {
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .user-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .balance-display {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #28a745;
+        }
+        
+        .btn-add-income {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            border: none;
+            color: white;
+        }
+        
+        .btn-add-income:hover {
+            background: linear-gradient(45deg, #218838, #1ba085);
+            color: white;
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        /* Botones del header admin personalizados */
+        .admin-header .header__button {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-header .header__button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .admin-header .header__button--logout {
+            background: rgba(220, 53, 69, 0.8);
+            border-color: rgba(220, 53, 69, 0.6);
+        }
+
+        .admin-header .header__button--logout:hover {
+            background: rgba(220, 53, 69, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <img src="../assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.svg" alt="SmartBudget Logo" width="40" height="40" class="me-3">
+                        <div>
+                            <h1 class="mb-0">Panel de Administración</h1>
+                            <small id="admin-welcome">Cargando...</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="header__button me-3" onclick="window.location.href='menu.html'">
+                        <i data-lucide="home" class="header__button-icon"></i>
+                        <span>Ir al Menu</span>
+                    </button>
+                    <button class="header__button header__button--logout" id="logout-btn">
+                        <i data-lucide="log-out" class="header__button-icon"></i>
+                        <span>Cerrar Sesión</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Estadísticas Generales -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card admin-card stats-card">
+                    <div class="card-body">
+                        <i data-lucide="users" class="mb-2" style="width: 3rem; height: 3rem; color: #667eea;"></i>
+                        <div class="stats-number" id="total-users">0</div>
+                        <small class="text-muted">Usuarios Totales</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card admin-card stats-card">
+                    <div class="card-body">
+                        <i data-lucide="dollar-sign" class="mb-2" style="width: 3rem; height: 3rem; color: #28a745;"></i>
+                        <div class="stats-number" id="total-balance">$0</div>
+                        <small class="text-muted">Balance Total</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card admin-card stats-card">
+                    <div class="card-body">
+                        <i data-lucide="trending-up" class="mb-2" style="width: 3rem; height: 3rem; color: #ffc107;"></i>
+                        <div class="stats-number" id="active-users">0</div>
+                        <small class="text-muted">Usuarios Activos</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card admin-card stats-card">
+                    <div class="card-body">
+                        <i data-lucide="calendar" class="mb-2" style="width: 3rem; height: 3rem; color: #dc3545;"></i>
+                        <div class="stats-number" id="todays-date">25</div>
+                        <small class="text-muted">Enero 2026</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Usuarios -->
+        <div class="card admin-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0">
+                    <i data-lucide="users" class="me-2"></i>
+                    Gestión de Usuarios
+                </h3>
+                <button class="btn btn-primary" onclick="location.reload()">
+                    <i data-lucide="refresh-cw" class="me-1"></i>
+                    Actualizar
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="users-loading" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="sr-only">Cargando usuarios...</span>
+                    </div>
+                    <p class="mt-2">Cargando usuarios...</p>
+                </div>
+                <div id="users-container" class="row" style="display: none;">
+                    <!-- Los usuarios se cargarán dinámicamente aquí -->
+                </div>
+                <div id="no-users" style="display: none;" class="text-center py-4">
+                    <i data-lucide="user-x" style="width: 4rem; height: 4rem;" class="text-muted mb-3"></i>
+                    <h5 class="text-muted">No hay usuarios disponibles</h5>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para agregar ingreso -->
+    <div class="modal fade" id="addIncomeModal" tabindex="-1" role="dialog" aria-labelledby="addIncomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="addIncomeModalLabel">
+                        <i data-lucide="dollar-sign" class="me-2"></i>
+                        Agregar Ingreso
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addIncomeForm">
+                        <input type="hidden" id="selectedUserId" value="">
+                        
+                        <div class="form-group mb-3">
+                            <label for="selectedUserName">Usuario seleccionado:</label>
+                            <input type="text" class="form-control" id="selectedUserName" readonly>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="incomeAmount">Cantidad a agregar:</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input type="number" class="form-control" id="incomeAmount" step="0.01" min="0.01" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label for="incomeDescription">Descripción:</label>
+                            <textarea class="form-control" id="incomeDescription" rows="3" placeholder="Ej: Bono por rendimiento, Ajuste salarial, etc."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-block">
+                                <i data-lucide="plus-circle" class="me-2"></i>
+                                Agregar Ingreso
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin JavaScript Module -->
+    <script type="module" src="../assets/js/pages/admin-init.js"></script>
+</body>
+</html>

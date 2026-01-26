@@ -64,6 +64,17 @@
     &--menu {
       padding: 0.5rem;
     }
+
+    &--logout {
+      background: #dc3545;
+      border-color: #dc3545;
+      color: white;
+
+      &:hover {
+        background: #c82333;
+        border-color: #bd2130;
+      }
+    }
   }
 
   &__button-icon {

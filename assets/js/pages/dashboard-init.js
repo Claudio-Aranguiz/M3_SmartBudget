@@ -3,6 +3,8 @@
  * Handles dashboard page initialization, charts setup and Lucide icons
  */
 
+import { checkAuthentication } from '../utils/auth-guard.js';
+
 /**
  * Dashboard data for charts
  */
@@ -177,6 +179,11 @@ class DashboardInit {
      */
     static setup() {
         console.log('🚀 Initializing Dashboard...');
+        
+        // Check authentication first
+        if (!checkAuthentication()) {
+            return; // Stop initialization if not authenticated
+        }
         
         // Initialize Lucide icons
         this.initLucideIcons();

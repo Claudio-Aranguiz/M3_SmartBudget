@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Transacciones</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 1000px; margin: 0 auto; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .error { background-color: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .info { background-color: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        button { margin: 10px 5px; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Verificación de Base de Datos de Transacciones</h1>
+    
+    <button onclick="runFullTest()">Ejecutar Test Completo</button>
+    <button onclick="showRawData()">Mostrar Datos Raw</button>
+    <button onclick="calculateBalances()">Calcular Balances</button>
+    
+    <div id="results"></div>
+
+    <script src="../assets/js/utils/transaction-utils.js"></script>
+    <script>
+        async function runFullTest() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="info">Ejecutando test...</div>';
+            
+            try {
+                const result = await TransactionUtils.runTransactionTest();
+                
+                let html = '';
+                if (result.success) {
+                    html += `<div class="success">✅ Test completado exitosamente</div>`;
+                    html += `<div class="info">📊 Total transacciones: ${result.totalTransactions}</div>`;
+                    html += `<div class="info">👤 Transacciones de usuario: ${result.userTransactions}</div>`;
+                    html += `<div class="info">💰 Balance calculado: $${result.balance.toFixed(2)}</div>`;
+                    html += `<div class="info">🧪 Transacciones de test encontradas: ${result.testTransactionsFound ? 'Sí' : 'No'}</div>`;
+                } else {
+                    html += `<div class="error">❌ Error en el test: ${result.error}</div>`;
+                }
+                
+                resultsDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function showRawData() {
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                const transactions = await TransactionUtils.loadTransactions();
+                
+                let html = '<h3>📄 Datos Raw de Transacciones</h3>';
+                html += '<table>';
+                html += '<tr><th>ID</th><th>Usuario</th><th>Tipo</th><th>Monto</th><th>Descripción</th><th>Fecha</th></tr>';
+                
+                transactions.forEach(t => {
+                    const typeColor = t.type === 'ingreso' ? 'color: green' : 'color: red';
+                    html += `<tr>`;
+                    html += `<td>${t.id}</td>`;
+                    html += `<td>${t.userId}</td>`;
+                    html += `<td style="${typeColor}">${t.type}</td>`;
+                    html += `<td>$${t.amount.toFixed(2)}</td>`;
+                    html += `<td>${t.description}</td>`;
+                    html += `<td>${t.date}</td>`;
+                    html += `</tr>`;
+                });
+                
+                html += '</table>';
+                resultsDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        async function calculateBalances() {
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                const allTransactions = await TransactionUtils.loadTransactions();
+                const users = [...new Set(allTransactions.map(t => t.userId))];
+                
+                let html = '<h3>💰 Balances por Usuario</h3>';
+                html += '<table>';
+                html += '<tr><th>Usuario ID</th><th>Transacciones</th><th>Ingresos</th><th>Gastos</th><th>Balance</th></tr>';
+                
+                for (const userId of users) {
+                    const userTransactions = await TransactionUtils.getUserTransactions(userId);
+                    const balance = await TransactionUtils.calculateUserBalance(userId);
+                    
+                    const ingresos = TransactionUtils.filterByType(userTransactions, 'ingreso');
+                    const gastos = TransactionUtils.filterByType(userTransactions, 'gasto');
+                    
+                    const totalIngresos = ingresos.reduce((sum, t) => sum + t.amount, 0);
+                    const totalGastos = gastos.reduce((sum, t) => sum + t.amount, 0);
+                    
+                    const balanceColor = balance >= 0 ? 'color: green' : 'color: red';
+                    
+                    html += `<tr>`;
+                    html += `<td>${userId}</td>`;
+                    html += `<td>${userTransactions.length}</td>`;
+                    html += `<td style="color: green">$${totalIngresos.toFixed(2)}</td>`;
+                    html += `<td style="color: red">$${totalGastos.toFixed(2)}</td>`;
+                    html += `<td style="${balanceColor}"><strong>$${balance.toFixed(2)}</strong></td>`;
+                    html += `</tr>`;
+                }
+                
+                html += '</table>';
+                resultsDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `<div class="error">❌ Error: ${error.message}</div>`;
+            }
+        }
+
+        // Auto-ejecutar test al cargar
+        window.addEventListener('load', runFullTest);
+    </script>
+</body>
+</html>

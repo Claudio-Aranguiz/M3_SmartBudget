@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Test Persistencia de Sesión - SmartBudget</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 2rem 0; }
+        .container { max-width: 1200px; }
+        .test-panel { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+                     padding: 2rem; margin-bottom: 2rem; }
+        .header-panel { background: linear-gradient(135deg, #667eea, #764ba2); color: white; 
+                       text-align: center; padding: 2rem; border-radius: 15px; }
+        .session-box { background: #f8f9fa; border: 2px solid #dee2e6; border-radius: 10px; 
+                      padding: 1.5rem; margin: 1rem 0; }
+        .session-active { border-color: #28a745; background: #d4f8d4; }
+        .session-inactive { border-color: #dc3545; background: #f8d7da; }
+        .page-link { background: #007bff; color: white; padding: 0.5rem 1rem; border-radius: 5px; 
+                    text-decoration: none; margin: 0.25rem; display: inline-block; }
+        .page-link:hover { background: #0056b3; color: white; text-decoration: none; }
+        .status { padding: 1rem; margin: 0.5rem 0; border-radius: 8px; font-weight: 500; }
+        .status-good { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .status-warning { background: #fff3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .status-error { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .log-panel { background: #2d3748; color: #e2e8f0; padding: 1.5rem; border-radius: 10px; 
+                    font-family: 'Courier New', monospace; max-height: 350px; overflow-y: auto; }
+        .btn-test { border-radius: 25px; padding: 0.5rem 1.5rem; font-weight: 600; margin: 0.25rem; }
+        .storage-item { background: #e9ecef; padding: 0.75rem; margin: 0.25rem 0; border-radius: 5px; 
+                       font-family: monospace; word-break: break-all; }
+        .nav-test { background: #17a2b8; color: white; padding: 1rem; border-radius: 10px; margin: 1rem 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header-panel">
+            <h1>🔐 Test de Persistencia de Sesión</h1>
+            <p>Verificación completa: Login → Navegación → Logout</p>
+        </div>
+
+        <!-- Login Test -->
+        <div class="test-panel">
+            <h3>🚪 Paso 1: Test de Login</h3>
+            <div class="row">
+                <div class="col-md-8">
+                    <form id="sessionLoginForm">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select id="testUser" class="form-control">
+                                    <option value="maria.gonzalez@email.com|maria123">María González</option>
+                                    <option value="admin@smartbudget.com|admin123">Administrador</option>
+                                    <option value="carlos.rodriguez@email.com|carlos123">Carlos Rodríguez</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-success btn-test btn-block">🔑 Login Test</button>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" id="logoutTest" class="btn btn-danger btn-test btn-block">🚪 Logout Test</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" id="checkSession" class="btn btn-info btn-test btn-block">🔍 Check</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <div id="loginTestStatus"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Session Status -->
+        <div class="test-panel">
+            <h3>🔑 Estado de Sesión Actual</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="session-box" id="sessionStatus">
+                        <h5>Estado de Autenticación</h5>
+                        <div id="authenticationState">
+                            <div class="badge badge-secondary">No autenticado</div>
+                            <div class="mt-2 small text-muted">Esperando login...</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="session-box">
+                        <h5>Datos de Usuario</h5>
+                        <div id="userDataDisplay">
+                            <div class="text-muted">No hay sesión activa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Test -->
+        <div class="test-panel">
+            <h3>🧭 Paso 2: Test de Navegación Entre Páginas</h3>
+            <div class="nav-test">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><strong>Simulación de Navegación:</strong> (En aplicación real se abren las páginas)</p>
+                        <a href="#" class="page-link" data-page="dashboard">📊 Dashboard</a>
+                        <a href="#" class="page-link" data-page="menu">📱 Menu</a>
+                        <a href="#" class="page-link" data-page="historial">📋 Historial</a>
+                        <a href="#" class="page-link" data-page="admin">👤 Admin</a>
+                    </div>
+                </div>
+                <div id="navigationResult" class="mt-3"></div>
+            </div>
+        </div>
+
+        <!-- localStorage Inspection -->
+        <div class="test-panel">
+            <h3>💾 Estado de localStorage</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Datos de Sesión:</h5>
+                    <div id="sessionStorage">
+                        <div class="storage-item">smartbudget-authenticated: null</div>
+                        <div class="storage-item">smartbudget-user: null</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5>Datos Temporales:</h5>
+                    <div id="tempStorage">
+                        <div class="storage-item">smartbudget-temp: []</div>
+                        <div class="storage-item">smartbudget-temp-users: []</div>
+                        <div class="storage-item">smartbudget-cache: []</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logout Test -->
+        <div class="test-panel">
+            <h3>🚪 Paso 3: Test de Logout Completo</h3>
+            <div id="logoutTestResults">
+                <div class="status status-warning">⏳ Esperando test de logout...</div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-3">
+                    <button id="completeLogout" class="btn btn-danger btn-test btn-block">🧹 Logout Completo</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="partialLogout" class="btn btn-warning btn-test btn-block">⚠️ Logout Parcial</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="clearAll" class="btn btn-secondary btn-test btn-block">🗑️ Limpiar Todo</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="refreshTest" class="btn btn-info btn-test btn-block">🔄 Actualizar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Results -->
+        <div class="test-panel">
+            <h3>✅ Resultados de Verificación</h3>
+            <div id="testResults">
+                <div class="status status-good">✅ Login funciona correctamente</div>
+                <div class="status status-warning">⏳ Persistencia entre páginas - Pendiente test</div>
+                <div class="status status-warning">⏳ Logout completo - Pendiente test</div>
+                <div class="status status-warning">⏳ Limpieza de datos - Pendiente test</div>
+            </div>
+        </div>
+
+        <!-- System Log -->
+        <div class="test-panel">
+            <h3>📋 Log del Sistema</h3>
+            <div class="log-panel" id="systemLog">
+[Sistema] Test de persistencia de sesión inicializado...
+[Info] Verificando estado inicial de localStorage...
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        class SessionPersistenceTest {
+            constructor() {
+                this.initializeEvents();
+                this.updateAllStatus();
+                this.log('🚀 Test de persistencia de sesión inicializado');
+                this.checkInitialState();
+            }
+
+            checkInitialState() {
+                const hasSession = localStorage.getItem('smartbudget-authenticated');
+                const userData = localStorage.getItem('smartbudget-user');
+                
+                if (hasSession && userData) {
+                    this.log('⚠️ Sesión existente detectada al inicio');
+                    this.showTestResult('loginTestStatus', '⚠️ Hay una sesión previa activa', 'status-warning');
+                } else {
+                    this.log('✅ Estado inicial limpio - Sin sesiones previas');
+                }
+                
+                this.updateAllStatus();
+            }
+
+            async simulateLogin(email, password) {
+                try {
+                    this.log(`🔑 Iniciando login para: ${email}`);
+                    
+                    // PASO 1: Consultar base de datos (simulado)
+                    const response = await fetch('../assets/data/users.json');
+                    const data = await response.json();
+                    
+                    const user = data.users.find(u => 
+                        u.email.toLowerCase() === email.toLowerCase() &&
+                        u.password === password &&
+                        u.isActive === true
+                    );
+
+                    if (user) {
+                        // PASO 2: Crear sesión completa
+                        const sessionData = {
+                            id: user.id,
+                            email: user.email,
+                            name: user.name,
+                            role: user.role,
+                            monthlyBudget: user.monthlyBudget || 0,
+                            loginTime: new Date().toISOString(),
+                            isAuthenticated: true
+                        };
+                        
+                        // PASO 3: Guardar en localStorage
+                        localStorage.setItem('smartbudget-authenticated', 'true');
+                        localStorage.setItem('smartbudget-user', JSON.stringify(sessionData));
+                        
+                        this.log(`✅ Login exitoso: ${user.name} (${user.role})`);
+                        this.log(`💾 Datos de sesión guardados en localStorage`);
+                        
+                        this.showTestResult('loginTestStatus', `✅ Login: ${user.name}`, 'status-good');
+                        this.updateAllStatus();
+                        
+                        return { success: true, user: sessionData };
+                    } else {
+                        this.log(`❌ Credenciales incorrectas`);
+                        this.showTestResult('loginTestStatus', '❌ Credenciales incorrectas', 'status-error');
+                        return { success: false };
+                    }
+
+                } catch (error) {
+                    this.log(`❌ Error en login: ${error.message}`);
+                    this.showTestResult('loginTestStatus', '❌ Error de conexión', 'status-error');
+                    return { success: false };
+                }
+            }
+
+            testNavigation(page) {
+                this.log(`🧭 Testando navegación a: ${page}`);
+                
+                // Verificar si hay sesión
+                const isAuthenticated = localStorage.getItem('smartbudget-authenticated');
+                const userData = localStorage.getItem('smartbudget-user');
+                
+                const isPublicPage = ['login', 'register'].includes(page);
+                
+                if (!isPublicPage && (!isAuthenticated || !userData)) {
+                    this.log(`❌ Navegación bloqueada: No hay sesión para página ${page}`);
+                    this.showNavigationResult(`❌ Acceso denegado a ${page} - Sin sesión`, 'status-error');
+                    return false;
+                } else if (isPublicPage && isAuthenticated) {
+                    this.log(`⚠️ Navegación a ${page} con sesión activa (debería redirigir)`);
+                    this.showNavigationResult(`⚠️ ${page} accesible pero con sesión activa`, 'status-warning');
+                    return true;
+                } else {
+                    this.log(`✅ Navegación permitida a: ${page}`);
+                    this.showNavigationResult(`✅ Acceso permitido a ${page}`, 'status-good');
+                    return true;
+                }
+            }
+
+            testCompleteLogout() {
+                this.log('🚪 Ejecutando logout completo...');
+                
+                const hadSession = localStorage.getItem('smartbudget-authenticated');
+                
+                if (!hadSession) {
+                    this.log('⚠️ No había sesión activa para cerrar');
+                    this.showLogoutResult('⚠️ No hay sesión activa', 'status-warning');
+                    return;
+                }
+                
+                // LOGOUT COMPLETO: Limpiar TODOS los datos relacionados con la sesión
+                const keysToRemove = [
+                    'smartbudget-authenticated',
+                    'smartbudget-user',
+                    'smartbudget-temp',
+                    'smartbudget-cache',
+                    'smartbudget-temp-users',
+                    'smartbudget-transactions-fallback'
+                ];
+                
+                let removedKeys = [];
+                keysToRemove.forEach(key => {
+                    if (localStorage.getItem(key)) {
+                        localStorage.removeItem(key);
+                        removedKeys.push(key);
+                    }
+                });
+                
+                this.log(`🧹 Logout completo - ${removedKeys.length} elementos limpiados`);
+                this.log(`📝 Elementos eliminados: ${removedKeys.join(', ')}`);
+                
+                this.showLogoutResult(`✅ Logout completo - ${removedKeys.length} elementos limpiados`, 'status-good');
+                this.updateAllStatus();
+            }
+
+            testPartialLogout() {
+                this.log('⚠️ Ejecutando logout parcial (INCORRECTO)...');
+                
+                // LOGOUT PARCIAL: Solo limpiar algunos datos (simular error común)
+                localStorage.removeItem('smartbudget-authenticated');
+                // Deliberadamente NO limpiar smartbudget-user para mostrar el problema
+                
+                this.log('⚠️ Logout parcial - Solo se limpió smartbudget-authenticated');
+                this.log('❌ PROBLEMA: smartbudget-user sigue presente');
+                
+                this.showLogoutResult('⚠️ Logout parcial - Datos residuales presentes', 'status-warning');
+                this.updateAllStatus();
+            }
+
+            updateAllStatus() {
+                this.updateSessionStatus();
+                this.updateStorageDisplay();
+            }
+
+            updateSessionStatus() {
+                const isAuthenticated = localStorage.getItem('smartbudget-authenticated');
+                const userDataStr = localStorage.getItem('smartbudget-user');
+                
+                const sessionBox = document.getElementById('sessionStatus');
+                const authState = document.getElementById('authenticationState');
+                const userDisplay = document.getElementById('userDataDisplay');
+                
+                if (isAuthenticated && userDataStr) {
+                    try {
+                        const userData = JSON.parse(userDataStr);
+                        
+                        sessionBox.className = 'session-box session-active';
+                        authState.innerHTML = `
+                            <div class="badge badge-success">✅ Autenticado</div>
+                            <div class="mt-2 small text-success">Sesión activa desde: ${new Date(userData.loginTime || Date.now()).toLocaleTimeString()}</div>
+                        `;
+                        
+                        userDisplay.innerHTML = `
+                            <strong>${userData.name}</strong><br>
+                            <small>${userData.email}</small><br>
+                            <span class="badge badge-info">${userData.role}</span>
+                            <span class="badge badge-secondary">ID: ${userData.id}</span>
+                        `;
+                        
+                    } catch (error) {
+                        sessionBox.className = 'session-box session-inactive';
+                        authState.innerHTML = `
+                            <div class="badge badge-danger">❌ Error en datos</div>
+                            <div class="mt-2 small text-danger">Datos de usuario corruptos</div>
+                        `;
+                        userDisplay.innerHTML = '<div class="text-danger">Error: Datos de usuario inválidos</div>';
+                    }
+                } else {
+                    sessionBox.className = 'session-box session-inactive';
+                    authState.innerHTML = `
+                        <div class="badge badge-secondary">No autenticado</div>
+                        <div class="mt-2 small text-muted">Sin sesión activa</div>
+                    `;
+                    userDisplay.innerHTML = '<div class="text-muted">No hay sesión activa</div>';
+                }
+            }
+
+            updateStorageDisplay() {
+                // Session storage
+                const sessionStorage = document.getElementById('sessionStorage');
+                const sessionKeys = ['smartbudget-authenticated', 'smartbudget-user'];
+                
+                sessionStorage.innerHTML = sessionKeys.map(key => {
+                    const value = localStorage.getItem(key);
+                    const displayValue = value ? 
+                        (key === 'smartbudget-user' ? 'User Object' : value) : 
+                        'null';
+                    return `<div class="storage-item">${key}: ${displayValue}</div>`;
+                }).join('');
+                
+                // Temp storage
+                const tempStorage = document.getElementById('tempStorage');
+                const tempKeys = ['smartbudget-temp', 'smartbudget-temp-users', 'smartbudget-cache'];
+                
+                tempStorage.innerHTML = tempKeys.map(key => {
+                    const value = localStorage.getItem(key);
+                    const displayValue = value ? `[${JSON.parse(value).length} items]` : '[]';
+                    return `<div class="storage-item">${key}: ${displayValue}</div>`;
+                }).join('');
+            }
+
+            showTestResult(elementId, message, statusClass) {
+                document.getElementById(elementId).innerHTML = `<div class="status ${statusClass}">${message}</div>`;
+                setTimeout(() => {
+                    document.getElementById(elementId).innerHTML = '';
+                }, 5000);
+            }
+
+            showNavigationResult(message, statusClass) {
+                document.getElementById('navigationResult').innerHTML = `<div class="status ${statusClass}">${message}</div>`;
+            }
+
+            showLogoutResult(message, statusClass) {
+                document.getElementById('logoutTestResults').innerHTML = `<div class="status ${statusClass}">${message}</div>`;
+            }
+
+            initializeEvents() {
+                // Login test
+                document.getElementById('sessionLoginForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const selected = document.getElementById('testUser').value.split('|');
+                    await this.simulateLogin(selected[0], selected[1]);
+                });
+
+                // Check session
+                document.getElementById('checkSession').addEventListener('click', () => {
+                    this.updateAllStatus();
+                    this.log('🔍 Estado de sesión actualizado');
+                });
+
+                // Navigation tests
+                document.querySelectorAll('.page-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const page = e.target.dataset.page;
+                        this.testNavigation(page);
+                    });
+                });
+
+                // Logout tests
+                document.getElementById('completeLogout').addEventListener('click', () => {
+                    this.testCompleteLogout();
+                });
+
+                document.getElementById('partialLogout').addEventListener('click', () => {
+                    this.testPartialLogout();
+                });
+
+                document.getElementById('clearAll').addEventListener('click', () => {
+                    localStorage.clear();
+                    this.log('🗑️ localStorage completamente limpiado');
+                    this.updateAllStatus();
+                });
+
+                document.getElementById('refreshTest').addEventListener('click', () => {
+                    this.updateAllStatus();
+                    this.log('🔄 Test actualizado');
+                });
+
+                // Direct logout test
+                document.getElementById('logoutTest').addEventListener('click', () => {
+                    this.testCompleteLogout();
+                });
+            }
+
+            log(message) {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEl = document.getElementById('systemLog');
+                const newLog = `[${timestamp}] ${message}\n${logEl.textContent}`;
+                
+                // Keep last 20 lines
+                const lines = newLog.split('\n');
+                logEl.textContent = lines.slice(0, 20).join('\n');
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Initialize test
+        new SessionPersistenceTest();
+    </script>
+</body>
+</html>

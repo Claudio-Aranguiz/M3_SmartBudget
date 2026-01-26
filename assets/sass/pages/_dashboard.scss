@@ -7,12 +7,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 0; // Móvil: sin gap
-    padding-bottom: 5rem;
+    padding-bottom: 0rem;
 
     // Desktop
     @media (min-width: 769px) {
       grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+      gap: 1rem;
     }
   }
 
