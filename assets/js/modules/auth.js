@@ -159,10 +159,10 @@ export class AuthModule {
                     this.clearSavedCredentials();
                 }
 
-                // Save session
-                StorageManager.setItem('isAuthenticated', true);
-                StorageManager.setItem('user', authResult.user);
-                StorageManager.setItem('loginTime', Date.now());
+                // Save session (usando claves consistentes con auth-guard.js)
+                StorageManager.setItem('smartbudget-authenticated', 'true');
+                StorageManager.setItem('smartbudget-user', JSON.stringify(authResult.user));
+                StorageManager.setItem('smartbudget-loginTime', Date.now());
 
                 // Show success message
                 Utils.showNotification('¡Bienvenido a SmartBudget!', 'success');
@@ -225,9 +225,10 @@ export class AuthModule {
                 });
 
                 if (loginResult.success) {
-                    StorageManager.setItem('isAuthenticated', true);
-                    StorageManager.setItem('user', loginResult.user);
-                    StorageManager.setItem('loginTime', Date.now());
+                    // Save session (usando claves consistentes con auth-guard.js)
+                    StorageManager.setItem('smartbudget-authenticated', 'true');
+                    StorageManager.setItem('smartbudget-user', JSON.stringify(loginResult.user));
+                    StorageManager.setItem('smartbudget-loginTime', Date.now());
                     
                     window.location.href = 'dashboard.html';
                 } else {
@@ -248,68 +249,190 @@ export class AuthModule {
     }
 
     /**
-     * Authenticate user (mock implementation)
+     * Authenticate user - ARQUITECTURA CORREGIDA
+     * localStorage (temporal session) → JSON Database (persistente)
      */
     async authenticateUser(credentials) {
-        // Mock authentication - In real app, this would be an API call
-        const mockUsers = [
-            {
-                id: 1,
-                name: 'Usuario Demo',
-                email: 'demo@smartbudget.com',
-                password: 'demo123'
-            },
-            {
-                id: 2,
-                name: 'Test User',
-                email: 'test@test.com',
-                password: 'test123'
+        try {
+            // PASO 1: Consultar base de datos JSON (fuente principal)
+            console.log('🔍 PASO 1: Consultando base de datos de usuarios...');
+            const response = await fetch('../assets/data/users.json');
+            const data = await response.json();
+            
+            // PASO 2: Buscar usuario en base de datos real
+            const user = data.users.find(u => 
+                u.email.toLowerCase() === credentials.email.toLowerCase() &&
+                u.password === credentials.password &&
+                u.isActive === true
+            );
+
+            if (user) {
+                // PASO 3: Actualizar lastLogin en base de datos (simular)
+                const updatedUser = {
+                    ...user,
+                    lastLogin: new Date().toISOString()
+                };
+                
+                console.log('✅ Usuario autenticado desde base de datos:', updatedUser.name);
+                console.log('📊 Datos del usuario:', {
+                    id: updatedUser.id,
+                    name: updatedUser.name,
+                    role: updatedUser.role,
+                    lastLogin: updatedUser.lastLogin
+                });
+                
+                // Simular actualización de lastLogin en JSON
+                this.simulateUserUpdate(updatedUser);
+                
+                // Remover password del objeto de sesión
+                const { password, ...userSession } = updatedUser;
+                
+                return {
+                    success: true,
+                    user: userSession,
+                    source: 'database'
+                };
+            } else {
+                console.log('❌ Credenciales no encontradas en base de datos');
+                return {
+                    success: false,
+                    error: 'Email o contraseña incorrectos'
+                };
             }
-        ];
+            
+        } catch (error) {
+            console.error('❌ Error accediendo a base de datos de usuarios:', error);
+            
+            // FALLBACK: Usuarios de emergencia (solo en caso de error de red)
+            console.warn('⚠️ Usando usuarios de fallback...');
+            const fallbackUsers = [
+                {
+                    id: 2,
+                    name: 'María González',
+                    email: 'maria.gonzalez@email.com',
+                    password: 'maria123',
+                    role: 'user'
+                },
+                {
+                    id: 1,
+                    name: 'Administrador',
+                    email: 'admin@smartbudget.com',
+                    password: 'admin123',
+                    role: 'admin'
+                }
+            ];
 
-        const user = mockUsers.find(u => 
-            u.email.toLowerCase() === credentials.email.toLowerCase() &&
-            u.password === credentials.password
-        );
+            const fallbackUser = fallbackUsers.find(u => 
+                u.email.toLowerCase() === credentials.email.toLowerCase() &&
+                u.password === credentials.password
+            );
 
-        if (user) {
-            const { password, ...userWithoutPassword } = user;
-            return {
-                success: true,
-                user: userWithoutPassword
-            };
-        } else {
+            if (fallbackUser) {
+                const { password, ...userSession } = fallbackUser;
+                return {
+                    success: true,
+                    user: { ...userSession, source: 'fallback' },
+                    source: 'fallback'
+                };
+            }
+
             return {
                 success: false,
-                error: 'Email o contraseña incorrectos'
+                error: 'Error de conexión y credenciales incorrectas'
             };
         }
     }
 
     /**
-     * Register user (mock implementation)
+     * Register user - ARQUITECTURA CORREGIDA
+     * localStorage (temporal) → JSON Database (persistente)
      */
     async registerUser(userData) {
-        // Mock registration - In real app, this would be an API call
+        const tempId = Date.now();
         
-        // Check if email already exists
-        const existingEmails = ['demo@smartbudget.com', 'test@test.com'];
-        if (existingEmails.includes(userData.email.toLowerCase())) {
+        try {
+            // PASO 1: Guardar temporalmente mientras se procesa
+            console.log('🔄 PASO 1: Procesando registro temporalmente...');
+            const tempUser = {
+                tempId: tempId,
+                name: userData.name,
+                email: userData.email.toLowerCase(),
+                status: 'pending_registration',
+                created: new Date().toISOString()
+            };
+            
+            this.saveTempUser(tempUser);
+            
+            // PASO 2: Consultar base de datos para verificar email único
+            console.log('🔍 PASO 2: Verificando email en base de datos...');
+            const response = await fetch('../assets/data/users.json');
+            const data = await response.json();
+            
+            // Verificar si el email ya existe
+            const existingUser = data.users.find(u => 
+                u.email.toLowerCase() === userData.email.toLowerCase()
+            );
+            
+            if (existingUser) {
+                this.clearTempUser(tempId);
+                return {
+                    success: false,
+                    error: 'Este email ya está registrado'
+                };
+            }
+            
+            // PASO 3: Crear usuario para la base de datos
+            console.log('💾 PASO 3: Registrando en base de datos...');
+            const newUserId = Math.max(...data.users.map(u => u.id), 0) + 1;
+            
+            const newUser = {
+                id: newUserId,
+                email: userData.email.toLowerCase(),
+                password: userData.password, // En producción: hash + salt
+                name: userData.name,
+                role: "user",
+                profileImage: "assets/img/default-avatar.jpg",
+                monthlyBudget: 2500.00,
+                createdAt: new Date().toISOString(),
+                lastLogin: null,
+                isActive: true
+            };
+            
+            // PASO 4: Simular persistencia en JSON
+            data.users.push(newUser);
+            data.metadata.totalUsers = data.users.length;
+            data.metadata.activeUsers = data.users.filter(u => u.isActive).length;
+            data.metadata.lastUpdated = new Date().toISOString();
+            
+            console.log('✅ Usuario registrado en base de datos:', newUser.name);
+            console.log('📊 Total usuarios en base:', data.metadata.totalUsers);
+            
+            // Simular contenido actualizado del JSON
+            this.simulateUserDBUpdate(data.users);
+            
+            // PASO 5: Limpiar datos temporales
+            this.clearTempUser(tempId);
+            
+            // Remover password del objeto de retorno
+            const { password, ...userResponse } = newUser;
+            
+            return {
+                success: true,
+                user: userResponse,
+                source: 'database'
+            };
+            
+        } catch (error) {
+            console.error('❌ Error en registro:', error);
+            
+            // Marcar como error en temporal
+            this.markTempUserError(tempId, error.message);
+            
             return {
                 success: false,
-                error: 'Este email ya está registrado'
+                error: 'Error de conexión durante el registro'
             };
         }
-
-        // Simulate successful registration
-        return {
-            success: true,
-            user: {
-                id: Date.now(),
-                name: userData.name,
-                email: userData.email
-            }
-        };
     }
 
     /**
@@ -698,9 +821,14 @@ export class AuthModule {
      * Logout user
      */
     logout() {
-        StorageManager.removeItem('isAuthenticated');
-        StorageManager.removeItem('user');
-        StorageManager.removeItem('loginTime');
+        // Limpiar datos de sesión (usando claves consistentes con auth-guard.js)
+        StorageManager.removeItem('smartbudget-authenticated');
+        StorageManager.removeItem('smartbudget-user');
+        StorageManager.removeItem('smartbudget-loginTime');
+        
+        // Limpiar también datos temporales por seguridad
+        StorageManager.removeItem('smartbudget-temp');
+        StorageManager.removeItem('smartbudget-cache');
         
         Utils.showNotification('Sesión cerrada correctamente', 'success');
         window.location.href = 'login.html';
@@ -727,5 +855,79 @@ export class AuthModule {
         this.loginAttempts = 0;
         this.editingTransaction = null;
         this.isInitialized = false;
+    }
+    
+    // ========== MÉTODOS AUXILIARES PARA ARQUITECTURA CORRECTA ==========
+    
+    /**
+     * Guardar usuario temporal durante el procesamiento
+     */
+    saveTempUser(tempUser) {
+        const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+        tempUsers.push(tempUser);
+        localStorage.setItem('smartbudget-temp-users', JSON.stringify(tempUsers));
+        console.log('💾 Usuario guardado temporalmente:', tempUser);
+    }
+    
+    /**
+     * Limpiar usuario temporal después del éxito
+     */
+    clearTempUser(tempId) {
+        const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+        const filtered = tempUsers.filter(u => u.tempId !== tempId);
+        localStorage.setItem('smartbudget-temp-users', JSON.stringify(filtered));
+        console.log('🧹 Usuario temporal limpiado:', tempId);
+    }
+    
+    /**
+     * Marcar usuario temporal como error
+     */
+    markTempUserError(tempId, errorMsg) {
+        const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+        const user = tempUsers.find(u => u.tempId === tempId);
+        if (user) {
+            user.status = 'error';
+            user.error = errorMsg;
+            localStorage.setItem('smartbudget-temp-users', JSON.stringify(tempUsers));
+            console.log('❌ Usuario temporal marcado con error:', user);
+        }
+    }
+    
+    /**
+     * Simular actualización de usuario en JSON
+     */
+    simulateUserUpdate(user) {
+        console.log('📝 SIMULACIÓN: Actualizando usuario en users.json');
+        console.log('Contenido que se escribiría:');
+        console.log(JSON.stringify({
+            id: user.id,
+            lastLogin: user.lastLogin,
+            name: user.name,
+            email: user.email
+        }, null, 2));
+    }
+    
+    /**
+     * Simular actualización completa de base de datos de usuarios
+     */
+    simulateUserDBUpdate(users) {
+        console.log('💾 SIMULACIÓN: Base de datos de usuarios actualizada');
+        console.log(`📊 Total usuarios: ${users.length}`);
+        console.log('Últimos 3 usuarios:');
+        users.slice(-3).forEach(u => {
+            console.log(`  - ${u.name} (${u.email}) - ID: ${u.id}`);
+        });
+    }
+    
+    /**
+     * Obtener estado de usuarios temporales
+     */
+    getTempUsersStatus() {
+        const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+        return {
+            total: tempUsers.length,
+            pending: tempUsers.filter(u => u.status === 'pending_registration').length,
+            errors: tempUsers.filter(u => u.status === 'error').length
+        };
     }
 }

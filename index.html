@@ -9,9 +9,13 @@
     <!-- Favicon-->
     <link rel="icon" type="image/png" href="assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
     <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="assets/sass/main.css"> <!-- Estilos compilados unificados (Bootstrap + Proyecto) -->
+    <link rel="stylesheet" href="assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
 </head>
 <body>
+    <!-- Imagen del background -->
+    <div class="background-image">
+        <img src="assets/img/Gemini_Generated_Image_76lk8y76lk8y76lk.png" alt="imagen de fondo decorativa" class="background-image__img">
+    </div>
     <!-- Header: Contiene el logo y botón de ingreso -->
     <header class="header">
         <nav class="nav">
@@ -31,17 +35,67 @@
     </main>
 
     <!-- Footer: Información de copyright y vínculos secundarios -->
-    <footer class="footer">
+    <footer class="footer bottom-nav">
         <p class="footer__text">SmartBudget &copy; 2026</p>
-        <a href="#" class="footer__link" alt="boton hacia about us">Conozca más de su App</a>
+        <button type="button" class="footer__text btn btn-link" data-bs-toggle="modal" data-bs-target="#aboutModal" style="padding:0; border:none; background:none;">Conozca más de su App</button>
     </footer>
 
 
-    <!-- Modal Para Concozcanos -->
+
+        <!-- Modal Para Conozca más de su App -->
+        <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                                                <h5 class="modal-title" id="aboutModalLabel">Bienvenido a SmartBudget</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>¡Gracias por elegir SmartBudget! Esta aplicación está diseñada para ayudarte a gestionar tus finanzas personales de manera sencilla, visual y segura. Descubre todas las funcionalidades que hemos preparado para ti y toma el control de tu presupuesto.</p>
+                        <hr>
+                        <h6>Contáctanos</h6>
+                        <ul style="list-style:none; padding-left:0;">
+                            <li><strong>Email:</strong> <a href="mailto:soporte@smartbudget.com">soporte@smartbudget.com</a></li>
+                            <li><strong>Teléfono:</strong> +56 900 123 456</li>
+                            <li><strong>Instagram:</strong> <a href="https://instagram.com/smartbudget" target="_blank">@smartbudget</a></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <!-- JS Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
+    
+    <!-- Demo System (solo se carga si está en modo demo) -->
+    <script type="module">
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('demo') === 'true') {
+            import('./demo/demo-controller.js');
+        }
+        </script>
+
+        <!-- Fix Bootstrap Modal trigger for v4 -->
+        <script>
+            // Bootstrap 4 usa data-toggle y data-target, no data-bs-toggle/data-bs-target
+            // Forzamos el disparo del modal si el click no lo abre
+            document.addEventListener('DOMContentLoaded', function() {
+                var btn = document.querySelector('button[data-bs-toggle="modal"][data-bs-target="#aboutModal"]');
+                if (btn && typeof $ !== 'undefined' && typeof $.fn.modal === 'function') {
+                    btn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        $('#aboutModal').modal('show');
+                    });
+                }
+            });
+        </script>
+    </script>
 </body>
 </html>

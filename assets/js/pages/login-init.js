@@ -1,7 +1,9 @@
 /**
  * Login Page Initializer
- * Handles login and registration form functionality
+ * Handles login and registration form functionality with JSON database
  */
+
+import { authenticateUser } from '../utils/auth-guard.js';
 
 /**
  * Login and Registration Forms Manager
@@ -47,7 +49,7 @@ class AuthManager {
         const loginForm = document.getElementById('loginForm');
         if (!loginForm) return;
 
-        loginForm.addEventListener('submit', (e) => {
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
@@ -55,19 +57,52 @@ class AuthManager {
             
             // Basic validation
             if (email && password) {
-                alert('Inicio de sesión exitoso! Redirigiendo al dashboard...');
+                // Show loading state
+                const submitBtn = loginForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Verificando...';
+                submitBtn.disabled = true;
                 
-                // Hide modal if using Bootstrap
-                if (typeof $ !== 'undefined' && $('#loginModal').length) {
-                    $('#loginModal').modal('hide');
+                try {
+                    // Authenticate with database
+                    const userData = await authenticateUser(email, password);
+                    
+                    if (userData) {
+                        this.handleSuccessfulLogin(userData);
+                    } else {
+                        alert('Credenciales incorrectas. Por favor verifica tu email y contraseña.');
+                    }
+                } catch (error) {
+                    console.error('❌ Login error:', error);
+                    alert('Error al iniciar sesión. Por favor intenta de nuevo.');
+                } finally {
+                    // Restore button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
                 }
-                
-                // Redirect to dashboard (uncomment when ready)
-                // window.location.href = 'dashboard.html';
             } else {
                 alert('Por favor, completa todos los campos');
             }
         });
+    }
+
+    /**
+     * Handle successful login process
+     */
+    handleSuccessfulLogin(userData) {
+        const welcomeMessage = `¡Hola ${userData.name}! Inicio de sesión exitoso.`;
+            
+        alert(welcomeMessage);
+        
+        // Hide modal if using Bootstrap
+        if (typeof $ !== 'undefined' && $('#loginModal').length) {
+            $('#loginModal').modal('hide');
+        }
+        
+        // Redirigir siempre a menu.html
+        setTimeout(() => {
+            window.location.href = 'menu.html';
+        }, 500);
     }
 
     /**
@@ -88,15 +123,29 @@ class AuthManager {
             // Basic validation
             if (name && email && password && confirmPassword) {
                 if (password === confirmPassword) {
-                    alert('Registro exitoso! Bienvenido a SmartBudget!');
+                    // Guardar datos de registro en localStorage
+                    const userData = {
+                        name: name,
+                        email: email,
+                        registrationDate: new Date().toISOString(),
+                        loginTime: new Date().toISOString(),
+                        isAuthenticated: true
+                    };
+                    
+                    localStorage.setItem('smartbudget-user', JSON.stringify(userData));
+                    localStorage.setItem('smartbudget-authenticated', 'true');
+                    
+                    alert('Registro exitoso! Bienvenido a SmartBudget! Redirigiendo al menú principal...');
                     
                     // Hide modal if using Bootstrap
                     if (typeof $ !== 'undefined' && $('#registerModal').length) {
                         $('#registerModal').modal('hide');
                     }
                     
-                    // Redirect to dashboard (uncomment when ready)
-                    // window.location.href = 'dashboard.html';
+                    // Esperar un momento para que se cierre el modal y luego redirigir
+                    setTimeout(() => {
+                        redirectAfterLogin('menu.html');
+                    }, 500);
                 } else {
                     alert('Las contraseñas no coinciden');
                 }

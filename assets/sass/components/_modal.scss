@@ -1,0 +1,43 @@
+@use "../abstracts/variables" as vars;
+
+// =============================================================================
+// MODAL CUSTOM - SmartBudget
+// Estilos personalizados para los modales siguiendo BEM
+// =============================================================================
+
+.modal-custom {
+   &__header {
+      border-bottom: 1px solid vars.$color-border-medium;
+      padding: vars.$spacing-base vars.$spacing-lg;
+   }
+
+   &__close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      padding: 0.375rem;
+      color: vars.$color-text-muted;
+      transition: color 0.2s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+         color: vars.$color-gray-900;
+      }
+   }
+
+   &__footer {
+      border-top: 1px solid vars.$color-border-medium;
+      padding: vars.$spacing-base vars.$spacing-lg;
+   }
+
+   &__input-text {
+      background-color: vars.$color-bg-primary;
+      border-color: vars.$color-gray-300;
+
+      &:focus {
+         background-color: vars.$color-bg-white;
+      }
+   }
+}

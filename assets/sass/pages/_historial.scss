@@ -1,6 +1,7 @@
 // Pages: Historial
 // Estilos específicos para la página del historial de transacciones
 
+<<<<<<< HEAD
 // Contenedor principal del historial
 .historial {
   padding: 1rem;
@@ -12,6 +13,36 @@
 .historial-filters {
   background: white;
   border-radius: 8px;
+=======
+.container {
+  padding-bottom: 80px;
+}
+
+// Cards de resumen
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+// Summary cards ahora están en components/_summary-cards.scss
+// Estilos específicos del historial
+.historial {
+  .summary-card {
+    &__header {
+      padding: 1rem 1rem 0.5rem;
+    }
+
+    &__content {
+      padding: 0.5rem 1rem 1rem;
+    }
+  }
+}
+
+// Búsqueda y filtros
+.search {
+>>>>>>> Internal_navegation_checking
   padding: 1rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -266,6 +297,7 @@
   }
 }
 
+<<<<<<< HEAD
 .historial-loading {
   display: flex;
   justify-content: center;
@@ -318,4 +350,11 @@
   .period-summary {
     grid-template-columns: 1fr;
   }
+=======
+// Responsivo
+@media (max-width: 480px) {
+  .summary {
+    gap: 0.5rem;
+  }
+>>>>>>> Internal_navegation_checking
 }

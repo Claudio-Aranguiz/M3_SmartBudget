@@ -8,9 +8,16 @@
    <!-- Favicon-->
    <link rel="icon" type="image/png" href="../assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
    <!-- CSS Dependencies -->
-   <link rel="stylesheet" href="../assets/sass/main.css"> <!-- Estilos compilados unificados (Bootstrap + Proyecto) -->
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+   <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+   
+>>>>>>> Internal_navegation_checking
 </head>
 <body>
+   <!-- Imagen del background -->
+   <div class="background-image">
+       <img src="../assets/img/Gemini_Generated_Image_76lk8y76lk8y76lk.png" alt="imagen de fondo decorativa" class="background-image__img">
+   </div>
    <!-- Header simplificado -->
     <header class="header">
         <nav class="nav">
@@ -67,7 +74,7 @@
             <!-- Acciones Financieras -->
             <h3>Acciones Rápidas</h3>
             <div class="dashboard__summary">
-                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de agregar ingreso')">
+                <div class="summary-card summary-card--interactive" data-transaction-type="ingreso" data-toggle="modal" data-target="#addTransactionModal">
                     <div class="summary-card__header">
                         <div class="summary-card__title">Agregar Ingreso</div>
                         <i data-lucide="plus-circle" class="menu-icon menu-icon--success"></i>
@@ -77,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de agregar gasto')">
+                <div class="summary-card summary-card--interactive" data-transaction-type="gasto" data-toggle="modal" data-target="#addTransactionModal">
                     <div class="summary-card__header">
                         <div class="summary-card__title">Agregar Gasto</div>
                         <i data-lucide="minus-circle" class="menu-icon menu-icon--danger"></i>
@@ -87,25 +94,6 @@
                     </div>
                 </div>
 
-                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de nueva tarjeta')">
-                    <div class="summary-card__header">
-                        <div class="summary-card__title">Nueva Tarjeta</div>
-                        <i data-lucide="credit-card" class="menu-icon menu-icon--primary"></i>
-                    </div>
-                    <div class="summary-card__content">
-                        <p>Agrega una tarjeta de crédito/débito</p>
-                    </div>
-                </div>
-
-                <div class="summary-card summary-card--interactive" onclick="showAlert('Función de transferir')">
-                    <div class="summary-card__header">
-                        <div class="summary-card__title">Transferir</div>
-                        <i data-lucide="send" class="menu-icon menu-icon--warning"></i>
-                    </div>
-                    <div class="summary-card__content">
-                        <p>Realiza una transferencia</p>
-                    </div>
-                </div>
             </div>
 
             <div class="dashboard__summary">
@@ -153,14 +141,82 @@
         </div>
     </main>
 
+   <!-- Modal para Agregar Transacción -->
+   <div class="modal fade" id="addTransactionModal" tabindex="-1" role="dialog" aria-labelledby="addTransactionModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+         <div class="modal-content">
+            <div class="modal-header modal-custom__header">
+               <h5 class="modal-title" id="addTransactionModalLabel">
+                  <i data-lucide="plus-circle" class="me-2"></i>
+                  <span id="modalTitle">Agregar Transacción</span>
+               </h5>
+               <button type="button" class="btn-close modal-custom__close" data-dismiss="modal" aria-label="Cerrar">
+                  <i data-lucide="x"></i>
+               </button>
+            </div>
+            <div class="modal-body">
+               <form id="addTransactionForm">
+                  <input type="hidden" id="transactionType" name="type" value="">
+                  
+                  <div class="form-group mb-3">
+                     <label for="transactionAmount" class="form-label">Monto *</label>
+                     <div class="input-group">
+                        <span class="input-group-text modal-custom__input-text">$</span>
+                        <input type="number" 
+                               class="form-control" 
+                               id="transactionAmount" name="amount" placeholder="0.00" step="0.01" min="0.01" required>
+                     </div>
+                     <small class="form-text text-muted">Ingrese el monto de la transacción</small>
+                  </div>
+
+                  <div class="form-group mb-3">
+                     <label for="transactionDescription" class="form-label">Descripción/Etiqueta *</label>
+                     <input type="text" 
+                            class="form-control" 
+                            id="transactionDescription" 
+                            name="description" placeholder="ej: Supermercado, Entretenimiento, Salario..." 
+                            maxlength="100"
+                            required>
+                     <small class="form-text text-muted">Describe brevemente la transacción</small>
+                  </div>
+
+                  <div class="form-group mb-3">
+                     <label for="transactionDate" class="form-label">Fecha</label>
+                     <input type="date" 
+                            class="form-control" 
+                            id="transactionDate" 
+                            name="date"
+                            required>
+                     <small class="form-text text-muted">Fecha de la transacción</small>
+                  </div>
+               </form>
+            </div>
+            <div class="modal-footer modal-custom__footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  <i data-lucide="x" class="me-1"></i>
+                  Cancelar
+               </button>
+               <button type="button" class="btn" id="saveTransactionBtn">
+                  <i data-lucide="check" class="me-1"></i>
+                  <span id="saveButtonText">Guardar</span>
+               </button>
+            </div>
+         </div>
+      </div>
+   </div>
+
    <footer class="footer bottom-nav">
-      <a href="dashboard.html" class=" footer__link">
+      <a href="dashboard.html" class="footer__text">
          <span class="">Dashboard</span>
       </a>
-      <a href="historial.html" class=" footer__link">
+      <a href="historial.html" class=" footer__text">
          <span class="">Historial</span>
       </a>
     </footer>
+
+   <!-- Bootstrap JS para modales -->
+   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+   <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
    <!-- Menu JavaScript Module -->
    <script type="module" src="../assets/js/pages/menu-init.js"></script>

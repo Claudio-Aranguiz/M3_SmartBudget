@@ -2,6 +2,9 @@
 // Estilos base para elementos estructurales fundamentales
 // NOTA: Las variables ya están disponibles desde Bootstrap y main.scss
 
+// USAR BOOTSTRAP CON NAMESPACE (debe ir primero)
+@use "../vendor/bootstrap/bootstrap" as bs;
+
 // Reset universal (complementa Bootstrap reboot)
 * {
   margin: 0;
@@ -9,14 +12,45 @@
   box-sizing: border-box;
 }
 
-// Estructura completa del body (usando variables de Bootstrap)
+// Imagen de fondo - posicionada detrás de todo el contenido
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 1.8;
+  }
+}
+
+// Estructura completa del html y body
+html,
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8f9fa;
-  color: #333333;
+  height: 100%;
+}
+
+  // Propiedades visuales
+  font-family: bs.$font-family-base;      // Variable de Bootstrap
+  background-color: bs.$body-bg;         // Variable de Bootstrap
+  color: bs.$body-color;                 // Variable de Bootstrap
+
+  // Propiedades estructurales
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh; // Mejor soporte para móviles modernos
+
+  // Asegurar que el contenido esté sobre la imagen
+  position: relative;
+  z-index: 1;
 }
 
 // Estilos base para enlaces
@@ -26,29 +60,43 @@ a {
 }
 
 // Contenedor principal
-.main {
   flex: 1;
-  padding: 1rem;
-  padding-bottom: 80px; // Espacio para footer fijo
-  background: rgba(197, 235, 241, 0.8392156863);
+  padding: bs.$spacer;                        // Variable de Bootstrap
+  padding-bottom: 60px;                    // Valor fijo para footer móvil
+  background: #c5ebf1d6;
 
   &--center {
-    align-content: center;
-    text-align: center;
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  &--bottom {
+    @media (max-width: 480px) {
+      justify-content: flex-end !important;
+    }
+  }
+}
+
+// Reglas especiales para evitar que el footer tape los modales
+.modal-open {
+
+  // Cuando hay un modal abierto, el footer no debe interferir
+  .footer.bottom-nav {
+    z-index: 1000; // Por debajo del modal (z-index: 1050)
+  }
+
+  // En móvil, ajustar la posición del modal para evitar el footer
+  @media (max-width: 767px) {
+    .modal-dialog {
+      margin-bottom: 90px; // Espacio para el footer
+    }
   }
 }
 
 // Contenedor de página base
-.page {
   max-width: 400px;
   margin: 0 auto;
   background: white;
   min-height: 100vh;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-// Contenedor general
-.container {
-  min-height: 100vh;
-  padding-bottom: 80px;
+  box-shadow: bs.$box-shadow;                 // Variable de Bootstrap personalizada
 }

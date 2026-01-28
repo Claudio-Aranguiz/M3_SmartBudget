@@ -3,6 +3,8 @@
  * Handles transaction history functionality, filtering and search
  */
 
+import { checkAuthentication, getAuthenticatedUser, logout } from '../utils/auth-guard.js';
+
 /**
  * Sample transaction data
  */
@@ -40,11 +42,23 @@ class HistorialManager {
     init() {
         console.log('🧾 Initializing Historial Manager...');
         
+        // Check authentication first
+        if (!this.checkAuthentication()) {
+            return; // Stop initialization if not authenticated
+        }
+        
         this.bindEvents();
         this.updateTotals();
         this.renderTransactions();
         
         console.log('✅ Historial Manager initialized successfully');
+    }
+
+    /**
+     * Check if user is authenticated
+     */
+    checkAuthentication() {
+        return checkAuthentication();
     }
 
     /**

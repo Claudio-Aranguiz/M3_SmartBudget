@@ -1,0 +1,104 @@
+// Componente: Summary Cards
+// Tarjetas de resumen unificadas para toda la aplicación
+
+// USAR VARIABLES DEL PROYECTO CON NAMESPACE
+@use "../abstracts/variables" as vars;
+
+.summary-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e9ecef;
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: box-shadow 0.3s ease;
+  }
+
+  // Variantes de tipo
+  &--income {
+    background: vars.$color-income-bg;
+    border-color: #c3e6c3;
+    
+    .summary-card__title,
+    .summary-card__value { 
+      color: vars.$color-income-light; 
+    }
+  }
+
+  &--expense {
+    background: vars.$color-expense-bg;
+    border-color: #fecaca;
+    
+    .summary-card__title,
+    .summary-card__value { 
+      color: vars.$color-expense-light; 
+    }
+  }
+
+  // Estructura
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: vars.$color-gray-600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__content {
+    display: block;
+    // Contenedor para el valor y cambios
+  }
+
+  &__value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+
+    &--income {
+      color: vars.$color-income;
+    }
+
+    &--expense {
+      color: vars.$color-expense;
+    }
+
+    &--savings {
+      color: #8b5cf6;
+    }
+  }
+
+  &__amount {
+    @extend .summary-card__value;
+  }
+
+  &__change {
+    font-size: 0.75rem;
+    color: vars.$color-gray-600;
+  }
+
+  &__percentage {
+    &--positive {
+      color: vars.$color-income;
+    }
+
+    &--negative {
+      color: vars.$color-expense;
+    }
+  }
+
+  &__icon {
+    width: 24px;
+    height: 24px;
+    color: vars.$color-gray-500;
+  }
+}

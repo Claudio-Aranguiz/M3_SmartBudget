@@ -1,0 +1,25 @@
+@use "../abstracts/variables" as vars;
+
+// Menu icons component
+// Estilos para iconos del menú con colores semánticos
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+  
+  &--primary {
+    color: vars.$color-icon-primary;
+  }
+  
+  &--success {
+    color: vars.$color-icon-success;
+  }
+  
+  &--warning {
+    color: vars.$color-icon-warning;
+  }
+  
+  &--danger {
+    color: vars.$color-icon-danger;
+  }
+}

@@ -9,7 +9,9 @@
     <!-- Favicon-->
     <link rel="icon" type="image/png" href="/assets/img/stacked_line_chart_24dp_F19E39_FILL0_wght400_GRAD0_opsz24.png">
     <!-- CSS Dependencies -->
-    <link rel="stylesheet" href="../assets/sass/main.css"> <!-- Estilos compilados unificados (Bootstrap + Proyecto) -->
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+    <link rel="stylesheet" href="../assets/sass/main-bootstrap.css"> <!-- Bootstrap personalizado con SCSS -->
+>>>>>>> Internal_navegation_checking
 </head>
 <body>
    <!-- Header: Contiene el logo y botón de ingreso -->
@@ -22,7 +24,11 @@
         </nav>
     </header>
 
-    <main class="main main--center">
+    <main class="main main--bottom">
+        <!-- Imagen del background SOLO dentro del main -->
+        <div class="background-image">
+            <img src="../assets/img/Gemini_Generated_Image_76lk8y76lk8y76lk.png" alt="imagen de fondo decorativa" class="background-image__img">
+        </div>
         <!-- Section Login: Botones de ingreso y registro -->
         <section class="auth">
             <button class="auth__button auth__button--login btn btn-primary mt-4" data-toggle="modal" data-target="#loginModal">Ingresar</button>
@@ -34,9 +40,9 @@
     </main>
 
     <!-- Footer: Información de copyright y vínculos secundarios -->
-    <footer class="footer">
+    <footer class="footer bottom-nav">
         <p class="footer__text">SmartBudget &copy; 2026</p>
-        <a href="#" class="footer__link" alt="boton hacia about us" data-toggle="modal" data-target="#termsModal">Terminos y Condiciones</a>
+        <a href="#" class="footer__text" alt="boton hacia about us" data-toggle="modal" data-target="#termsModal">Terminos y Condiciones</a>
     </footer>
    
 

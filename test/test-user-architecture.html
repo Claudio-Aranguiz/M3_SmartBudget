@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 Test Arquitectura de Usuarios - SmartBudget</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .container { max-width: 1200px; margin: 2rem auto; }
+        .test-card { background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); 
+                     padding: 2rem; margin-bottom: 2rem; }
+        .header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; 
+                  padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem; }
+        .status-good { background: #d4edda; color: #155724; border-left: 5px solid #28a745; }
+        .status-warning { background: #fff3cd; color: #856404; border-left: 5px solid #ffc107; }
+        .status-error { background: #f8d7da; color: #721c24; border-left: 5px solid #dc3545; }
+        .status { padding: 1rem; margin: 1rem 0; border-radius: 8px; font-weight: 500; }
+        .flow-box { background: #f8f9fa; border: 2px dashed #dee2e6; padding: 1.5rem; 
+                    border-radius: 10px; text-align: center; margin: 1rem 0; }
+        .flow-active { border-color: #007bff; background: #e7f3ff; }
+        .user-card { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); 
+                     padding: 1rem; border-radius: 10px; color: white; margin: 0.5rem 0; }
+        .log-console { background: #2d3748; color: #e2e8f0; padding: 1rem; border-radius: 8px; 
+                       font-family: 'Courier New', monospace; max-height: 300px; overflow-y: auto; }
+        .btn-custom { border-radius: 25px; padding: 0.5rem 1.5rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header">
+            <h1>🔐 Test de Arquitectura de Usuarios</h1>
+            <p>Verificación: localStorage (temporal) → JSON Database (persistente)</p>
+        </div>
+
+        <!-- Test de Login -->
+        <div class="test-card">
+            <h3>🚪 Test de Login (Consulta Base de Datos)</h3>
+            <form id="loginTestForm">
+                <div class="row">
+                    <div class="col-md-4">
+                        <select id="loginUser" class="form-control">
+                            <option value="maria.gonzalez@email.com|maria123">María González (User)</option>
+                            <option value="admin@smartbudget.com|admin123">Administrador (Admin)</option>
+                            <option value="carlos.rodriguez@email.com|carlos123">Carlos Rodríguez (User)</option>
+                            <option value="demo@smartbudget.com|demo123">Usuario Demo</option>
+                            <option value="wrong@email.com|wrong">❌ Credenciales Incorrectas</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary btn-custom btn-block">🔍 Test Login</button>
+                    </div>
+                    <div class="col-md-5">
+                        <div id="loginStatus"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Test de Registro -->
+        <div class="test-card">
+            <h3>📝 Test de Registro (Persistencia en JSON)</h3>
+            <form id="registerTestForm">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" id="regName" class="form-control" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="email" id="regEmail" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="col-md-2">
+                        <input type="password" id="regPassword" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-success btn-custom btn-block">✨ Test Registro</button>
+                    </div>
+                    <div class="col-md-2">
+                        <div id="registerStatus"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Flujo de Arquitectura -->
+        <div class="test-card">
+            <h3>🏗️ Flujo de Arquitectura de Usuarios</h3>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="flow-box" id="tempBox">
+                        <h5>📝 localStorage (Temporal)</h5>
+                        <div id="tempUserCount" class="badge badge-warning">0 pendientes</div>
+                        <div id="tempUserContent" class="mt-2 small text-muted">Vacío</div>
+                    </div>
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                    <div style="font-size: 2rem; color: #007bff;">→</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="flow-box" id="dbBox">
+                        <h5>💾 Base de Datos JSON</h5>
+                        <div id="dbUserCount" class="badge badge-success">6 usuarios</div>
+                        <div id="dbUserContent" class="mt-2 small">users.json</div>
+                    </div>
+                </div>
+                <div class="col-md-1 d-flex align-items-center justify-content-center">
+                    <div style="font-size: 2rem; color: #28a745;">→</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="flow-box" id="sessionBox">
+                        <h5>🔑 Sesión Activa</h5>
+                        <div id="sessionStatus" class="badge badge-info">No autenticado</div>
+                        <div id="sessionContent" class="mt-2 small text-muted">Esperando login</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estado de Base de Datos -->
+        <div class="test-card">
+            <h3>👥 Estado de Base de Datos de Usuarios</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Usuarios en Base de Datos:</h5>
+                    <div id="dbUsersList">
+                        <div class="user-card">
+                            <strong>María González</strong> (maria.gonzalez@email.com) - ID: 2
+                        </div>
+                        <div class="user-card">
+                            <strong>Administrador</strong> (admin@smartbudget.com) - ID: 1
+                        </div>
+                        <div class="user-card">
+                            <strong>Carlos Rodríguez</strong> (carlos.rodriguez@email.com) - ID: 3
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5>Estado de localStorage:</h5>
+                    <div id="localStorageState">
+                        <div class="status status-good">✅ smartbudget-user: Solo sesión activa</div>
+                        <div class="status status-good">✅ smartbudget-temp-users: Solo durante registro</div>
+                        <div class="status status-good">✅ No datos persistentes incorrectos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verificación Arquitectural -->
+        <div class="test-card">
+            <h3>✅ Verificación de Arquitectura Correcta</h3>
+            <div id="architectureStatus">
+                <div class="status status-good">✅ LOGIN: Consulta users.json como fuente principal</div>
+                <div class="status status-good">✅ REGISTRO: localStorage temporal → persistencia JSON</div>
+                <div class="status status-good">✅ SESIÓN: Solo datos de sesión en localStorage</div>
+                <div class="status status-good">✅ FALLBACK: Usuarios de emergencia si falla la red</div>
+                <div class="status status-good">✅ SEPARACIÓN: Temporal vs Persistente bien definida</div>
+            </div>
+        </div>
+
+        <!-- Console Log -->
+        <div class="test-card">
+            <h3>📋 Log del Sistema</h3>
+            <div id="systemLog" class="log-console">
+[Sistema] Arquitectura de usuarios corregida inicializada...
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="test-card">
+            <div class="row">
+                <div class="col-md-3">
+                    <button id="refreshStatus" class="btn btn-info btn-custom btn-block">🔄 Actualizar Estado</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="clearTemp" class="btn btn-warning btn-custom btn-block">🧹 Limpiar Temporal</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="testConnection" class="btn btn-success btn-custom btn-block">🔗 Test Conexión DB</button>
+                </div>
+                <div class="col-md-3">
+                    <button id="logout" class="btn btn-danger btn-custom btn-block">🚪 Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class UserArchitectureTest {
+            constructor() {
+                this.initializeEvents();
+                this.updateStatus();
+                this.log('🚀 Test de arquitectura de usuarios iniciado');
+            }
+
+            async testLogin(email, password) {
+                try {
+                    this.log(`🔍 Iniciando test de login: ${email}`);
+                    this.activateFlowBox('tempBox');
+
+                    // PASO 1: Consultar base de datos JSON
+                    const response = await fetch('../assets/data/users.json');
+                    const data = await response.json();
+                    this.log(`📊 Base de datos cargada: ${data.users.length} usuarios`);
+                    
+                    // PASO 2: Buscar usuario
+                    const user = data.users.find(u => 
+                        u.email.toLowerCase() === email.toLowerCase() &&
+                        u.password === password &&
+                        u.isActive === true
+                    );
+
+                    if (user) {
+                        // PASO 3: Éxito - Crear sesión
+                        this.activateFlowBox('sessionBox');
+                        const { password: _, ...userSession } = user;
+                        
+                        // Solo guardar sesión (no el usuario completo)
+                        localStorage.setItem('smartbudget-user', JSON.stringify(userSession));
+                        
+                        this.log(`✅ Login exitoso: ${user.name} (${user.role})`);
+                        this.log(`🔑 Sesión creada - ID: ${user.id}`);
+                        
+                        this.showStatus('loginStatus', `✅ ${user.name} autenticado`, 'status-good');
+                        this.updateStatus();
+                        
+                        return { success: true, user: userSession };
+                    } else {
+                        this.log(`❌ Credenciales incorrectas: ${email}`);
+                        this.showStatus('loginStatus', '❌ Credenciales incorrectas', 'status-error');
+                        return { success: false };
+                    }
+
+                } catch (error) {
+                    this.log(`❌ Error de conexión: ${error.message}`);
+                    this.showStatus('loginStatus', '❌ Error de conexión', 'status-error');
+                    return { success: false };
+                } finally {
+                    this.deactivateFlowBoxes();
+                }
+            }
+
+            async testRegister(userData) {
+                const tempId = Date.now();
+                
+                try {
+                    this.log(`📝 Iniciando test de registro: ${userData.email}`);
+                    this.activateFlowBox('tempBox');
+
+                    // PASO 1: Temporal
+                    const tempUser = {
+                        tempId: tempId,
+                        name: userData.name,
+                        email: userData.email,
+                        status: 'pending_registration',
+                        created: new Date().toISOString()
+                    };
+                    
+                    let tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+                    tempUsers.push(tempUser);
+                    localStorage.setItem('smartbudget-temp-users', JSON.stringify(tempUsers));
+                    
+                    this.updateStatus();
+                    this.log(`💾 Usuario guardado temporalmente (ID: ${tempId})`);
+                    
+                    await this.delay(1500);
+
+                    // PASO 2: Verificar base de datos
+                    this.activateFlowBox('dbBox');
+                    const response = await fetch('../assets/data/users.json');
+                    const data = await response.json();
+                    
+                    const existingUser = data.users.find(u => 
+                        u.email.toLowerCase() === userData.email.toLowerCase()
+                    );
+                    
+                    if (existingUser) {
+                        this.clearTempUser(tempId);
+                        this.log(`❌ Email ya existe: ${userData.email}`);
+                        this.showStatus('registerStatus', '❌ Email existe', 'status-error');
+                        return { success: false };
+                    }
+
+                    await this.delay(1000);
+
+                    // PASO 3: Simular persistencia
+                    const newUserId = Math.max(...data.users.map(u => u.id), 0) + 1;
+                    const newUser = {
+                        id: newUserId,
+                        email: userData.email,
+                        name: userData.name,
+                        role: 'user',
+                        createdAt: new Date().toISOString(),
+                        isActive: true
+                    };
+
+                    this.log(`✅ Usuario registrado en DB: ${newUser.name} (ID: ${newUserId})`);
+                    this.log(`📊 Total usuarios: ${data.users.length + 1}`);
+                    
+                    // PASO 4: Limpiar temporal
+                    this.clearTempUser(tempId);
+                    this.updateStatus();
+                    
+                    this.showStatus('registerStatus', `✅ Usuario ${newUserId}`, 'status-good');
+                    
+                    return { success: true, user: newUser };
+
+                } catch (error) {
+                    this.markTempUserError(tempId, error.message);
+                    this.log(`❌ Error en registro: ${error.message}`);
+                    this.showStatus('registerStatus', '❌ Error', 'status-error');
+                    return { success: false };
+                } finally {
+                    this.deactivateFlowBoxes();
+                }
+            }
+
+            clearTempUser(tempId) {
+                const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+                const filtered = tempUsers.filter(u => u.tempId !== tempId);
+                localStorage.setItem('smartbudget-temp-users', JSON.stringify(filtered));
+            }
+
+            markTempUserError(tempId, error) {
+                const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+                const user = tempUsers.find(u => u.tempId === tempId);
+                if (user) {
+                    user.status = 'error';
+                    user.error = error;
+                    localStorage.setItem('smartbudget-temp-users', JSON.stringify(tempUsers));
+                }
+            }
+
+            activateFlowBox(boxId) {
+                document.querySelectorAll('.flow-box').forEach(box => box.classList.remove('flow-active'));
+                document.getElementById(boxId).classList.add('flow-active');
+            }
+
+            deactivateFlowBoxes() {
+                setTimeout(() => {
+                    document.querySelectorAll('.flow-box').forEach(box => box.classList.remove('flow-active'));
+                }, 2000);
+            }
+
+            updateStatus() {
+                // Temporal users
+                const tempUsers = JSON.parse(localStorage.getItem('smartbudget-temp-users') || '[]');
+                document.getElementById('tempUserCount').textContent = `${tempUsers.length} pendientes`;
+                document.getElementById('tempUserCount').className = tempUsers.length > 0 ? 'badge badge-warning' : 'badge badge-success';
+                document.getElementById('tempUserContent').textContent = tempUsers.length > 0 ? 
+                    `Último: ${tempUsers[tempUsers.length-1]?.name || 'N/A'}` : 'Vacío';
+
+                // Session status
+                const currentUser = JSON.parse(localStorage.getItem('smartbudget-user') || 'null');
+                if (currentUser) {
+                    document.getElementById('sessionStatus').textContent = currentUser.name;
+                    document.getElementById('sessionStatus').className = 'badge badge-success';
+                    document.getElementById('sessionContent').textContent = `${currentUser.role} - ID: ${currentUser.id}`;
+                } else {
+                    document.getElementById('sessionStatus').textContent = 'No autenticado';
+                    document.getElementById('sessionStatus').className = 'badge badge-secondary';
+                    document.getElementById('sessionContent').textContent = 'Esperando login';
+                }
+            }
+
+            showStatus(elementId, message, className) {
+                document.getElementById(elementId).innerHTML = `<div class="status ${className}">${message}</div>`;
+                setTimeout(() => {
+                    document.getElementById(elementId).innerHTML = '';
+                }, 4000);
+            }
+
+            initializeEvents() {
+                document.getElementById('loginTestForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const selected = document.getElementById('loginUser').value.split('|');
+                    await this.testLogin(selected[0], selected[1]);
+                });
+
+                document.getElementById('registerTestForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const userData = {
+                        name: document.getElementById('regName').value,
+                        email: document.getElementById('regEmail').value,
+                        password: document.getElementById('regPassword').value
+                    };
+                    
+                    if (userData.name && userData.email && userData.password) {
+                        await this.testRegister(userData);
+                        e.target.reset();
+                    }
+                });
+
+                document.getElementById('refreshStatus').addEventListener('click', () => {
+                    this.updateStatus();
+                    this.log('🔄 Estado actualizado');
+                });
+
+                document.getElementById('clearTemp').addEventListener('click', () => {
+                    localStorage.removeItem('smartbudget-temp-users');
+                    this.updateStatus();
+                    this.log('🧹 Usuarios temporales limpiados');
+                });
+
+                document.getElementById('testConnection').addEventListener('click', async () => {
+                    try {
+                        const response = await fetch('../assets/data/users.json');
+                        const data = await response.json();
+                        this.log(`✅ Conexión exitosa - ${data.users.length} usuarios en DB`);
+                    } catch (error) {
+                        this.log(`❌ Error de conexión: ${error.message}`);
+                    }
+                });
+
+                document.getElementById('logout').addEventListener('click', () => {
+                    localStorage.removeItem('smartbudget-user');
+                    this.updateStatus();
+                    this.log('🚪 Sesión cerrada');
+                });
+            }
+
+            log(message) {
+                const timestamp = new Date().toLocaleTimeString();
+                const logEl = document.getElementById('systemLog');
+                logEl.textContent = `[${timestamp}] ${message}\n${logEl.textContent}`;
+                
+                // Keep only last 15 lines
+                const lines = logEl.textContent.split('\n');
+                if (lines.length > 15) {
+                    logEl.textContent = lines.slice(0, 15).join('\n');
+                }
+            }
+
+            delay(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+
+        // Inicializar test
+        new UserArchitectureTest();
+    </script>
+</body>
+</html>

@@ -1,6 +1,9 @@
 // Variables globales del proyecto SmartBudget
 // Centralización de todas las variables para mejor mantenimiento
 
+// NOTA: No incluimos Bootstrap aquí para evitar dependencias circulares
+// Bootstrap será cargado directamente en los archivos que lo necesiten
+
 // =============================================================================
 // COLORES DEL SISTEMA
 // =============================================================================

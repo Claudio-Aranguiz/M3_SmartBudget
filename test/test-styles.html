@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Estilos - SmartBudget</title>
+    <!-- CSS Dependencies -->
+    <link rel="stylesheet" href="assets/sass/main-bootstrap.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-primary">Test de Estilos SmartBudget</h1>
+        
+        <!-- Test Header -->
+        <header class="header mb-4">
+            <div class="header__container">
+                <div class="header__brand">
+                    <span class="header__icon">💰</span>
+                    <span class="header__title">SmartBudget Test</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Test Summary Cards -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="summary-card summary-card--income">
+                    <div class="summary-card__icon">
+                        <span>📈</span>
+                    </div>
+                    <div class="summary-card__content">
+                        <h3 class="summary-card__title">Ingresos</h3>
+                        <p class="summary-card__amount">$1,500.00</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="summary-card summary-card--expense">
+                    <div class="summary-card__icon">
+                        <span>📉</span>
+                    </div>
+                    <div class="summary-card__content">
+                        <h3 class="summary-card__title">Gastos</h3>
+                        <p class="summary-card__amount">$850.00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Transactions -->
+        <div class="transactions">
+            <div class="transactions__header">
+                <h2 class="transactions__title">Transacciones Recientes</h2>
+            </div>
+            <div class="transactions__list">
+                <div class="transactions__item">
+                    <div class="transactions__icon transactions__icon--income">
+                        <span>💰</span>
+                    </div>
+                    <div class="transactions__details">
+                        <h4>Salario</h4>
+                        <p class="text-muted">Hoy</p>
+                    </div>
+                    <div class="transactions__amount transactions__amount--income">
+                        +$1,500.00
+                    </div>
+                </div>
+                <div class="transactions__item">
+                    <div class="transactions__icon transactions__icon--expense">
+                        <span>🛒</span>
+                    </div>
+                    <div class="transactions__details">
+                        <h4>Supermercado</h4>
+                        <p class="text-muted">Ayer</p>
+                    </div>
+                    <div class="transactions__amount transactions__amount--expense">
+                        -$120.50
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Bootstrap Components -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Test Bootstrap Components</h3>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-primary me-2">Primary</button>
+                        <button class="btn btn-success me-2">Success</button>
+                        <button class="btn btn-danger me-2">Danger</button>
+                        <div class="alert alert-info mt-3">
+                            Si ves este contenido con estilos correctos, el CSS está funcionando! ✅
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
