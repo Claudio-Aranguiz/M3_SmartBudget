@@ -44,10 +44,6 @@ test/temp-*
 test/*.tmp
 test/results-*
 
-# Archivos de configuración de herramientas que pueden regenerarse
-.sass-cache/
-*.scssc
-
 # DEPENDENCIAS Y PAQUETES
 # =============================================================================
 

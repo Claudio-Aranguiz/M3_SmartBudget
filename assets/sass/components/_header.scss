@@ -2,12 +2,8 @@
 
 // Componente: Header
 // Estilos para headers de páginas
-@use "../abstracts/variables" as vars;
 
-// Componente: Header
-// Estilos para headers de páginas
-
-// Contenedor principal del header
+.header {
   background: vars.$color-bg-white;
   border-bottom: 1px solid vars.$color-border-light;
 
@@ -18,6 +14,13 @@
     justify-content: space-between;
   }
 
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
   &__brand {
     display: flex;
     align-items: center;
@@ -111,144 +114,5 @@
       color: #6c757d;
       margin: 0;
     }
-  }
-}
-  }
-}
-
-// Título del header
-.header-title {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-// Botón de menú (hamburger) del header
-.header-menu {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-}
-
-<<<<<<< HEAD
-// Botón de regreso/back del header
-.header-back {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.2rem;
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.1);
-=======
-  &__brand {
-    display: flex;
-    align-items: center;
-    gap: vars.$spacing-sm;
-  }
-
-  &__icon {
-    color: vars.$color-primary;
-  }
-
-  &__title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #333;
-
-    &--small {
-      font-size: 1.125rem;
-    }
-  }
-
-  &__subtitle {
-    color: #666;
-    margin: 0;
-  }
-
-  &__button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    background: white;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
-    transition: background 0.2s;
-
-    &:hover {
-      background: #f9fafb;
-    }
-
-    &--menu {
-      padding: 0.5rem;
-    }
-
-    &--logout {
-      background: #dc3545;
-      border-color: #dc3545;
-      color: white;
-
-      &:hover {
-        background: #c82333;
-        border-color: #bd2130;
-      }
-    }
-  }
-
-  &__button-icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  &__back-button {
-    background: none;
-    border: none;
-    font-size: 1.25rem;
-    cursor: pointer;
-    color: #666;
-    padding: 0.5rem;
-    border-radius: 4px;
-    transition: background 0.2s;
-
-    &:hover {
-      background-color: #f8f9fa;
-    }
-  }
-
-  &__back-icon {
-    font-size: 20px;
-  }
-
-  &__info {
-    h1 {
-      font-size: 1.25rem;
-      font-weight: bold;
-      color: #212529;
-      margin: 0;
-    }
-
-    p {
-      font-size: 0.875rem;
-      color: #6c757d;
-      margin: 0;
-    }
->>>>>>> Internal_navegation_checking
   }
 }

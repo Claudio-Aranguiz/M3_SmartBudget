@@ -23,30 +23,14 @@
 @use "components/menu-icons" as icons;
 @use "components/modal" as modal;
 
-// 4. COMPONENTES PERSONALIZADOS
-@use "components/header" as header;
-@use "components/navigation" as nav;
-@use "components/summary-cards" as cards;
-@use "components/charts" as charts;
-@use "components/states" as states;
-@use "components/transactions" as transactions;
-@use "components/menu-icons" as icons;
-@use "components/modal" as modal;
-
 // 5. LAYOUTS PERSONALIZADOS
 @use "layout/footer" as footer;
 @use "layout/hero" as hero;
 @use "layout/auth" as auth;
 
-<<<<<<< HEAD
 // 6. PÁGINAS ESPECÍFICAS
 @use "pages/dashboard" as dashboard;
 @use "pages/historial" as historial;
-=======
-// 6. PÁGINAS ESPECÍFICAS
-@use "pages/dashboard" as dashboard;
-@use "pages/historial" as historial;
->>>>>>> Internal_navegation_checking
 // =============================================================================
 // BOOTSTRAP INCLUYE:
 // ✅ Reset/Normalize (reboot)

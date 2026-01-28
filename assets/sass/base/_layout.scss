@@ -5,7 +5,7 @@
 // USAR BOOTSTRAP CON NAMESPACE (debe ir primero)
 @use "../vendor/bootstrap/bootstrap" as bs;
 
-// Reset universal (complementa Bootstrap reboot)
+// Reset universal
 * {
   margin: 0;
   padding: 0;
@@ -37,10 +37,11 @@ body {
   height: 100%;
 }
 
+body {
   // Propiedades visuales
-  font-family: bs.$font-family-base;      // Variable de Bootstrap
-  background-color: bs.$body-bg;         // Variable de Bootstrap
-  color: bs.$body-color;                 // Variable de Bootstrap
+  font-family: bs.$font-family-base;
+  background-color: transparent; // Cambiar a transparente para mostrar la imagen de fondo
+  color: bs.$body-color;
 
   // Propiedades estructurales
   display: flex;
@@ -59,12 +60,32 @@ a {
   color: inherit;
 }
 
-// Contenedor principal
+// Contenedor principal - usar solo clase .main para evitar redundancia
+.main {
   flex: 1;
-  padding: bs.$spacer;                        // Variable de Bootstrap
-  padding-bottom: 60px;                    // Valor fijo para footer móvil
-  background: #c5ebf1d6;
+  display: flex;
+  flex-direction: column;
+  padding: bs.$spacer 0; // Padding solo vertical, horizontal lo maneja el container
+  background: rgba(197, 235, 241, 0.85);
+  position: relative;
+  overflow-x: hidden; // Prevenir desbordes accidentales
 
+  // Espacio para el footer fijo
+  padding-bottom: 80px;
+
+  @media (max-width: 480px) {
+    padding-bottom: 90px;
+  }
+
+  // En móvil, asegurar ancho completo
+  @media (max-width: 767px) {
+    margin: 0;
+    width: 100%;
+    padding-left: bs.$spacer; // Recuperar padding para evitar que el contenido toque los bordes
+    padding-right: bs.$spacer;
+  }
+
+  // Modificadores específicos
   &--center {
     justify-content: center !important;
     text-align: center !important;
@@ -94,9 +115,9 @@ a {
 }
 
 // Contenedor de página base
+.page {
   max-width: 400px;
   margin: 0 auto;
   background: white;
-  min-height: 100vh;
-  box-shadow: bs.$box-shadow;                 // Variable de Bootstrap personalizada
+  box-shadow: bs.$box-shadow;
 }

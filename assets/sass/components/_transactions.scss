@@ -2,16 +2,8 @@
 
 // Componente: Transactions
 // Estilos para lista de transacciones
-@use "../abstracts/variables" as vars;
 
-// Componente: Transactions
-// Estilos para lista de transacciones
-
-// Contenedor principal de transacciones
 .transactions {
-<<<<<<< HEAD
-  padding: 1rem;
-=======
   background: white;
   border-radius: 0.5rem;
   padding: 1.5rem;
@@ -94,24 +86,14 @@
 }
 
 .transaction {
->>>>>>> Internal_navegation_checking
   background: white;
   border-radius: 8px;
-  margin: 1rem 0;
+  border: 1px solid #e9ecef;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-// Encabezado de la sección de transacciones
-.transactions-header {
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-<<<<<<< HEAD
-  margin-bottom: 1rem;
-  
-  h2 {
-    font-size: 1.25rem;
-=======
   transition: all 0.2s ease;
 
   &:hover {
@@ -156,58 +138,16 @@
   }
 
   &__name {
->>>>>>> Internal_navegation_checking
     font-weight: 600;
-    color: #333;
     margin: 0;
+    color: #374151;
   }
-}
 
-// Lista de transacciones
-.transaction-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-// Item individual de transacción
-.transaction-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-  transition: background-color 0.2s ease;
-  
-  &:last-child {
-    border-bottom: none;
-  }
-  
-  &:hover {
-    background-color: #f8f9fa;
-  }
-}
-
-// Información de la transacción
-.transaction-info {
-  flex: 1;
-  
-  .transaction-description {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-    margin: 0 0 0.25rem 0;
-  }
-  
-  .transaction-date {
+  &__date {
     font-size: 0.875rem;
     color: #666;
     margin: 0;
   }
-<<<<<<< HEAD
-  
-  .transaction-category {
-=======
 
   &__amount {
     font-weight: 600;
@@ -269,182 +209,12 @@
   }
 
   &-date {
->>>>>>> Internal_navegation_checking
     font-size: 0.75rem;
-    color: #888;
-    background: #f0f0f0;
-    padding: 0.125rem 0.5rem;
-    border-radius: 12px;
-    display: inline-block;
-    margin-top: 0.25rem;
+    color: #6b7280;
   }
-}
 
-// Monto de la transacción
-.transaction-amount {
-  font-size: 1.125rem;
-  font-weight: 600;
-  text-align: right;
-  
-  &.positive,
-  &.income {
-    color: #22c55e; // Verde para ingresos
-  }
-  
-  &.negative,
-  &.expense {
-    color: #ef4444; // Rojo para gastos
-  }
-}
-
-// Icono de transacción
-.transaction-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 1rem;
-  
-  &.income {
-    background: rgba(34, 197, 94, 0.1);
-    color: #22c55e;
-  }
-  
-  &.expense {
-    background: rgba(239, 68, 68, 0.1);
-    color: #ef4444;
-  }
-}
-
-// Botones de acción para transacciones
-.transaction-actions {
-  display: flex;
-  gap: 0.5rem;
-  
-  .btn-edit,
-  .btn-delete {
-    padding: 0.25rem 0.5rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .btn-edit {
-    background: #3b82f6;
-    color: white;
-    
-    &:hover {
-      background: #2563eb;
-    }
-  }
-  
-  .btn-delete {
-    background: #ef4444;
-    color: white;
-    
-    &:hover {
-      background: #dc2626;
-    }
-  }
-}
-
-// Formulario de transacción
-.transaction-form {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-  
-  .form-group {
-    margin-bottom: 1rem;
-    
-    label {
-      display: block;
-      font-weight: 500;
-      color: #333;
-      margin-bottom: 0.5rem;
-    }
-    
-    input,
-    select,
-    textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      font-size: 1rem;
-      
-      &:focus {
-        outline: none;
-        border-color: #3b82f6;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-    }
-  }
-  
-  .form-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    margin-top: 1.5rem;
-    
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      
-      &.btn-primary {
-        background: #3b82f6;
-        color: white;
-        
-        &:hover {
-          background: #2563eb;
-        }
-      }
-      
-      &.btn-secondary {
-        background: #6b7280;
-        color: white;
-        
-        &:hover {
-          background: #4b5563;
-        }
-      }
-    }
-  }
-}
-
-// Estados vacíos
-.transactions-empty {
-  text-align: center;
-  padding: 3rem 1rem;
-  color: #666;
-  
-  .empty-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    opacity: 0.5;
-  }
-  
-  .empty-message {
+  &-amount {
     font-size: 1.125rem;
-<<<<<<< HEAD
-    margin-bottom: 0.5rem;
-  }
-  
-  .empty-description {
-    font-size: 0.875rem;
-    opacity: 0.7;
-=======
     font-weight: 600;
 
     &.income {
@@ -454,6 +224,5 @@
     &.expense {
       color: vars.$color-expense;
     }
->>>>>>> Internal_navegation_checking
   }
 }
