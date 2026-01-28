@@ -15,12 +15,4 @@
   margin-bottom: 1rem;
 }
 
-// Utilidades de display
-.u-hidden {
-  display: none !important;
-}
-
-.u-text-small {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
-}
+// Utilidades de display (migradas a utilities/_helpers.scss)

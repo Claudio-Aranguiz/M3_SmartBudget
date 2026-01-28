@@ -1,3 +1,9 @@
+// Estilo específico para botón tipo link en el footer (antes inline en HTML)
+.footer__button-link {
+  padding: 0;
+  border: none;
+  background: none;
+}
 @use "../abstracts/variables" as vars;
 
 // Layout: Footer
