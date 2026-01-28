@@ -21,6 +21,7 @@
 @use "components/states" as states;
 @use "components/transactions" as transactions;
 @use "components/menu-icons" as icons;
+@use "components/modal" as modal;
 
 // 5. LAYOUTS PERSONALIZADOS
 @use "layout/footer" as footer;

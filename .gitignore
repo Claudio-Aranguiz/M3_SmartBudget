@@ -1,3 +1,16 @@
+# Archivos temporales de sistema y VSCode
+.vscode/
+*.log
+*.tmp
+*.bak
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos de entorno de desarrollo
+.env
+.env.*
+.DS_Store
 
 # =============================================================================
 # GITIGNORE - SmartBudget Project v1.0

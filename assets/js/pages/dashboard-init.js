@@ -12,12 +12,12 @@ import ChartsConfigManager from '../utils/charts-config.js';
  * Data processing utilities for dashboard
  */
 class DashboardDataProcessor {
-    
+
     /**
      * Get current user ID from session
      */
     static getCurrentUserId() {
-        const session = StorageManager.getSession();
+        const session = StorageManager.getSessionItem('session');
         return session?.userId || null;
     }
 
@@ -31,10 +31,10 @@ class DashboardDataProcessor {
 
         // Initialize all months with zero values
         monthNames.forEach((month, index) => {
-            monthlyData[index] = { 
-                mes: month, 
-                ingresos: 0, 
-                gastos: 0 
+            monthlyData[index] = {
+                mes: month,
+                ingresos: 0,
+                gastos: 0
             };
         });
 
@@ -54,7 +54,7 @@ class DashboardDataProcessor {
         // Return only months with data (last 6 months for better visualization)
         const currentMonth = new Date().getMonth();
         const startMonth = Math.max(0, currentMonth - 5);
-        
+
         return Object.values(monthlyData).slice(startMonth, currentMonth + 1);
     }
 
@@ -85,14 +85,14 @@ class DashboardDataProcessor {
 
         expenses.forEach(transaction => {
             let category = 'Otros'; // Default category
-            
+
             // Try to get category from transaction data first
             if (transaction.category) {
                 category = transaction.category;
             } else {
                 // Infer category from description
                 const description = transaction.description.toLowerCase();
-                
+
                 for (const [categoryName, keywords] of Object.entries(categoryKeywords)) {
                     if (keywords.some(keyword => description.includes(keyword))) {
                         category = categoryName;
@@ -146,7 +146,7 @@ class DashboardDataProcessor {
         const currentIncome = currentMonthTransactions
             .filter(t => t.type === 'ingreso')
             .reduce((sum, t) => sum + t.amount, 0);
-        
+
         const currentExpenses = currentMonthTransactions
             .filter(t => t.type === 'gasto')
             .reduce((sum, t) => sum + t.amount, 0);
@@ -158,7 +158,7 @@ class DashboardDataProcessor {
         const lastIncome = lastMonthTransactions
             .filter(t => t.type === 'ingreso')
             .reduce((sum, t) => sum + t.amount, 0);
-        
+
         const lastExpenses = lastMonthTransactions
             .filter(t => t.type === 'gasto')
             .reduce((sum, t) => sum + t.amount, 0);
@@ -188,7 +188,7 @@ class DashboardDataProcessor {
  */
 class DashboardCharts {
     static chartInstances = {};
-    
+
     /**
      * Initialize all dashboard charts with real data
      */
@@ -202,7 +202,7 @@ class DashboardCharts {
             }
 
             console.log('🔄 Loading real transaction data for charts...');
-            
+
             const userId = DashboardDataProcessor.getCurrentUserId();
             if (!userId) {
                 console.warn('⚠️ No user ID found, using fallback data');
@@ -214,7 +214,7 @@ class DashboardCharts {
 
             const transactions = await getUserTransactions(userId);
             console.log(`📊 Loaded ${transactions.length} transactions for user ${userId}`);
-            
+
             // Process data
             const monthlyData = DashboardDataProcessor.processMonthlyData(transactions);
             const categoryData = DashboardDataProcessor.processCategoryData(transactions);
@@ -222,14 +222,14 @@ class DashboardCharts {
 
             // Update summary cards
             this.updateSummaryCards(summaryStats);
-            
+
             // Update recent transactions
             this.updateRecentTransactions(transactions);
-            
+
             // Initialize charts with real data
             this.initIncomeExpenseChart(monthlyData);
             this.initCategoryChart(categoryData);
-            
+
             console.log('✅ Dashboard charts initialized with real data');
         } catch (error) {
             console.error('❌ Error initializing charts with real data:', error);
@@ -268,10 +268,10 @@ class DashboardCharts {
 
                 const isIncome = transaction.type === 'ingreso';
                 const date = new Date(transaction.date);
-                const formattedDate = date.toLocaleDateString('es-ES', { 
-                    day: 'numeric', 
-                    month: 'short', 
-                    year: 'numeric' 
+                const formattedDate = date.toLocaleDateString('es-ES', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
                 });
                 const formattedAmount = transaction.amount.toLocaleString('es-ES', {
                     minimumFractionDigits: 2,
@@ -315,11 +315,11 @@ class DashboardCharts {
             // Update Balance Total
             const balanceElement = document.querySelector('.summary-card__value');
             const balanceChangeElement = document.querySelector('.summary-card__percentage');
-            
+
             if (balanceElement) {
                 balanceElement.textContent = `$${stats.balance.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
             }
-            
+
             if (balanceChangeElement) {
                 const change = stats.balanceChange;
                 balanceChangeElement.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
@@ -329,11 +329,11 @@ class DashboardCharts {
             // Update Ingresos
             const incomeElement = document.querySelector('.summary-card--income .summary-card__value');
             const incomeChangeElement = document.querySelector('.summary-card--income .summary-card__percentage');
-            
+
             if (incomeElement) {
                 incomeElement.textContent = `$${stats.income.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
             }
-            
+
             if (incomeChangeElement) {
                 const change = stats.incomeChange;
                 incomeChangeElement.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
@@ -343,11 +343,11 @@ class DashboardCharts {
             // Update Gastos
             const expenseElement = document.querySelector('.summary-card--expense .summary-card__value');
             const expenseChangeElement = document.querySelector('.summary-card--expense .summary-card__percentage');
-            
+
             if (expenseElement) {
                 expenseElement.textContent = `$${stats.expenses.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
             }
-            
+
             if (expenseChangeElement) {
                 const change = stats.expenseChange;
                 expenseChangeElement.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
@@ -357,11 +357,11 @@ class DashboardCharts {
             // Update Ahorros
             const savingsElement = document.querySelector('.summary-card--savings .summary-card__value');
             const savingsChangeElement = document.querySelector('.summary-card--savings .summary-card__percentage');
-            
+
             if (savingsElement) {
                 savingsElement.textContent = `$${stats.savings.toLocaleString('es-ES', { minimumFractionDigits: 2 })}`;
             }
-            
+
             if (savingsChangeElement) {
                 const change = stats.savingsChange;
                 savingsChangeElement.textContent = `${change >= 0 ? '+' : ''}${change.toFixed(1)}%`;
@@ -435,7 +435,7 @@ class DashboardCharts {
                         borderWidth: 1,
                         cornerRadius: 8,
                         callbacks: {
-                            label: function(context) {
+                            label: function (context) {
                                 return `${context.dataset.label}: $${context.parsed.y.toLocaleString('es-ES')}`;
                             }
                         }
@@ -461,16 +461,10 @@ class DashboardCharts {
                             font: {
                                 size: 11
                             },
-                            callback: function(value) {
+                            callback: function (value) {
                                 return '$' + value.toLocaleString('es-ES');
                             }
                         }
-                    }
-                },
-                elements: {
-                    point: {
-                        radius: 4,
-                        hoverRadius: 6
                     }
                 }
             }
@@ -520,7 +514,7 @@ class DashboardCharts {
                             font: {
                                 size: 11
                             },
-                            generateLabels: function(chart) {
+                            generateLabels: function (chart) {
                                 const data = chart.data;
                                 if (data.labels.length && data.datasets.length) {
                                     return data.labels.map((label, i) => {
@@ -550,7 +544,7 @@ class DashboardCharts {
                         borderWidth: 1,
                         cornerRadius: 8,
                         callbacks: {
-                            label: function(context) {
+                            label: function (context) {
                                 const total = context.dataset.data.reduce((a, b) => a + b, 0);
                                 const percentage = ((context.parsed / total) * 100).toFixed(1);
                                 return `${context.label}: $${context.parsed.toLocaleString('es-ES')} (${percentage}%)`;
@@ -572,7 +566,7 @@ class DashboardCharts {
     static showNoDataMessage(canvas, message) {
         const ctx = canvas.getContext('2d');
         const { width, height } = canvas;
-        
+
         ctx.clearRect(0, 0, width, height);
         ctx.fillStyle = '#6b7280';
         ctx.font = '14px Inter, system-ui, sans-serif';
@@ -586,7 +580,7 @@ class DashboardCharts {
      */
     static initFallbackCharts() {
         console.log('🔄 Initializing fallback charts with static data...');
-        
+
         const fallbackMonthly = [
             { mes: 'Ene', ingresos: 4000, gastos: 2400 },
             { mes: 'Feb', ingresos: 3000, gastos: 1398 },
@@ -595,7 +589,7 @@ class DashboardCharts {
             { mes: 'May', ingresos: 1890, gastos: 2800 },
             { mes: 'Jun', ingresos: 2390, gastos: 2000 }
         ];
-        
+
         const fallbackCategories = [
             { nombre: 'Alimentación', valor: 4000, color: '#3b82f6' },
             { nombre: 'Transporte', valor: 3000, color: '#8b5cf6' },
@@ -606,7 +600,7 @@ class DashboardCharts {
 
         this.initIncomeExpenseChart(fallbackMonthly);
         this.initCategoryChart(fallbackCategories);
-        
+
         console.log('✅ Fallback charts initialized');
     }
 
@@ -627,72 +621,14 @@ class DashboardCharts {
         });
         this.chartInstances = {};
     }
-}
-                    point: {
-                        radius: 4,
-                        hoverRadius: 6
-                    }
-                }
-            }
-        });
-    }
 
-    /**
-     * Initialize Category Doughnut Chart
-     */
-    static initCategoryChart() {
-        const ctx = document.getElementById('categoryChart');
-        if (!ctx) return;
-
-        new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: DASHBOARD_DATA.categories.map(item => item.nombre),
-                datasets: [{
-                    data: DASHBOARD_DATA.categories.map(item => item.valor),
-                    backgroundColor: DASHBOARD_DATA.categories.map(item => item.color),
-                    borderWidth: 2,
-                    borderColor: '#ffffff',
-                    hoverBorderWidth: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '60%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 20,
-                            usePointStyle: true,
-                            font: {
-                                size: 12
-                            }
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                return context.label + ': $' + context.parsed.toLocaleString();
-                            }
-                        }
-                    }
-                },
-                animation: {
-                    animateScale: true,
-                    animateRotate: true
-                }
-            }
-        });
-    }
 }
 
 /**
  * Dashboard Page Initializer
  */
 class DashboardInit {
-    
+
     /**
      * Initialize dashboard page
      */
@@ -710,25 +646,21 @@ class DashboardInit {
      */
     static setup() {
         console.log('🚀 Initializing Dashboard with Real Data...');
-        
+
         // Check authentication first
         if (!checkAuthentication()) {
             return; // Stop initialization if not authenticated
         }
-        
+
         // Initialize Lucide icons
         this.initLucideIcons();
-        
+
         // Initialize charts when Chart.js is ready
         this.initChartsWhenReady();
 
         // Set up event listeners for data refresh
         this.setupEventListeners();
 
-        // Add debug controls in development
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            ChartsConfigManager.addDebugControls();
-        }
     }
 
     /**
@@ -756,7 +688,7 @@ class DashboardInit {
                 setTimeout(checkChart, 100);
             }
         };
-        
+
         checkChart();
     }
 

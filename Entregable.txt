@@ -1,0 +1,8 @@
+*  Carpeta comprimida adjunta en formato zip.
+
+*  Documento con breve justificación metodológica (PDF o MD).  Este archivo está en documentation/
+
+*  Repositorio:
+https://github.com/Claudio-Aranguiz/M3_SmartBudget
+
+*  Captura de pantallas en distintos dispositivos.  Estas estan en una carpeta al interior de documentation/

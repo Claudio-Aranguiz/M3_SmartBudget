@@ -34,168 +34,168 @@
    </header>
 
     <main class="main dashboard">
-        <div class="row">
-            <div class="col-lg-9 mx-auto">
-               <div class="dashboard__summary">
-               <!-- Balance Total Card -->
-               <div class="summary-card">
-                  <div class="summary-card__content">
-                     <div class="summary-card__header">
-                        <h3 class="summary-card__title">Balance Total</h3>
-                        <i data-lucide="wallet" class="summary-card__icon"></i>
-                     </div>
-                     <div class="summary-card__value">$15,231.89</div>
-                     <p class="summary-card__change">
-                        <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
-                     </p>
-                  </div>
-               </div>
-               
-               <!-- Ingresos Card -->
-               <div class="summary-card summary-card--income">
-                  <div class="summary-card__content">
-                     <div class="summary-card__header">
-                        <h3 class="summary-card__title">Ingresos</h3>
-                        <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
-                     </div>
-                     <div class="summary-card__value summary-card__value--income">$8,420.00</div>
-                     <p class="summary-card__change">
-                        <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
-                     </p>
-                  </div>
-               </div>
-            
-               <!-- Gastos Card -->
-               <div class="summary-card summary-card--expense">
-                  <div class="summary-card__content">
-                     <div class="summary-card__header">
-                        <h3 class="summary-card__title">Gastos</h3>
-                        <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
-                     </div>
-                     <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
-                        <p class="summary-card__change">
-                           <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
-                        </p>
-                  </div>
-               </div>
-
-               <!-- Ahorros Card -->
-               <div class="summary-card summary-card--savings">
-                  <div class="summary-card__content">
-                     <div class="summary-card__header">
-                        <h3 class="summary-card__title">Ahorros</h3>
-                        <i data-lucide="piggy-bank" class="summary-card__icon summary-card__icon--savings"></i>
-                     </div>
-                     <div class="summary-card__value summary-card__value--savings">$3,091.50</div>
-                        <p class="summary-card__change">
-                           <span class="summary-card__percentage summary-card__percentage--positive">+15.7%</span> vs mes anterior
-                        </p>
-                  </div>
-               </div>
-            </div>
-         <br>
-      <!-- Charts Section - Desktop Only -->
-      <div class="dashboard__charts">
-         <!-- Ingresos vs Gastos Chart -->
-         <div class="chart-card">
-            <div class="chart-card__content">
-               <h3 class="chart-card__title">Ingresos vs Gastos</h3>
-               <div class="chart-card__container">
-                  <canvas id="incomeExpenseChart" class="chart-card__canvas"></canvas>
-               </div>
-            </div>
-         </div>
-
-         <!-- Gastos por Categoría Chart -->
-         <div class="chart-card">
-            <div class="chart-card__content">
-               <h3 class="chart-card__title">Gastos por Categoría</h3>
-               <div class="chart-card__container">
-                  <canvas id="categoryChart" class="chart-card__canvas"></canvas>
-               </div>
-            </div>
-         </div>
-      </div>
-
-      <!-- Recent Transactions -->
-      <div class="transactions">
-         <div class="transactions__content">
-            <div class="transactions__header">
-               <h3 class="transactions__title">Movimientos Recientes</h3>
-               <button class="transactions__button transactions__button--view-all">Ver todos</button>
-            </div>
-            <div class="transactions__list">
-               <!-- Transaction 1 -->
-               <div class="transaction">
-                  <div class="transaction__info">
-                     <div class="transaction__icon transaction__icon--expense">
-                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
-                     </div>
-                     <div class="transaction__details">
-                        <p class="transaction__name">Supermercado</p>
-                        <p class="transaction__date">17 Ene 2026</p>
-                     </div>
-                  </div>
-                  <span class="transaction__amount transaction__amount--expense">-$125.50</span>
-               </div>
-
-               <!-- Transaction 2 -->
-               <div class="transaction">
-                  <div class="transaction__info">
-                     <div class="transaction__icon transaction__icon--income">
-                        <i data-lucide="arrow-up-right" class="transaction__icon-svg"></i>
-                     </div>
-                     <div class="transaction__details">
-                        <p class="transaction__name">Salario</p>
-                        <p class="transaction__date">15 Ene 2026</p>
-                     </div>
-                  </div>
-                  <span class="transaction__amount transaction__amount--income">+$3,500.00</span>
-               </div>
-
-               <!-- Transaction 3 -->
-               <div class="transaction">
-                  <div class="transaction__info">
-                     <div class="transaction__icon transaction__icon--expense">
-                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
-                     </div>
-                     <div class="transaction__details">
-                        <p class="transaction__name">Netflix</p>
-                        <p class="transaction__date">14 Ene 2026</p>
-                     </div>
-                  </div>
-                  <span class="transaction__amount transaction__amount--expense">-$15.99</span>
-               </div>
-
-               <!-- Transaction 4 -->
-               <div class="transaction">
-                  <div class="transaction__info">
-                     <div class="transaction__icon transaction__icon--expense">
-                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
-                     </div>
-                     <div class="transaction__details">
-                        <p class="transaction__name">Uber</p>
-                        <p class="transaction__date">13 Ene 2026</p>
-                     </div>
-                  </div>
-                  <span class="transaction__amount transaction__amount--expense">-$23.50</span>
-               </div>
-
-               <!-- Transaction 5 -->
-               <div class="transaction">
-                  <div class="transaction__info">
-                     <div class="transaction__icon transaction__icon--expense">
-                        <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
-                     </div>
-                     <div class="transaction__details">
-                        <p class="transaction__name">Restaurante</p>
-                        <p class="transaction__date">12 Ene 2026</p>
-                     </div>
-                  </div>
-                  <span class="transaction__amount transaction__amount--expense">-$78.00</span>
-               </div>
-            </div>
-         </div>
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-lg-9 mx-auto">
+                    <div class="dashboard__summary">
+                        <div class="summary-card">
+                            <div class="summary-card__content">
+                                <div class="summary-card__header">
+                                    <h3 class="summary-card__title">Balance Total</h3>
+                                    <i data-lucide="wallet" class="summary-card__icon"></i>
+                                </div>
+                                <div class="summary-card__value">$15,231.89</div>
+                                <p class="summary-card__change">
+                                    <span class="summary-card__percentage summary-card__percentage--positive">+20.1%</span> desde el mes pasado
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Ingresos Card -->
+                        <div class="summary-card summary-card--income">
+                            <div class="summary-card__content">
+                                <div class="summary-card__header">
+                                    <h3 class="summary-card__title">Ingresos</h3>
+                                    <i data-lucide="trending-up" class="summary-card__icon summary-card__icon--income"></i>
+                                </div>
+                                <div class="summary-card__value summary-card__value--income">$8,420.00</div>
+                                <p class="summary-card__change">
+                                    <span class="summary-card__percentage summary-card__percentage--positive">+12.5%</span> vs mes anterior
+                                </p>
+                            </div>
+                        </div>
+                    
+                        <!-- Gastos Card -->
+                        <div class="summary-card summary-card--expense">
+                            <div class="summary-card__content">
+                                <div class="summary-card__header">
+                                    <h3 class="summary-card__title">Gastos</h3>
+                                    <i data-lucide="trending-down" class="summary-card__icon summary-card__icon--expense"></i>
+                                </div>
+                                <div class="summary-card__value summary-card__value--expense">$5,328.50</div>
+                                    <p class="summary-card__change">
+                                        <span class="summary-card__percentage summary-card__percentage--negative">+8.2%</span> vs mes anterior
+                                    </p>
+                            </div>
+                        </div>
+        
+                        <!-- Ahorros Card -->
+                        <div class="summary-card summary-card--savings">
+                            <div class="summary-card__content">
+                                <div class="summary-card__header">
+                                    <h3 class="summary-card__title">Ahorros</h3>
+                                    <i data-lucide="piggy-bank" class="summary-card__icon summary-card__icon--savings"></i>
+                                </div>
+                                <div class="summary-card__value summary-card__value--savings">$3,091.50</div>
+                                    <p class="summary-card__change">
+                                        <span class="summary-card__percentage summary-card__percentage--positive">+15.7%</span> vs mes anterior
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+        
+                    <!-- Recent Transactions -->
+                    <div class="transactions">
+                        <div class="transactions__content">
+                            <div class="transactions__header">
+                                <h3 class="transactions__title">Movimientos Recientes</h3>
+                                <button class="transactions__button transactions__button--view-all">Ver todos</button>
+                            </div>
+                            <div class="transactions__list">
+                                <!-- Transaction 1 -->
+                                <div class="transaction">
+                                    <div class="transaction__info">
+                                        <div class="transaction__icon transaction__icon--expense">
+                                            <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                                        </div>
+                                        <div class="transaction__details">
+                                            <p class="transaction__name">Supermercado</p>
+                                            <p class="transaction__date">17 Ene 2026</p>
+                                        </div>
+                                    </div>
+                                    <span class="transaction__amount transaction__amount--expense">-$125.50</span>
+                                </div>
+                
+                                <!-- Transaction 2 -->
+                                <div class="transaction">
+                                    <div class="transaction__info">
+                                        <div class="transaction__icon transaction__icon--income">
+                                            <i data-lucide="arrow-up-right" class="transaction__icon-svg"></i>
+                                        </div>
+                                        <div class="transaction__details">
+                                            <p class="transaction__name">Salario</p>
+                                            <p class="transaction__date">15 Ene 2026</p>
+                                        </div>
+                                    </div>
+                                    <span class="transaction__amount transaction__amount--income">+$3,500.00</span>
+                                </div>
+                
+                                <!-- Transaction 3 -->
+                                <div class="transaction">
+                                    <div class="transaction__info">
+                                        <div class="transaction__icon transaction__icon--expense">
+                                            <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                                        </div>
+                                        <div class="transaction__details">
+                                            <p class="transaction__name">Netflix</p>
+                                            <p class="transaction__date">14 Ene 2026</p>
+                                        </div>
+                                    </div>
+                                    <span class="transaction__amount transaction__amount--expense">-$15.99</span>
+                                </div>
+                
+                                <!-- Transaction 4 -->
+                                <div class="transaction">
+                                    <div class="transaction__info">
+                                        <div class="transaction__icon transaction__icon--expense">
+                                            <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                                        </div>
+                                        <div class="transaction__details">
+                                            <p class="transaction__name">Uber</p>
+                                            <p class="transaction__date">13 Ene 2026</p>
+                                        </div>
+                                    </div>
+                                    <span class="transaction__amount transaction__amount--expense">-$23.50</span>
+                                </div>
+                
+                                <!-- Transaction 5 -->
+                                <div class="transaction">
+                                    <div class="transaction__info">
+                                        <div class="transaction__icon transaction__icon--expense">
+                                            <i data-lucide="arrow-down-right" class="transaction__icon-svg"></i>
+                                        </div>
+                                        <div class="transaction__details">
+                                            <p class="transaction__name">Restaurante</p>
+                                            <p class="transaction__date">12 Ene 2026</p>
+                                        </div>
+                                    </div>
+                                    <span class="transaction__amount transaction__amount--expense">-$78.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Charts Section -->
+                    <div class="dashboard__charts">
+                        <div class="chart-card">
+                            <div class="chart-card__content">
+                                <h3 class="chart-card__title">Ingresos vs Gastos</h3>
+                                <div class="chart-card__container">
+                                    <canvas id="incomeExpenseChart" class="chart-card__canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="chart-card">
+                            <div class="chart-card__content">
+                                <h3 class="chart-card__title">Gastos por Categoría</h3>
+                                <div class="chart-card__container">
+                                    <canvas id="categoryChart" class="chart-card__canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -203,24 +203,14 @@
 
    <footer class="footer bottom-nav">
       <a href="menu.html" class="footer__text">
-         <i data-lucide="menu" class="footer__icon"></i>
-         Menú
+         <span>Menú</span>
+      </a>
+      <a href="historial.html" class="footer__text">
+         <span>Historial</span>
       </a>
    </footer>
 
    <!-- JavaScript -->
-   <script type="module" src="../assets/js/pages/dashboard-init.js"></script>
-</body>
-</html>
-         <span class="">Acciones</span>
-      </a>
-      <a href="historial.html" class=" footer__text">
-         <span class="">Historial</span>
-      </a>
-    </footer>
-   </script>
-   
-   <!-- Dashboard JavaScript Module -->
    <script type="module" src="../assets/js/pages/dashboard-init.js"></script>
 </body>
 </html>
